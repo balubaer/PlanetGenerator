@@ -11,7 +11,7 @@ import Foundation
 var planets:Array <Planet> = Array()
 
 //Create Planets
-for index in 1...10 {
+for index in 1...100 {
     var planet: Planet = Planet()
     
     planet.number = index

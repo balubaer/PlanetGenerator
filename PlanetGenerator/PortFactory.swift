@@ -21,108 +21,138 @@ func planetWithNumber(planets:Array<Planet>, number:Int) -> Planet? {
 }
 
 class PortFactory {
-    var usedPlanetNumbers:Array <Int> = Array()
-    var port: Port?
+    var planetsWithEnoughConnections: Array <Planet> = Array()
     var planetsCount: Int
-    
+    var dice: Dice
     init() {
         planetsCount = 0
+        dice = Dice()
     }
     
-    func addPlanetNumber(aPlanetNumber: Int) {
-        if contains(usedPlanetNumbers, aPlanetNumber) == false {
-            usedPlanetNumbers.append(aPlanetNumber)
-        }
-    }
-    
-    func isPlanetOK(aPlanet:Planet) -> Bool {
+    func hasPlanetMaxConnetion(aPlanet: Planet) -> Bool {
         var result = false
-
-        if (port != nil) {
-            var portPlanetNumber = port!.planet!.number
-            var planetNumber = aPlanet.number
-            
-            if contains(usedPlanetNumbers, planetNumber) == false {
+        if (aPlanet.ports != nil) {
+            var connectionCount = Int(aPlanet.ports!.planets.count)
+            if (connectionCount == 5) {
                 result = true
             }
         }
         return result
+    }
+    
+    func hasPlanetEnoughConnection(aPlanet: Planet) -> Bool {
+        var result = false
+        if (aPlanet.ports != nil) {
+            var connectionCount = Int(aPlanet.ports!.planets.count)
+            if (connectionCount >= 2 && connectionCount <= 5) {
+                result = true
+            }
+        }
+        return result
+    }
+    
+    func addPlanetWithEnoughConnectionTest(aPlanet: Planet) {
+        if self.hasPlanetEnoughConnection(aPlanet) {
+            if contains(planetsWithEnoughConnections, aPlanet) == false {
+                planetsWithEnoughConnections.append(aPlanet)
+            }
+        }
     }
     
     func isAllConnectionCreated() -> Bool {
         var result = false
-        if (port != nil) {
-            if planetsCount > usedPlanetNumbers.count {
-                result = port!.planets.count == port!.connectionsCount
-            } else {
+            if planetsCount == planetsWithEnoughConnections.count {
                 result = true
             }
-        }
         return result
     }
-
-    func generatePlanetConnection(aPlanetsArray:Array <Planet>) {
-        if (port != nil) {
-            var planetDice = Dice(sides: aPlanetsArray.count)
-            
-            self.generateConnectionsCount()
-            
-            while (!isAllConnectionCreated()) {
-                var indexNumber = planetDice.roll()
-                var realIndex = indexNumber - 1
-
-                var found = self.isPlanetOK(aPlanetsArray[realIndex])
-                
-                while (!found) {
-                    indexNumber = planetDice.roll()
-                    realIndex = indexNumber - 1
-                    
-                    found = self.isPlanetOK(aPlanetsArray[realIndex])
-                }
-                if found {
-                    port!.planets.append(aPlanetsArray[realIndex])
-                    self.addPlanetNumber(aPlanetsArray[realIndex].number);
-                }
-            }
-        }
-    }
     
-    func isConnectionCountOK(aCount:Int) -> Bool {
+    func isPlanetForNewConnectionOK(aPlanet: Planet) -> Bool {
         var result = false
         
-        if (aCount > 1 && aCount <= 5) {
+        if (self.hasPlanetMaxConnetion(aPlanet) == false) {
             result = true
         }
         return result
     }
-    
-    func generateConnectionsCount() {
-        var connectionsCountDice = Dice(sides: 5)
+
+    func getStartPlanetWithDiceAndPlanetArray(aPlanetsArray:Array <Planet>) -> Planet {
+        var result:Planet? = nil
         
-        var aCount = connectionsCountDice.roll()
-        var found = self.isConnectionCountOK(aCount)
+        dice.setSites(planetsCount)
         
-        while (!found) {
-            aCount = connectionsCountDice.roll()
-            found = self.isConnectionCountOK(aCount)
-        }
-        if found {
-            if (port != nil) {
-                port!.connectionsCount = aCount
+        var indexNumber = dice.roll()
+        var realIndex = indexNumber - 1
+        result = aPlanetsArray[realIndex];
+        
+        if (result != nil) {
+            var found = self.isPlanetForNewConnectionOK(result!);
+            
+            while (!found) {
+                indexNumber = dice.roll()
+                realIndex = indexNumber - 1
+                result = aPlanetsArray[realIndex];
+                
+                found = self.isPlanetForNewConnectionOK(result!)
             }
         }
-    }
-
-    func connectExistConnection(aPlanet: Planet) {
         
-        for planet in planets {
-            var aPort = planet.ports
-            if (aPort != nil) {
-                var portPlanets = aPort!.planets
-                if contains(portPlanets, aPlanet) {
-                    port?.planets.append(planet)
+        return result!
+        
+    }
+    
+    func isEndPlanetForNewConnectionOK(aEndPlanet: Planet, aStartPlanet: Planet) -> Bool {
+        var result = false
+        
+        if (aEndPlanet.number != aStartPlanet.number) {
+            if (self.hasPlanetMaxConnetion(aEndPlanet) == false) {
+                if aEndPlanet.hasConnectionToPlanet(aStartPlanet) == false {
+                    result = true
                 }
-                self.addPlanetNumber(planet.number)
+            }
+        }
+        return result
+    }
+    
+    func getEndPlanetWithDicePlanetArrayAndStartPlanet(aPlanetsArray:Array <Planet>, aStartPlanet: Planet) -> Planet {
+        var result:Planet? = nil
+        
+        dice.setSites(planetsCount)
+        
+        var indexNumber = dice.roll()
+        var realIndex = indexNumber - 1
+        result = aPlanetsArray[realIndex];
+        
+        if result != nil {
+            var found = self.isEndPlanetForNewConnectionOK(result!, aStartPlanet: aStartPlanet);
+            
+            while (!found) {
+                indexNumber = dice.roll()
+                realIndex = indexNumber - 1
+                result = aPlanetsArray[realIndex];
+                
+                found = self.isEndPlanetForNewConnectionOK(result!, aStartPlanet: aStartPlanet)
+            }
+        }
+        
+        return result!
+        
+    }
+    
+    func generatePlanetConnection(aPlanetsArray:Array <Planet>) {
+        var startPlanet: Planet?
+        var endPlanet: Planet?
+
+        while (!isAllConnectionCreated()) {
+            startPlanet = self.getStartPlanetWithDiceAndPlanetArray(aPlanetsArray)
+            if (startPlanet != nil) {
+                endPlanet = self.getEndPlanetWithDicePlanetArrayAndStartPlanet(aPlanetsArray, aStartPlanet: startPlanet!)
+                if (endPlanet != nil) {
+                    startPlanet!.ports!.planets.append(endPlanet!)
+                    endPlanet!.ports!.planets.append(startPlanet!)
+                    self.addPlanetWithEnoughConnectionTest(startPlanet!)
+                    self.addPlanetWithEnoughConnectionTest(endPlanet!)
+                }
             }
         }
     }
@@ -131,17 +161,12 @@ class PortFactory {
         
         planetsCount = planetArray.count
         
+        //All Planets get Ports
         for planet in planets {
-            
-            usedPlanetNumbers.removeAll()
-            port = Port()
-            port!.planet = planet
-            port!.planet!.ports = port!
-            
-            self.addPlanetNumber(planet.number)
-            
-            self.connectExistConnection(planet)
-            self.generatePlanetConnection(planets)
+            var port = Port()
+            port.planet = planet
+            port.planet!.ports = port
         }
+        self.generatePlanetConnection(planets)
     }
 }

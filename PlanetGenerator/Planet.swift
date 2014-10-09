@@ -25,7 +25,13 @@ class Planet: Comparable, Equatable {
         name = "NO Name"
     }
     
-    
+    func hasConnectionToPlanet(aPlant : Planet) -> Bool {
+        var result = false
+        if ports != nil {
+            result = ports!.hasConnectionToPlanet(aPlant)
+        }
+        return result
+    }
 }
 
 func <=(lhs: Planet, rhs: Planet) -> Bool {

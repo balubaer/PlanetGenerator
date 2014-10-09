@@ -16,7 +16,6 @@ class Port {
     init() {
         planets = Array()
         connectionsCount = 0
-      //  planet = nil
     }
     
     var description: String {
@@ -33,4 +32,9 @@ class Port {
 
         return desc
     }
+    
+    func hasConnectionToPlanet(aPlant : Planet) -> Bool {
+        return contains(planets, aPlant)
+    }
+
 }

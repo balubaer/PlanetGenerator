@@ -9,15 +9,24 @@
 import Foundation
 
 class Dice {
-    let sides: Int
+    var sides: Int
+    
+    init() {
+        self.sides = 0
+    }
+    
     init(sides: Int) {
         self.sides = sides
     }
+    
+    func setSites(aSides: Int) {
+        self.sides = aSides
+    }
+    
     func roll() -> Int {
         var resultRandom = Int(arc4random_uniform(UInt32(sides)))
             
         var result = resultRandom + 1
-        //println( "roll: \(result)")
 
         return result
     }
