@@ -10,19 +10,36 @@ import Foundation
 
 class Planet: Comparable, Equatable {
     var number: Int = 0
-    var name: String
+    var name: String {
+        var aName = "W\(number)"
+        return aName
+    }
     var ports: Port?
+    var player: Player?
+    var fleets: Array <Fleet>
+    var industry: Int = 0
+    var metal: Int = 0
+    var mines: Int = 0
+    var population: Int = 0
+    var limit: Int = 0
+    var round: Int = 0
+    
+    //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     
     var description: String {
-        var desc = "Planet Nummer: \(number) Name: \(name) "
+        var desc = self.name
         if ports != nil {
-            desc = desc + ports!.description
+            desc = ports!.description
         }
+        if player != nil {
+            desc += " \(player!.description)"
+        }
+        
         return desc
     }
     
     init() {
-        name = "NO Name"
+        fleets = Array()
     }
     
     func hasConnectionToPlanet(aPlant : Planet) -> Bool {

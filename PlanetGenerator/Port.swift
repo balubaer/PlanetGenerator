@@ -10,26 +10,34 @@ import Foundation
 
 class Port {
     var planets:Array <Planet>
-    var connectionsCount:Int
     var planet:Planet?
     
     init() {
         planets = Array()
-        connectionsCount = 0
     }
     
     var description: String {
-        var desc = " Port: connectionsCount [\(connectionsCount)] ";
-        
+        var desc = ""
+        var connectionCount = planets.count
         if planet != nil {
-            desc = desc + "MainPlanet <\(planet!.number)>\n"
+            desc = planet!.name
+        }  else {
+            desc = "W?"
         }
-        planets.sort { $0 < $1 }
-        for item in planets {
-            var number = item.number
-            desc = desc + " ToPlanet <\(number)>"
+        if (connectionCount > 0) {
+            var counter = 0
+            desc += "("
+            planets.sort { $0 < $1 }
+            for item in planets {
+                var number = item.number
+                desc += "\(number)"
+                if counter < (connectionCount - 1) {
+                    desc += ","
+                }
+                counter++;
+            }
+            desc += ")"
         }
-
         return desc
     }
     

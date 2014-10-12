@@ -1,0 +1,4 @@
+Festlegungen
+
+- Anzahl Flotten beim Start pro Spieler
+    5
