@@ -36,6 +36,16 @@ class TestFleets: XCTestCase {
         fleet.number = 25
         
         XCTAssertEqual("F25[ZAPHOD] = 99", fleet.description, "### fleet.description Fehler ###")
+        
+        fleet.moved = true
+        fleet.cargo = 7
+        XCTAssertEqual("F25[ZAPHOD] = 99 (bewegt,Fracht=7)", fleet.description, "### fleet.description Fehler ###")
+
+        fleet.moved = false
+        fleet.ambusch = true
+        fleet.cargo = 0
+        XCTAssertEqual("F25[ZAPHOD] = 99 (Ambush)", fleet.description, "### fleet.description Fehler ###")
+        
     }
 
     
