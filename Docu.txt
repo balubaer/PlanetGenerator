@@ -2,3 +2,8 @@ Festlegungen
 
 - Anzahl Flotten beim Start pro Spieler
     5
+
+TODOs:
+
+- Flotten verschenken
+- Kunstwerke behandeln
