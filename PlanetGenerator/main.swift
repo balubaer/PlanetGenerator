@@ -16,8 +16,6 @@ for index in 1...100 {
     
     planet.number = index
     
-    planet.name = "Erde \(index)"
-    
     planets.append(planet)
 }
 
