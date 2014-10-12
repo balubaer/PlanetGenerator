@@ -23,6 +23,8 @@ class Planet: Comparable, Equatable {
     var population: Int = 0
     var limit: Int = 0
     var round: Int = 0
+    var iShips: Int = 0
+    var pShips: Int = 0
     
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     
@@ -33,6 +35,13 @@ class Planet: Comparable, Equatable {
         }
         if player != nil {
             desc += " \(player!.description)"
+        }
+        
+        var resouceString = createResourceString()
+        
+        if countElements(resouceString) != 0 {
+            desc += " "
+            desc += resouceString
         }
         
         return desc
@@ -46,6 +55,42 @@ class Planet: Comparable, Equatable {
         var result = false
         if ports != nil {
             result = ports!.hasConnectionToPlanet(aPlant)
+        }
+        return result
+    }
+    
+    func createResourceString () -> String {
+        var resourceArray:Array <String> = Array()
+        var result:String = ""
+        
+        if industry != 0 {
+            resourceArray.append("Industrie=\(industry)")
+        }
+        if metal != 0 {
+            resourceArray.append("Metall=\(metal)")
+        }
+        if mines != 0 {
+            resourceArray.append("Minen=\(mines)")
+        }
+        if population != 0 {
+            resourceArray.append("Bevoelkerung=\(population)")
+        }
+        if limit != 0 {
+            resourceArray.append("Limit=\(limit)")
+        }
+        if round != 0 {
+            resourceArray.append("Runden=\(round)")
+        }
+        if iShips != 0 {
+            resourceArray.append("I-Schiffe=\(iShips)")
+        }
+        if pShips != 0 {
+            resourceArray.append("P-Schiffe=\(pShips)")
+        }
+        
+        if resourceArray.count != 0 {
+            
+            result = createBracketAndCommarStringWithStringArray(resourceArray)
         }
         return result
     }

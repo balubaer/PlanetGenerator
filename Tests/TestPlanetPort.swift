@@ -45,7 +45,32 @@ class TestPlanetPort: XCTestCase {
         port.planets.append(planet3)
         XCTAssertEqual("W123(1,2,3)", port.description, "### port.description Fehler ###")
         XCTAssertEqual("W123(1,2,3)", planet.description, "### planet.description Fehler ###")
+        
+        planet.industry = 1
+        XCTAssertEqual("W123(1,2,3) (Industrie=1)", planet.description, "### planet.description Fehler ###")
+        
+        planet.population = 2
+        XCTAssertEqual("W123(1,2,3) (Industrie=1,Bevoelkerung=2)", planet.description, "### planet.description Fehler ###")
+        
+        planet.limit = 3
+        XCTAssertEqual("W123(1,2,3) (Industrie=1,Bevoelkerung=2,Limit=3)", planet.description, "### planet.description Fehler ###")
+        
+        var player = Player()
+        player.name = "ZAPHOD"
+        planet.player = player
+        
+        XCTAssertEqual("W123(1,2,3) [ZAPHOD] (Industrie=1,Bevoelkerung=2,Limit=3)", planet.description, "### planet.description Fehler ###")
+
+        var port1 = Port()
+        port1.planet = planet1
+        port1.planets.append(planet)
+        planet1.ports = port1
+        planet1.limit = 4
+        planet1.mines = 5
+        XCTAssertEqual("W1(123) (Minen=5,Limit=4)", planet1.description, "### planet.description Fehler ###")
+        
+        
+        
 
     }
-
 }
