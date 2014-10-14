@@ -24,3 +24,14 @@ func createBracketAndCommarStringWithStringArray(aStringArray:Array <String>) ->
 
     return result
 }
+
+func isCharacterANumber(aCharacter: Character) -> Bool {
+    var tempString = "\(aCharacter)"
+    var value : Int? = tempString.toInt()
+    var result: Bool = false
+    
+    if value != nil {
+        result = (value >= 0 && value <= 9)
+    }
+    return result
+}
