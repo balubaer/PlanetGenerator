@@ -1,7 +1,12 @@
 Festlegungen
 
+- Anzahl Flotten == Anzahl Planeten
 - Anzahl Flotten beim Start pro Spieler
     5
+
+- 13 - 20 Planeten pro Spieler
+- 2.5 - 5 Verbindungen pro Planet
+- Keine Planeten ohne Verbindung zu den anderen Planeten
 
 TODOs:
 
