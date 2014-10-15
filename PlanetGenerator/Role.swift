@@ -1,5 +1,5 @@
 //
-//  Player.swift
+//  Role.swift
 //  PlanetGenerator
 //
 //  Created by Bernd Niklas on 11.10.14.
@@ -8,13 +8,11 @@
 
 import Foundation
 
-class Player: Equatable {
+class Role {
     var name: String
-    var points: Int = 0
-    var role: Role?
     
     var description: String {
-        var desc = "[\(name)]"
+        var desc = "Character Name: \(name)"
         return desc
     }
     
@@ -22,12 +20,4 @@ class Player: Equatable {
         name = "NO Name"
     }
     
-}
-
-func ==(lhs: Player, rhs: Player) -> Bool {
-    var lName = lhs.name
-    var rName = rhs.name
-    var result = (lName == rName)
-    
-    return result
 }

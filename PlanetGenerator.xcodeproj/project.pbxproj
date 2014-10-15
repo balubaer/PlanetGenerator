@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		852B2D0019EA4C8A005B9623 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852B2CFF19EA4C8A005B9623 /* Utils.swift */; };
+		852EB71319EEAEBC000BE7DB /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
+		852EB71519EEF0AC000BE7DB /* planets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 852EB71419EEF0AC000BE7DB /* planets.plist */; };
 		85844FB219EA015F00291C9C /* TestPlanetPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB119EA015F00291C9C /* TestPlanetPort.swift */; };
 		85844FB419EA0B1000291C9C /* TestPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB319EA0B1000291C9C /* TestPlayer.swift */; };
 		859DB42A19EB03AD00B10E56 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
@@ -19,11 +21,12 @@
 		85A117CC19E4B2E00045A39D /* Port.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C819E4B2E00045A39D /* Port.swift */; };
 		85A117CD19E4B2E00045A39D /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C919E4B2E00045A39D /* Dice.swift */; };
 		85A117CE19E4B2E00045A39D /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117CA19E4B2E00045A39D /* Planet.swift */; };
+		85D81ADF19EE2EA200B2F3E0 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
 		85DD0C9319ECD054009F8146 /* commands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 85DD0C9219ECD054009F8146 /* commands.txt */; };
 		85DD0C9619ECD1A7009F8146 /* TestsComandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD0C9519ECD1A7009F8146 /* TestsComandFactory.swift */; };
 		85DE741D19E8CF3100952C10 /* Fleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741C19E8CF3100952C10 /* Fleet.swift */; };
 		85DE741F19E8D04400952C10 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741E19E8D04400952C10 /* Player.swift */; };
-		85DE742119E8D15200952C10 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Character.swift */; };
+		85DE742119E8D15200952C10 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
 		85DE742519E8D81000952C10 /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; };
 		85DE743319E8E35700952C10 /* TestsFleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE743219E8E35700952C10 /* TestsFleetMovement.swift */; };
 		85DE743719E8E42C00952C10 /* TestFleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742919E8E25200952C10 /* TestFleet.swift */; };
@@ -34,6 +37,9 @@
 		85DE743C19E8EB6D00952C10 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C919E4B2E00045A39D /* Dice.swift */; };
 		85DE743D19E8EB7400952C10 /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; };
 		85EF07ED19EAEFBC00705298 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; };
+		85FDC83919EDF0E700ACA91B /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */; };
+		85FDC83B19EDF83000ACA91B /* TestPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83A19EDF83000ACA91B /* TestPersistenceManager.swift */; };
+		85FDC83C19EDFE5100ACA91B /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		852B2CFF19EA4C8A005B9623 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		852EB71419EEF0AC000BE7DB /* planets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = planets.plist; sourceTree = "<group>"; };
 		85844FB119EA015F00291C9C /* TestPlanetPort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanetPort.swift; sourceTree = "<group>"; };
 		85844FB319EA0B1000291C9C /* TestPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlayer.swift; sourceTree = "<group>"; };
 		859DB42919EB03AD00B10E56 /* CommandFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandFactory.swift; sourceTree = "<group>"; };
@@ -65,7 +72,7 @@
 		85DD0C9519ECD1A7009F8146 /* TestsComandFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsComandFactory.swift; sourceTree = "<group>"; };
 		85DE741C19E8CF3100952C10 /* Fleet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fleet.swift; sourceTree = "<group>"; };
 		85DE741E19E8D04400952C10 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		85DE742019E8D15200952C10 /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		85DE742019E8D15200952C10 /* Role.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		85DE742319E8D34100952C10 /* Docu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Docu.txt; sourceTree = "<group>"; };
 		85DE742419E8D81000952C10 /* FleetMovement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FleetMovement.swift; sourceTree = "<group>"; };
 		85DE742719E8E08600952C10 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
@@ -74,6 +81,8 @@
 		85DE743119E8E35700952C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85DE743219E8E35700952C10 /* TestsFleetMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsFleetMovement.swift; sourceTree = "<group>"; };
 		85EF07EC19EAEFBC00705298 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		85FDC83A19EDF83000ACA91B /* TestPersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,20 +125,21 @@
 		85A117BF19E4B27E0045A39D /* PlanetGenerator */ = {
 			isa = PBXGroup;
 			children = (
-				85A117C719E4B2E00045A39D /* PortFactory.swift */,
 				85A117C819E4B2E00045A39D /* Port.swift */,
-				85A117C919E4B2E00045A39D /* Dice.swift */,
+				85A117C719E4B2E00045A39D /* PortFactory.swift */,
 				85A117CA19E4B2E00045A39D /* Planet.swift */,
-				85DE742419E8D81000952C10 /* FleetMovement.swift */,
-				85A117C019E4B27E0045A39D /* main.swift */,
 				85DE741C19E8CF3100952C10 /* Fleet.swift */,
+				85DE742419E8D81000952C10 /* FleetMovement.swift */,
+				859DB42B19EB10B300B10E56 /* FleetFactory.swift */,
 				85DE741E19E8D04400952C10 /* Player.swift */,
-				85DE742019E8D15200952C10 /* Character.swift */,
-				85DE742719E8E08600952C10 /* MyPlayground.playground */,
-				852B2CFF19EA4C8A005B9623 /* Utils.swift */,
+				85DE742019E8D15200952C10 /* Role.swift */,
 				85EF07EC19EAEFBC00705298 /* Command.swift */,
 				859DB42919EB03AD00B10E56 /* CommandFactory.swift */,
-				859DB42B19EB10B300B10E56 /* FleetFactory.swift */,
+				85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */,
+				85A117C919E4B2E00045A39D /* Dice.swift */,
+				852B2CFF19EA4C8A005B9623 /* Utils.swift */,
+				85A117C019E4B27E0045A39D /* main.swift */,
+				85DE742719E8E08600952C10 /* MyPlayground.playground */,
 			);
 			path = PlanetGenerator;
 			sourceTree = "<group>";
@@ -137,6 +147,7 @@
 		85DD0C9419ECD090009F8146 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				852EB71419EEF0AC000BE7DB /* planets.plist */,
 				85DD0C9219ECD054009F8146 /* commands.txt */,
 			);
 			name = Resources;
@@ -153,14 +164,15 @@
 		85DE742F19E8E35700952C10 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				85DD0C9419ECD090009F8146 /* Resources */,
 				85DE742919E8E25200952C10 /* TestFleet.swift */,
 				85DD0C9519ECD1A7009F8146 /* TestsComandFactory.swift */,
 				85DE743219E8E35700952C10 /* TestsFleetMovement.swift */,
 				85844FB119EA015F00291C9C /* TestPlanetPort.swift */,
 				85844FB319EA0B1000291C9C /* TestPlayer.swift */,
 				859F661919EA693D005B5E2D /* TestUtils.swift */,
+				85FDC83A19EDF83000ACA91B /* TestPersistenceManager.swift */,
 				85DE743019E8E35700952C10 /* Supporting Files */,
+				85DD0C9419ECD090009F8146 /* Resources */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -250,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				852EB71519EEF0AC000BE7DB /* planets.plist in Resources */,
 				85DD0C9319ECD054009F8146 /* commands.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +278,7 @@
 				85DE742519E8D81000952C10 /* FleetMovement.swift in Sources */,
 				85A117C119E4B27E0045A39D /* main.swift in Sources */,
 				85A117CD19E4B2E00045A39D /* Dice.swift in Sources */,
+				85FDC83919EDF0E700ACA91B /* PersistenceManager.swift in Sources */,
 				85A117CB19E4B2E00045A39D /* PortFactory.swift in Sources */,
 				852B2D0019EA4C8A005B9623 /* Utils.swift in Sources */,
 				85DE741F19E8D04400952C10 /* Player.swift in Sources */,
@@ -273,7 +287,7 @@
 				85EF07ED19EAEFBC00705298 /* Command.swift in Sources */,
 				859DB42C19EB10B300B10E56 /* FleetFactory.swift in Sources */,
 				859DB42A19EB03AD00B10E56 /* CommandFactory.swift in Sources */,
-				85DE742119E8D15200952C10 /* Character.swift in Sources */,
+				85DE742119E8D15200952C10 /* Role.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +295,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				852EB71319EEAEBC000BE7DB /* Role.swift in Sources */,
+				85D81ADF19EE2EA200B2F3E0 /* CommandFactory.swift in Sources */,
+				85FDC83C19EDFE5100ACA91B /* PersistenceManager.swift in Sources */,
 				85DE743D19E8EB7400952C10 /* FleetMovement.swift in Sources */,
+				85FDC83B19EDF83000ACA91B /* TestPersistenceManager.swift in Sources */,
 				85DE743C19E8EB6D00952C10 /* Dice.swift in Sources */,
 				859F661A19EA693D005B5E2D /* TestUtils.swift in Sources */,
 				859F661B19EA6EF8005B5E2D /* Utils.swift in Sources */,

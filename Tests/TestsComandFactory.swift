@@ -50,6 +50,8 @@ class TestsCommandFactory: XCTestCase {
     func testFactory() {
         
         XCTAssertNotNil(commandsString, "### commandsString Fehler ###")
+       // var commandFactory = CommandFactory(aPlanetArray: Array <Planet>, aFleetArray: Array <Fleet>
+        
         XCTAssertTrue(true, "### factory Fehler ###")
 
     }

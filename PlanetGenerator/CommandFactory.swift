@@ -11,10 +11,18 @@ import Foundation
 class CommandFactory {
     var planets: Array <Planet>
     var fleets: Array <Fleet>
+    var commandStrings: Array <String>
+    var provessCommand: String?
+    var commandChars: String?
     
     init(aPlanetArray: Array <Planet>, aFleetArray: Array <Fleet>) {
         planets = aPlanetArray
         fleets = aFleetArray
+        commandStrings = Array()
+    }
+    
+    func setCommandStringsWithLongString(aString: String) {
+        commandStrings = aString.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: " \n\r"))
     }
 }
 

@@ -34,8 +34,8 @@ class PortFactory {
     
     func hasPlanetMaxConnetion(aPlanet: Planet) -> Bool {
         var result = false
-        if (aPlanet.ports != nil) {
-            var connectionCount = Int(aPlanet.ports!.planets.count)
+        if (aPlanet.port != nil) {
+            var connectionCount = Int(aPlanet.port!.planets.count)
             if (connectionCount == 5) {
                 result = true
             }
@@ -45,8 +45,8 @@ class PortFactory {
     
     func hasPlanetEnoughConnection(aPlanet: Planet) -> Bool {
         var result = false
-        if (aPlanet.ports != nil) {
-            var connectionCount = Int(aPlanet.ports!.planets.count)
+        if (aPlanet.port != nil) {
+            var connectionCount = Int(aPlanet.port!.planets.count)
             if (connectionCount >= 2 && connectionCount <= 5) {
                 result = true
             }
@@ -165,8 +165,8 @@ class PortFactory {
             if (startPlanet != nil) {
                 endPlanet = self.getEndPlanetWithDiceAndStartPlanet(startPlanet!)
                 if (endPlanet != nil) {
-                    startPlanet!.ports!.planets.append(endPlanet!)
-                    endPlanet!.ports!.planets.append(startPlanet!)
+                    startPlanet!.port!.planets.append(endPlanet!)
+                    endPlanet!.port!.planets.append(startPlanet!)
                     self.addPlanetWithEnoughConnectionTest(startPlanet!)
                     self.addPlanetWithEnoughConnectionTest(endPlanet!)
                     self.removePlanetFromWorkArrayWithMaxConnectionTest(startPlanet!)
@@ -188,7 +188,7 @@ class PortFactory {
 
             var port = Port()
             port.planet = planet
-            port.planet!.ports = port
+            port.planet!.port = port
         }
         self.generatePlanetConnection()
     }

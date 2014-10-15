@@ -14,7 +14,7 @@ class Planet: Comparable, Equatable {
         var aName = "W\(number)"
         return aName
     }
-    var ports: Port?
+    var port: Port?
     var player: Player?
     var fleets: Array <Fleet>
     var industry: Int = 0
@@ -30,8 +30,8 @@ class Planet: Comparable, Equatable {
     
     var description: String {
         var desc = self.name
-        if ports != nil {
-            desc = ports!.description
+        if port != nil {
+            desc = port!.description
         }
         if player != nil {
             desc += " \(player!.description)"
@@ -53,8 +53,8 @@ class Planet: Comparable, Equatable {
     
     func hasConnectionToPlanet(aPlant : Planet) -> Bool {
         var result = false
-        if ports != nil {
-            result = ports!.hasConnectionToPlanet(aPlant)
+        if port != nil {
+            result = port!.hasConnectionToPlanet(aPlant)
         }
         return result
     }

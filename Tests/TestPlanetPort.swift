@@ -21,7 +21,7 @@ class TestPlanetPort: XCTestCase {
         XCTAssertEqual("W123", planet.description, "### planet.description Fehler ###")
         XCTAssertEqual("W?", port.description, "### port.description Fehler ###")
 
-        planet.ports = port
+        planet.port = port
         port.planet = planet
         
         XCTAssertEqual("W123", planet.description, "### planet.description Fehler ###")
@@ -64,7 +64,7 @@ class TestPlanetPort: XCTestCase {
         var port1 = Port()
         port1.planet = planet1
         port1.planets.append(planet)
-        planet1.ports = port1
+        planet1.port = port1
         planet1.limit = 4
         planet1.mines = 5
         XCTAssertEqual("W1(123) (Minen=5,Limit=4)", planet1.description, "### planet.description Fehler ###")
