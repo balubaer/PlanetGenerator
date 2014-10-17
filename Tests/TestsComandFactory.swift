@@ -11,6 +11,7 @@ import XCTest
 
 class TestsCommandFactory: XCTestCase {
     var commandsString: String?
+    var planetArray: Array<Planet>?
     
     func getBundle() -> NSBundle? {
         var result: NSBundle? = nil
@@ -39,6 +40,14 @@ class TestsCommandFactory: XCTestCase {
             if path != nil {
                 commandsString = NSString(contentsOfFile:path!, encoding: NSUTF8StringEncoding, error: nil)
             }
+            path = aBundle!.resourcePath
+            path = path?.stringByAppendingPathComponent("planets.plist")
+            if path != nil {
+                var persManager = PersistenceManager()
+
+                planetArray = persManager.readPlanetPListWithPath(path!)
+            }
+
         }
     }
     
@@ -50,10 +59,15 @@ class TestsCommandFactory: XCTestCase {
     func testFactory() {
         
         XCTAssertNotNil(commandsString, "### commandsString Fehler ###")
-       // var commandFactory = CommandFactory(aPlanetArray: Array <Planet>, aFleetArray: Array <Fleet>
-        
-        XCTAssertTrue(true, "### factory Fehler ###")
-
+        var planetArrayExist = (planetArray != nil)
+        XCTAssertTrue(planetArrayExist, "### planetArray Fehler ###")
+        if planetArrayExist {
+            var commandFactory = CommandFactory(aPlanetArray: planetArray!)
+            if commandsString != nil {
+                commandFactory.setCommandStringsWithLongString(commandsString!)
+                commandFactory.executeCommands()
+            }
+        }
     }
     
     func testPerformanceExample() {

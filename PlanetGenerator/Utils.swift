@@ -35,3 +35,13 @@ func isCharacterANumber(aCharacter: Character) -> Bool {
     }
     return result
 }
+
+func extractNumberString(aString: String) ->String {
+    var result = String()
+    for aCharacter in aString {
+        if isCharacterANumber(aCharacter) {
+            result.append(aCharacter)
+        }
+    }
+    return result
+}

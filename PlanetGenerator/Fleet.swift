@@ -8,6 +8,22 @@
 
 import Foundation
 
+func fleetAndHomePlanetWithNumber(planets:Array<Planet>, number:Int) -> (fleet:Fleet?, homePlanet:Planet?) {
+    var fleet:Fleet? = nil
+    var homePlanet:Planet? = nil
+    for planet in planets {
+        for aFleet in planet.fleets {
+            if aFleet.number == number {
+                fleet = aFleet
+                homePlanet = planet
+                break
+            }
+        }
+    }
+    
+    return (fleet, homePlanet)
+}
+
 class Fleet: Comparable, Equatable {
     var number: Int = 0
     var name: String {

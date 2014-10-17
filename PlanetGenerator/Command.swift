@@ -8,6 +8,11 @@
 
 import Foundation
 
+@objc protocol ExecuteCommand {
+    func executeCommand()
+}
+
+
 class Command {
     var string: String
     var player: Player
@@ -20,14 +25,26 @@ class Command {
     }
 }
 
-class MoveCommand: Command {
+class MoveCommand: Command, ExecuteCommand{
     var fleet: Fleet
     var planets: Array <Planet>
+    var homePlanet: Planet
     var count = 0
     
-    init(aFleet: Fleet, aPlanetArray: Array <Planet>, aString: String, aPlayer: Player) {
+    init(aFleet: Fleet, aHomePlanet: Planet, aPlanetArray: Array <Planet>, aString: String, aPlayer: Player) {
         fleet = aFleet
+        homePlanet = aHomePlanet
         planets = aPlanetArray
         super.init(aString: aString, aPlayer: aPlayer)
     }
+    
+    func executeCommand() {
+        NSLog("###### MoveCommand.executeCommand ######")
+        
+    }
+}
+
+struct CommandError {
+    var errorCode = 0
+    var errorString = ""
 }

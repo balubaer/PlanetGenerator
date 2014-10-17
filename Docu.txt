@@ -12,3 +12,4 @@ TODOs:
 
 - Flotten verschenken
 - Kunstwerke behandeln
+- Player im PersistenceManager

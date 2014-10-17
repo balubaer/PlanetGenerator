@@ -8,6 +8,19 @@
 
 import Foundation
 
+
+func planetWithNumber(planets:Array<Planet>, number:Int) -> Planet? {
+    var result:Planet? = nil
+    for planet in planets {
+        if planet.number == number {
+            result = planet
+            break
+        }
+    }
+    
+    return result;
+}
+
 class Planet: Comparable, Equatable {
     var number: Int = 0
     var name: String {

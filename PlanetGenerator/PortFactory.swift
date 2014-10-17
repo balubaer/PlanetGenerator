@@ -8,18 +8,6 @@
 
 import Foundation
 
-
-func planetWithNumber(planets:Array<Planet>, number:Int) -> Planet? {
-    var result:Planet? = nil
-    for planet in planets {
-        if planet.number == number {
-            result = planet
-        }
-    }
-    
-    return result;
-}
-
 class PortFactory {
     var planetsWithEnoughConnections: Array <Planet> = Array()
     var workingPlanets: Array <Planet>
@@ -182,7 +170,7 @@ class PortFactory {
         planetsCount = planetArray.count
         
         //All Planets get Ports
-        for planet in planets {
+        for planet in planetArray {
             
             workingPlanets.append(planet)
 

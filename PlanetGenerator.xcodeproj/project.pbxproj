@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8518BF1819F1550A0088CC20 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; };
 		852B2D0019EA4C8A005B9623 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852B2CFF19EA4C8A005B9623 /* Utils.swift */; };
 		852EB71319EEAEBC000BE7DB /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
 		852EB71519EEF0AC000BE7DB /* planets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 852EB71419EEF0AC000BE7DB /* planets.plist */; };
@@ -21,6 +22,7 @@
 		85A117CC19E4B2E00045A39D /* Port.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C819E4B2E00045A39D /* Port.swift */; };
 		85A117CD19E4B2E00045A39D /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C919E4B2E00045A39D /* Dice.swift */; };
 		85A117CE19E4B2E00045A39D /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117CA19E4B2E00045A39D /* Planet.swift */; };
+		85A6216A19EFDF3A00E61699 /* PortFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C719E4B2E00045A39D /* PortFactory.swift */; };
 		85D81ADF19EE2EA200B2F3E0 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
 		85DD0C9319ECD054009F8146 /* commands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 85DD0C9219ECD054009F8146 /* commands.txt */; };
 		85DD0C9619ECD1A7009F8146 /* TestsComandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD0C9519ECD1A7009F8146 /* TestsComandFactory.swift */; };
@@ -295,6 +297,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8518BF1819F1550A0088CC20 /* Command.swift in Sources */,
+				85A6216A19EFDF3A00E61699 /* PortFactory.swift in Sources */,
 				852EB71319EEAEBC000BE7DB /* Role.swift in Sources */,
 				85D81ADF19EE2EA200B2F3E0 /* CommandFactory.swift in Sources */,
 				85FDC83C19EDFE5100ACA91B /* PersistenceManager.swift in Sources */,
