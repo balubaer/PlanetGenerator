@@ -30,6 +30,7 @@ class Planet: Comparable, Equatable {
     var port: Port?
     var player: Player?
     var fleets: Array <Fleet>
+    var fleetMovements: Array <FleetMovement> = Array()
     var industry: Int = 0
     var metal: Int = 0
     var mines: Int = 0
@@ -55,6 +56,29 @@ class Planet: Comparable, Equatable {
         if countElements(resouceString) != 0 {
             desc += " "
             desc += resouceString
+        }
+
+        if fleets.count > 0 {
+            for fleet in fleets {
+                desc += "\n"
+                desc += fleet.description
+            }
+        }
+        
+        var fleetMovementsCount = fleetMovements.count
+        
+        if fleetMovementsCount > 0 {
+            var counter = 0
+            
+            desc += "\n("
+            for fleetMovement in fleetMovements {
+                desc += fleetMovement.description
+                counter++
+                if counter < fleetMovementsCount {
+                    desc += " "
+                }
+            }
+            desc += ")"
         }
         
         return desc

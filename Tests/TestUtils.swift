@@ -36,4 +36,23 @@ class TestUtils: XCTestCase {
         XCTAssertFalse(isCharacterANumber("z"), "### isCharacterANumber Fehler ###")
 
     }
+    
+    func testRemoveFromArray() {
+        var list = [1,2,3]
+        list.removeObject(2) // Successfully removes 2 because types matched
+        
+        XCTAssertTrue(list.count == 2, "### removeObject Fehler ###")
+
+        list.removeObject("3") // fails silently to remove anything because the types don't match
+        XCTAssertTrue(list.count == 2, "### removeObject Fehler ###")
+        var counter = 0
+        for aInt in list {
+            if counter == 0 {
+                XCTAssertTrue(aInt == 1, "### removeObject Fehler ###")
+            } else if counter == 1 {
+                XCTAssertTrue(aInt == 3, "### removeObject Fehler ###")
+            }
+            counter++
+        }
+    }
 }

@@ -39,8 +39,42 @@ class MoveCommand: Command, ExecuteCommand{
     }
     
     func executeCommand() {
-        NSLog("###### MoveCommand.executeCommand ######")
+        var fromPlanet: Planet = homePlanet
+        var toPlanet: Planet
+        var isError = false
+        for planet in planets {
+            toPlanet = planet
+            if fromPlanet.hasConnectionToPlanet(toPlanet) {
+                fromPlanet = planet
+                //Ambush
+            } else {
+                //TODO: Fehler
+                isError = true
+                break
+            }
+            //TODO: Test Ships
+        }
         
+        if isError == false {
+            homePlanet.fleets.removeObject(fleet)
+            var counter = 0
+            var planetCount = planets.count
+            fromPlanet = homePlanet
+            
+            for planet in planets {
+                toPlanet = planet
+                var fleetMovement = FleetMovement()
+                fleetMovement.fleet = fleet
+                fleetMovement.toPlanet = toPlanet
+                
+                fromPlanet.fleetMovements.append(fleetMovement)
+                
+                counter++
+                if counter == planetCount {
+                    planet.fleets.append(fleet)
+                }
+            }
+        }
     }
 }
 

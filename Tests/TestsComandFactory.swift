@@ -57,16 +57,62 @@ class TestsCommandFactory: XCTestCase {
     }
     
     func testFactory() {
-        
-        XCTAssertNotNil(commandsString, "### commandsString Fehler ###")
-        var planetArrayExist = (planetArray != nil)
-        XCTAssertTrue(planetArrayExist, "### planetArray Fehler ###")
-        if planetArrayExist {
+        if planetArray != nil {
             var commandFactory = CommandFactory(aPlanetArray: planetArray!)
             if commandsString != nil {
                 commandFactory.setCommandStringsWithLongString(commandsString!)
                 commandFactory.executeCommands()
+                
+                for planet in planetArray! {
+                    if planet.number == 1 {
+                        var twoFleetsThere = (planet.fleets.count == 2)
+                        XCTAssertTrue(twoFleetsThere, "### Planet 1 hat nicht die 2 Flotten ###")
+                        
+                        //Test Flotte 2
+                        var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 2)
+                        
+                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil{
+                            XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
+                            XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 2, "### Flotte wurde nicht gefunden ###")
+                        } else {
+                            XCTFail("### Flotte 2 nicht gefunden  ###")
+                        }
+                        
+                        //Test Flotte 3
+                        fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 3)
+                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil{
+                            XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
+                            XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 3, "### Flotte wurde nicht gefunden ###")
+                        } else {
+                            XCTFail("### Flotte 3 nicht gefunden  ###")
+                        }
+
+                    } else if planet.number == 2 {
+                        var oneFleetsThere = (planet.fleets.count == 1)
+                        XCTAssertTrue(oneFleetsThere, "### Planet 2 hat nicht die 1 Flotte ###")
+                        //Test Flotte 1
+                        var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 1)
+                        
+                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil{
+                            XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
+                            XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 1, "### Flotte wurde nicht gefunden ###")
+                        } else {
+                            XCTFail("### Flotte 1 nicht gefunden  ###")
+                        }
+
+
+                        
+                    } else if planet.number == 3 {
+                        var noFleetsThere = (planet.fleets.count == 0)
+                        XCTAssertTrue(noFleetsThere, "### Planet 3 hat nicht die 0 Flotten ###")
+                    }
+                }
+                
+            } else {
+                XCTFail("### TestsCommandFactory.testFactory commandsString is nil ###")
             }
+        } else {
+            XCTFail("### TestsCommandFactory.testFactory planetArray is nil ###")
         }
     }
     

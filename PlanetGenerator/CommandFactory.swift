@@ -75,8 +75,6 @@ class CommandFactory {
                     default:
                         result = nil
                     }
-                    // case "FWW":
-                    // case "FWWW":
                 default:
                     result = nil
                 }
@@ -89,6 +87,7 @@ class CommandFactory {
         for command in commandStrings {
             commandChars = ""
             provessCommand = command
+            commandElements = Array()
             var counter = 0
             var charCount = countElements(command)
             var foundCommandElementEnd = false

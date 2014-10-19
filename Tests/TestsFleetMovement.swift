@@ -34,7 +34,7 @@ class TestsFleetMovement: XCTestCase {
         fleetMove.fleet = fleet
         fleetMove.toPlanet = planet
         
-        XCTAssertEqual("(F25[ZAPHOD]-->W46)", fleetMove.description, "### fleetMove.description Fehler ###")
+        XCTAssertEqual("F25[ZAPHOD]-->W46", fleetMove.description, "### fleetMove.description Fehler ###")
 
     }
     

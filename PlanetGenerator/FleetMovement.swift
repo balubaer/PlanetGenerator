@@ -15,7 +15,7 @@ class FleetMovement {
     var description: String {
         var desc = "(---)"
         if fleet != nil && toPlanet != nil {
-            desc = "(\(fleet!.name)-->\(toPlanet!.name))"
+            desc = "\(fleet!.name)-->\(toPlanet!.name)"
         }
         return desc
     }
