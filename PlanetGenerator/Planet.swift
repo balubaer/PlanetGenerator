@@ -32,6 +32,16 @@ class Planet: Comparable, Equatable {
     var fleets: Array <Fleet>
     var fleetMovements: Array <FleetMovement> = Array()
     var industry: Int = 0
+    var usedIndustry: Int = 0
+    var effectiveIndustry: Int {
+        var result: Int = 0
+        if industry <= metal {
+            result = industry
+        } else {
+            result = metal
+        }
+        return result
+    }
     var metal: Int = 0
     var mines: Int = 0
     var population: Int = 0

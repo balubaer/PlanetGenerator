@@ -13,3 +13,6 @@ TODOs:
 - Flotten verschenken
 - Kunstwerke behandeln
 - Player im PersistenceManager
+- Fehler Implementieren
+
+

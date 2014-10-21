@@ -60,6 +60,16 @@ class TestsCommandFactory: XCTestCase {
         if planetArray != nil {
             var commandFactory = CommandFactory(aPlanetArray: planetArray!)
             if commandsString != nil {
+                
+                //Test Flotte 1
+                var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 1)
+                if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
+                    XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 0,"### Flotte 1 Anzahl Schiffe falsch ###")
+                    XCTAssertTrue(fleetAndHomePlanet.homePlanet!.metal == 1,"### Planet 1 Anzahl Metalle falsch ###")
+                } else {
+                    XCTFail("### Flotte 1 nicht gefunden  ###")
+                }
+                
                 commandFactory.setCommandStringsWithLongString(commandsString!)
                 commandFactory.executeCommands()
                 
@@ -67,11 +77,12 @@ class TestsCommandFactory: XCTestCase {
                     if planet.number == 1 {
                         var twoFleetsThere = (planet.fleets.count == 2)
                         XCTAssertTrue(twoFleetsThere, "### Planet 1 hat nicht die 2 Flotten ###")
+                        XCTAssertTrue(planet.metal == 0,"### Planet 1 Anzahl Metalle falsch ###")
                         
                         //Test Flotte 2
                         var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 2)
                         
-                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil{
+                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
                             XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 2, "### Flotte wurde nicht gefunden ###")
                         } else {
@@ -80,28 +91,27 @@ class TestsCommandFactory: XCTestCase {
                         
                         //Test Flotte 3
                         fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 3)
-                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil{
+                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
                             XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 3, "### Flotte wurde nicht gefunden ###")
                         } else {
                             XCTFail("### Flotte 3 nicht gefunden  ###")
                         }
-
+                        
                     } else if planet.number == 2 {
                         var oneFleetsThere = (planet.fleets.count == 1)
                         XCTAssertTrue(oneFleetsThere, "### Planet 2 hat nicht die 1 Flotte ###")
                         //Test Flotte 1
                         var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 1)
                         
-                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil{
+                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
                             XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 1, "### Flotte wurde nicht gefunden ###")
+                            XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 1,"### Flotte 1 Anzahl Schiffe falsch ###")
+                            
                         } else {
                             XCTFail("### Flotte 1 nicht gefunden  ###")
                         }
-
-
-                        
                     } else if planet.number == 3 {
                         var noFleetsThere = (planet.fleets.count == 0)
                         XCTAssertTrue(noFleetsThere, "### Planet 3 hat nicht die 0 Flotten ###")

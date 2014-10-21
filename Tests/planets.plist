@@ -17,7 +17,7 @@
 			<key>player</key>
 			<string>ZAPHOD</string>
 			<key>ships</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>2</key>
 		<dict>
@@ -64,7 +64,7 @@
 			<key>limit</key>
 			<integer>13</integer>
 			<key>metal</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>mines</key>
 			<integer>0</integer>
 			<key>name</key>

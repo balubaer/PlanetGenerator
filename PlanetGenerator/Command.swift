@@ -12,19 +12,66 @@ import Foundation
     func executeCommand()
 }
 
+enum TurnPhase: Int {
+    case Initial = 1, Unloading, Transfer, Building, Loading, Combat, Movement, Final
+}
 
-class Command {
+
+
+class Command: Comparable  {
     var string: String
     var player: Player
     var errorCode: Int
+    let turnPhase:TurnPhase
     
-    init(aString: String, aPlayer: Player) {
+    init(aString: String, aPlayer: Player, aTurnPhase: TurnPhase) {
         string = aString
         player = aPlayer
         errorCode = 0
+        turnPhase = aTurnPhase
     }
 }
 
+func <=(lhs: Command, rhs: Command) -> Bool {
+    var lTurnPhase = lhs.turnPhase
+    var rTurnPhase = rhs.turnPhase
+    
+    var result = lTurnPhase.rawValue <= rTurnPhase.rawValue
+    return result
+}
+
+func >=(lhs: Command, rhs: Command) -> Bool {
+    var lTurnPhase = lhs.turnPhase
+    var rTurnPhase = rhs.turnPhase
+    var result = lTurnPhase.rawValue >= rTurnPhase.rawValue
+    return result
+}
+
+func >(lhs: Command, rhs: Command) -> Bool {
+    var lTurnPhase = lhs.turnPhase
+    var rTurnPhase = rhs.turnPhase
+    var result = lTurnPhase.rawValue > rTurnPhase.rawValue
+    
+    return result
+}
+
+func <(lhs: Command, rhs: Command) -> Bool {
+    var lTurnPhase = lhs.turnPhase
+    var rTurnPhase = rhs.turnPhase
+    var result = lTurnPhase.rawValue < rTurnPhase.rawValue
+    
+    return result
+}
+
+func ==(lhs: Command, rhs: Command) -> Bool {
+    var lTurnPhase = lhs.turnPhase
+    var rTurnPhase = rhs.turnPhase
+    var result = lTurnPhase == rTurnPhase
+    
+    return result
+}
+
+//FnnnWmmm FnnnWmmmWooo FnnnWmmmWoooWrrr
 class MoveCommand: Command, ExecuteCommand{
     var fleet: Fleet
     var planets: Array <Planet>
@@ -35,7 +82,8 @@ class MoveCommand: Command, ExecuteCommand{
         fleet = aFleet
         homePlanet = aHomePlanet
         planets = aPlanetArray
-        super.init(aString: aString, aPlayer: aPlayer)
+
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Movement)
     }
     
     func executeCommand() {
@@ -74,6 +122,52 @@ class MoveCommand: Command, ExecuteCommand{
                     planet.fleets.append(fleet)
                 }
             }
+        }
+    }
+}
+
+//WnnnBqqqFmmm
+class BuildFleetShip: Command, ExecuteCommand {
+    var fleet: Fleet
+    var homePlanet: Planet
+    var planetNumber: Int
+    var shipsToBuild: Int
+
+    init(aFleet: Fleet, aHomePlanet: Planet, aPlanetNumber: Int,  aShipsToBuild: Int, aString: String, aPlayer: Player) {
+        fleet = aFleet
+        homePlanet = aHomePlanet
+        planetNumber = aPlanetNumber
+        shipsToBuild = aShipsToBuild
+
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Building)
+    }
+
+    func executeCommand() {
+        var isError = false
+
+        if homePlanet.number != planetNumber {
+            //TODO: Fehler Plante wo die Flotte ist ist nich der gleiche auf dem gebaut werden muss 
+            isError = true
+        }
+        
+        if isError == false {
+            if contains(homePlanet.fleets, fleet) == false  {
+                //TODO: Fehler Flotte ist nicht auf Planet
+                isError = true
+            }
+        }
+        
+        if isError == false {
+            if homePlanet.metal < shipsToBuild {
+                //TODO: Fehler zuwenig Metalle
+            }
+        }
+        
+        //TODO: Weiter Tests implementieren
+        
+        if (isError == false) {
+            fleet.ships += shipsToBuild
+            homePlanet.metal -= shipsToBuild
         }
     }
 }
