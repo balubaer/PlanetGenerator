@@ -21,13 +21,12 @@ enum TurnPhase: Int {
 class Command: Comparable  {
     var string: String
     var player: Player
-    var errorCode: Int
+    var errors: Array <(Int, String)> = Array()
     let turnPhase:TurnPhase
     
     init(aString: String, aPlayer: Player, aTurnPhase: TurnPhase) {
         string = aString
         player = aPlayer
-        errorCode = 0
         turnPhase = aTurnPhase
     }
 }
@@ -152,7 +151,7 @@ class BuildFleetShip: Command, ExecuteCommand {
         
         if isError == false {
             if contains(homePlanet.fleets, fleet) == false  {
-                //TODO: Fehler Flotte ist nicht auf Planet
+                errors.append(FleetNotOnPlanet_Error)
                 isError = true
             }
         }
@@ -168,6 +167,90 @@ class BuildFleetShip: Command, ExecuteCommand {
         if (isError == false) {
             fleet.ships += shipsToBuild
             homePlanet.metal -= shipsToBuild
+        }
+    }
+}
+
+//FnnnUqqq FnnnU
+class UnloadingMetal: Command, ExecuteCommand {
+    var fleet: Fleet
+    var homePlanet: Planet
+    var metalToUnload: Int
+
+    init(aFleet: Fleet, aHomePlanet: Planet,  aMetalToUnload: Int, aString: String, aPlayer: Player) {
+        fleet = aFleet
+        homePlanet = aHomePlanet
+        metalToUnload = aMetalToUnload
+        
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Unloading)
+    }
+    
+    func executeCommand() {
+        var isError = false
+        
+        if isError == false {
+            if contains(homePlanet.fleets, fleet) == false  {
+                errors.append(FleetNotOnPlanet_Error)
+                isError = true
+            }
+        }
+        
+        
+        //TODO: Weiter Tests implementieren
+        
+        if (isError == false) {
+            //Mit metalToUnload == 0 alle Metalle ausladen
+            if metalToUnload == 0 || fleet.cargo < metalToUnload {
+                homePlanet.metal += fleet.cargo
+                fleet.cargo = 0
+            } else {
+                fleet.cargo -= metalToUnload
+                homePlanet.metal += metalToUnload
+            }
+        }
+    }
+}
+
+//FnnnTqqqFmmm
+class TransferShipsFleetToFleet: Command, ExecuteCommand {
+    var fromFleet: Fleet
+    var toFleet: Fleet
+    var fromHomePlanet: Planet
+    var toHomePlanet: Planet
+    var shipsToTransfer: Int
+    
+    init(aFromFleet: Fleet, aToFleet: Fleet, aFromHomePlanet: Planet, aToHomePlanet: Planet, aShipsToTransfer: Int, aString: String, aPlayer: Player) {
+        fromFleet = aFromFleet
+        toFleet = aToFleet
+        fromHomePlanet = aFromHomePlanet
+        toHomePlanet = aToHomePlanet
+        shipsToTransfer = aShipsToTransfer
+        
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+    }
+    
+    func executeCommand() {
+        var isError = false
+        
+        if isError == false {
+            if fromHomePlanet != toHomePlanet  {
+                //TODO: Fehler art zufügen
+                isError = true
+            }
+            if isError == false {
+                if fromFleet.ships < shipsToTransfer {
+                    //TODO: Fehler art zufügen
+                    isError = true
+                }
+            }
+            //TODO: Check Owner Man kann einer Neutralen Flotte keine Schiffe Transverieren
+        }
+        
+        //TODO: Weiter Tests implementieren
+        
+        if (isError == false) {
+            fromFleet.ships -= shipsToTransfer
+            toFleet.ships += shipsToTransfer
         }
     }
 }
