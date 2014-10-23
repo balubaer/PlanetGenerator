@@ -70,6 +70,42 @@ class TestsCommandFactory: XCTestCase {
                     XCTFail("### Flotte 1 nicht gefunden  ###")
                 }
                 
+                //Test Flotte 2 Und Planet auf Metalle
+                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 2)
+                if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
+                    XCTAssertTrue(fleetAndHomePlanet.fleet!.cargo == 10,"### Flotte 2 Anzahl Cargo falsch ###")
+                    XCTAssertTrue(fleetAndHomePlanet.homePlanet!.metal == 0,"### Planet 2 Anzahl Metalle falsch ###")
+                } else {
+                    XCTFail("### Flotte 2 nicht gefunden  ###")
+                }
+
+                //Test Flotte 3 Und Planet auf Metalle
+                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 3)
+                if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
+                    XCTAssertTrue(fleetAndHomePlanet.fleet!.cargo == 5,"### Flotte 3 Anzahl Cargo falsch ###")
+                    XCTAssertTrue(fleetAndHomePlanet.homePlanet!.metal == 0,"### Planet 3 Anzahl Metalle falsch ###")
+                } else {
+                    XCTFail("### Flotte 3 nicht gefunden  ###")
+                }
+                
+                //Test Flotte 4 Und Planet auf Metalle
+                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 4)
+                if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
+                    XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 7,"### Flotte 4 Anzahl Schiffe falsch ###")
+                    XCTAssertTrue(fleetAndHomePlanet.fleet!.cargo == 7,"### Flotte 4 Anzahl Cargo falsch ###")
+                    XCTAssertTrue(fleetAndHomePlanet.homePlanet!.metal == 0,"### Planet 4 Anzahl Metalle falsch ###")
+                } else {
+                    XCTFail("### Flotte 4 nicht gefunden  ###")
+                }
+
+                //Test Flotte 5 Und Planet auf Schiffe
+                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 5)
+                if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
+                    XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 0,"### Flotte 5 Anzahl Schiffe falsch ###")
+                } else {
+                    XCTFail("### Flotte 5 nicht gefunden  ###")
+                }
+
                 commandFactory.setCommandStringsWithLongString(commandsString!)
                 commandFactory.executeCommands()
                 
@@ -85,6 +121,9 @@ class TestsCommandFactory: XCTestCase {
                         if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
                             XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 2, "### Flotte wurde nicht gefunden ###")
+                            
+                            XCTAssertEqual(fleetAndHomePlanet.fleet!.cargo, 0, "### Flotte 2 Anzahl Cargo falsch ###")
+
                         } else {
                             XCTFail("### Flotte 2 nicht gefunden  ###")
                         }
@@ -94,6 +133,8 @@ class TestsCommandFactory: XCTestCase {
                         if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
                             XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 3, "### Flotte wurde nicht gefunden ###")
+                            XCTAssertEqual(fleetAndHomePlanet.fleet!.cargo, 3, "### Flotte 3 Anzahl Cargo falsch ###")
+                            
                         } else {
                             XCTFail("### Flotte 3 nicht gefunden  ###")
                         }
@@ -101,6 +142,9 @@ class TestsCommandFactory: XCTestCase {
                     } else if planet.number == 2 {
                         var oneFleetsThere = (planet.fleets.count == 1)
                         XCTAssertTrue(oneFleetsThere, "### Planet 2 hat nicht die 1 Flotte ###")
+                        
+                        XCTAssertEqual(planet.metal, 10, "### Planet 2 Anzahl Metalle falsch ###")
+
                         //Test Flotte 1
                         var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 1)
                         
@@ -115,6 +159,26 @@ class TestsCommandFactory: XCTestCase {
                     } else if planet.number == 3 {
                         var noFleetsThere = (planet.fleets.count == 0)
                         XCTAssertTrue(noFleetsThere, "### Planet 3 hat nicht die 0 Flotten ###")
+                        XCTAssertEqual(planet.metal, 2, "### Planet 3 Anzahl Metalle falsch ###")
+
+                    } else if planet.number == 4 {
+                        
+                        XCTAssertEqual(planet.metal, 7, "### Planet 4 Anzahl Metalle falsch ###")
+
+                        var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 4)
+                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
+                            XCTAssertEqual(fleetAndHomePlanet.fleet!.cargo, 0, "### Flotte 4 Anzahl Cargo falsch ###")
+                            XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 5,"### Flotte 4 Anzahl Schiffe falsch ###")
+                        } else {
+                            XCTFail("### Flotte 4 nicht gefunden  ###")
+                        }
+                        
+                        fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 5)
+                        if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
+                            XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 2,"### Flotte 5 Anzahl Schiffe falsch ###")
+                        } else {
+                            XCTFail("### Flotte 5 nicht gefunden  ###")
+                        }
                     }
                 }
                 
