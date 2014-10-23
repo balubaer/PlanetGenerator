@@ -39,7 +39,7 @@ class Fleet: Comparable, Equatable {
     var player: Player?
     var cargo: Int = 0
     var moved: Bool = false
-    var ambusch: Bool = false
+    var ambush: Bool = false
     
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     //TODO: niklas schenken
@@ -67,7 +67,7 @@ class Fleet: Comparable, Equatable {
         if moved {
             infoArray.append("bewegt")
         }
-        if ambusch {
+        if ambush {
             infoArray.append("Ambush")
         }
         if cargo != 0 {

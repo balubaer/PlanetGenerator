@@ -4,9 +4,39 @@
 <dict>
 	<key>fleets</key>
 	<dict>
+		<key>5</key>
+		<dict>
+			<key>ambush</key>
+			<false/>
+			<key>cargo</key>
+			<integer>0</integer>
+			<key>moved</key>
+			<false/>
+			<key>number</key>
+			<integer>5</integer>
+			<key>player</key>
+			<string>ZAPHOD</string>
+			<key>ships</key>
+			<integer>0</integer>
+		</dict>
+		<key>4</key>
+		<dict>
+			<key>moved</key>
+			<false/>
+			<key>ships</key>
+			<integer>7</integer>
+			<key>player</key>
+			<string>ZAPHOD</string>
+			<key>number</key>
+			<integer>4</integer>
+			<key>cargo</key>
+			<integer>7</integer>
+			<key>ambush</key>
+			<false/>
+		</dict>
 		<key>1</key>
 		<dict>
-			<key>ambusch</key>
+			<key>ambush</key>
 			<false/>
 			<key>cargo</key>
 			<integer>0</integer>
@@ -21,10 +51,10 @@
 		</dict>
 		<key>2</key>
 		<dict>
-			<key>ambusch</key>
+			<key>ambush</key>
 			<false/>
 			<key>cargo</key>
-			<integer>0</integer>
+			<integer>10</integer>
 			<key>moved</key>
 			<false/>
 			<key>number</key>
@@ -36,10 +66,10 @@
 		</dict>
 		<key>3</key>
 		<dict>
-			<key>ambusch</key>
+			<key>ambush</key>
 			<false/>
 			<key>cargo</key>
-			<integer>0</integer>
+			<integer>5</integer>
 			<key>moved</key>
 			<false/>
 			<key>number</key>
@@ -52,6 +82,33 @@
 	</dict>
 	<key>planets</key>
 	<array>
+		<dict>
+			<key>fleets</key>
+			<array>
+				<integer>5</integer>
+				<integer>4</integer>
+			</array>
+			<key>iShips</key>
+			<integer>0</integer>
+			<key>industry</key>
+			<integer>0</integer>
+			<key>limit</key>
+			<integer>0</integer>
+			<key>metal</key>
+			<integer>0</integer>
+			<key>mines</key>
+			<integer>0</integer>
+			<key>name</key>
+			<string>W4</string>
+			<key>number</key>
+			<integer>4</integer>
+			<key>pShips</key>
+			<integer>0</integer>
+			<key>population</key>
+			<integer>0</integer>
+			<key>round</key>
+			<integer>0</integer>
+		</dict>
 		<dict>
 			<key>fleets</key>
 			<array>
@@ -135,6 +192,10 @@
 	<dict/>
 	<key>ports</key>
 	<dict>
+		<key>4</key>
+		<array>
+			<integer>3</integer>
+		</array>
 		<key>1</key>
 		<array>
 			<integer>2</integer>
@@ -146,6 +207,7 @@
 		</array>
 		<key>3</key>
 		<array>
+			<integer>4</integer>
 			<integer>2</integer>
 		</array>
 	</dict>

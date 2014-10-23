@@ -52,7 +52,7 @@ class PersistenceManager {
                     }
                     fleetDict["cargo"] = fleet.cargo
                     fleetDict["moved"] = fleet.moved
-                    fleetDict["ambusch"] = fleet.ambusch
+                    fleetDict["ambush"] = fleet.ambush
                     fleetDictForPList[String(fleet.number)] = fleetDict
                 }
                 planetDict["fleets"] = fleetArray
@@ -181,7 +181,7 @@ class PersistenceManager {
                         }
                         fleet.cargo = Int(fleetFromPlist!["cargo"] as NSNumber)
                         fleet.moved = (fleetFromPlist!["moved"] as Bool)
-                        fleet.ambusch = (fleetFromPlist!["ambusch"] as Bool)
+                        fleet.ambush = (fleetFromPlist!["ambush"] as Bool)
                     }
                 }
             }
