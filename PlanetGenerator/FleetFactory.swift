@@ -10,8 +10,25 @@ import Foundation
 
 class FleetFactory {
     var dice: Dice
+    var fleetCount: Int
     
-    init() {
+    init(aFleetCount: Int) {
         dice = Dice()
+        fleetCount = aFleetCount
+    }
+    
+    func createWithPlanetArray(planetArray:Array <Planet>) {
+        dice.setSites(planetArray.count)
+
+        //Create Fleets
+        for index in 1...fleetCount {
+            var planet: Planet? = planetWithNumber(planetArray, dice.roll())
+            
+            if planet != nil {
+                var fleet = Fleet()
+                fleet.number = index
+                planet!.fleets.append(fleet)
+            }
+        }
     }
 }

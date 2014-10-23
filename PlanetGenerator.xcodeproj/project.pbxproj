@@ -23,6 +23,8 @@
 		85A117CD19E4B2E00045A39D /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C919E4B2E00045A39D /* Dice.swift */; };
 		85A117CE19E4B2E00045A39D /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117CA19E4B2E00045A39D /* Planet.swift */; };
 		85A6216A19EFDF3A00E61699 /* PortFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C719E4B2E00045A39D /* PortFactory.swift */; };
+		85C90B9519F6CDB100800CE8 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C90B9419F6CDB100800CE8 /* Error.swift */; };
+		85C90B9619F6CDB100800CE8 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C90B9419F6CDB100800CE8 /* Error.swift */; };
 		85D81ADF19EE2EA200B2F3E0 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
 		85DD0C9319ECD054009F8146 /* commands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 85DD0C9219ECD054009F8146 /* commands.txt */; };
 		85DD0C9619ECD1A7009F8146 /* TestsComandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD0C9519ECD1A7009F8146 /* TestsComandFactory.swift */; };
@@ -39,6 +41,8 @@
 		85DE743C19E8EB6D00952C10 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C919E4B2E00045A39D /* Dice.swift */; };
 		85DE743D19E8EB7400952C10 /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; };
 		85EF07ED19EAEFBC00705298 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; };
+		85FA590519F99909009FA889 /* PlanetGenerator.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85FA590419F992FE009FA889 /* PlanetGenerator.plist */; };
+		85FA590719F99E6F009FA889 /* PlayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA590619F99E6F009FA889 /* PlayerFactory.swift */; };
 		85FDC83919EDF0E700ACA91B /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */; };
 		85FDC83B19EDF83000ACA91B /* TestPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83A19EDF83000ACA91B /* TestPersistenceManager.swift */; };
 		85FDC83C19EDFE5100ACA91B /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */; };
@@ -47,12 +51,13 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		85A117BB19E4B27E0045A39D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				85FA590519F99909009FA889 /* PlanetGenerator.plist in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -70,6 +75,7 @@
 		85A117C819E4B2E00045A39D /* Port.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Port.swift; sourceTree = "<group>"; };
 		85A117C919E4B2E00045A39D /* Dice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		85A117CA19E4B2E00045A39D /* Planet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		85C90B9419F6CDB100800CE8 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		85DD0C9219ECD054009F8146 /* commands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = commands.txt; sourceTree = "<group>"; };
 		85DD0C9519ECD1A7009F8146 /* TestsComandFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsComandFactory.swift; sourceTree = "<group>"; };
 		85DE741C19E8CF3100952C10 /* Fleet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fleet.swift; sourceTree = "<group>"; };
@@ -83,6 +89,8 @@
 		85DE743119E8E35700952C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85DE743219E8E35700952C10 /* TestsFleetMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsFleetMovement.swift; sourceTree = "<group>"; };
 		85EF07EC19EAEFBC00705298 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		85FA590419F992FE009FA889 /* PlanetGenerator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlanetGenerator.plist; sourceTree = "<group>"; };
+		85FA590619F99E6F009FA889 /* PlayerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerFactory.swift; sourceTree = "<group>"; };
 		85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		85FDC83A19EDF83000ACA91B /* TestPersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +135,7 @@
 		85A117BF19E4B27E0045A39D /* PlanetGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				85FA590319F992BC009FA889 /* Resources */,
 				85A117C819E4B2E00045A39D /* Port.swift */,
 				85A117C719E4B2E00045A39D /* PortFactory.swift */,
 				85A117CA19E4B2E00045A39D /* Planet.swift */,
@@ -134,10 +143,12 @@
 				85DE742419E8D81000952C10 /* FleetMovement.swift */,
 				859DB42B19EB10B300B10E56 /* FleetFactory.swift */,
 				85DE741E19E8D04400952C10 /* Player.swift */,
+				85FA590619F99E6F009FA889 /* PlayerFactory.swift */,
 				85DE742019E8D15200952C10 /* Role.swift */,
 				85EF07EC19EAEFBC00705298 /* Command.swift */,
 				859DB42919EB03AD00B10E56 /* CommandFactory.swift */,
 				85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */,
+				85C90B9419F6CDB100800CE8 /* Error.swift */,
 				85A117C919E4B2E00045A39D /* Dice.swift */,
 				852B2CFF19EA4C8A005B9623 /* Utils.swift */,
 				85A117C019E4B27E0045A39D /* main.swift */,
@@ -185,6 +196,14 @@
 				85DE743119E8E35700952C10 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		85FA590319F992BC009FA889 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				85FA590419F992FE009FA889 /* PlanetGenerator.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +298,7 @@
 				85A117CC19E4B2E00045A39D /* Port.swift in Sources */,
 				85DE742519E8D81000952C10 /* FleetMovement.swift in Sources */,
 				85A117C119E4B27E0045A39D /* main.swift in Sources */,
+				85FA590719F99E6F009FA889 /* PlayerFactory.swift in Sources */,
 				85A117CD19E4B2E00045A39D /* Dice.swift in Sources */,
 				85FDC83919EDF0E700ACA91B /* PersistenceManager.swift in Sources */,
 				85A117CB19E4B2E00045A39D /* PortFactory.swift in Sources */,
@@ -289,6 +309,7 @@
 				85EF07ED19EAEFBC00705298 /* Command.swift in Sources */,
 				859DB42C19EB10B300B10E56 /* FleetFactory.swift in Sources */,
 				859DB42A19EB03AD00B10E56 /* CommandFactory.swift in Sources */,
+				85C90B9519F6CDB100800CE8 /* Error.swift in Sources */,
 				85DE742119E8D15200952C10 /* Role.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +326,7 @@
 				85DE743D19E8EB7400952C10 /* FleetMovement.swift in Sources */,
 				85FDC83B19EDF83000ACA91B /* TestPersistenceManager.swift in Sources */,
 				85DE743C19E8EB6D00952C10 /* Dice.swift in Sources */,
+				85C90B9619F6CDB100800CE8 /* Error.swift in Sources */,
 				859F661A19EA693D005B5E2D /* TestUtils.swift in Sources */,
 				859F661B19EA6EF8005B5E2D /* Utils.swift in Sources */,
 				85DE743B19E8EB6800952C10 /* Port.swift in Sources */,
