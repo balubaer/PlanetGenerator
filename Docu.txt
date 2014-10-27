@@ -8,6 +8,10 @@ Festlegungen
 - 2.5 - 5 Verbindungen pro Planet
 - Keine Planeten ohne Verbindung zu den anderen Planeten
 
+- PlanetGenerator legt sein Ergebnis in Verzeichnie "Turn0" ab
+
+
+
 TODOs:
 
 - Flotten verschenken
