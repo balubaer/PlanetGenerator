@@ -28,6 +28,8 @@ var fleetCount = Int(dictFormPList!["fleetCount"] as NSNumber)
 var fleetsOnHomePlanet = Int(dictFormPList!["fleetsOnHomePlanet"] as NSNumber)
 var startShipsCount = Int(dictFormPList!["startShipsCount"] as NSNumber)
 
+var playPath = dictFormPList!["playPath"] as String
+var playName = dictFormPList!["playName"] as String
 
 var planets:Array <Planet> = Array()
 
@@ -55,11 +57,25 @@ var playerFactory = PlayerFactory(aPlayerNameArray: playerNames)
 
 playerFactory.createWithPlanetArray(planets, fleetCount: fleetCount, aFleetsOnHomePlanet: fleetsOnHomePlanet, startShipsCount: startShipsCount)
 
-//output Result
-for item in planets {
-    var number = item.number
-    println(item.description)
-    
+var planetPlistFilePath = playPath.stringByAppendingPathComponent(playName)
+
+var fileManager = NSFileManager.defaultManager()
+
+var isDir : ObjCBool = false
+
+if fileManager.fileExistsAtPath(planetPlistFilePath, isDirectory: &isDir) == false {
+    fileManager.createDirectoryAtPath(planetPlistFilePath, withIntermediateDirectories: true, attributes: nil, error: nil)
 }
+
+planetPlistFilePath = planetPlistFilePath.stringByAppendingPathComponent("Turn0")
+
+if fileManager.fileExistsAtPath(planetPlistFilePath, isDirectory: &isDir) == false {
+    fileManager.createDirectoryAtPath(planetPlistFilePath, withIntermediateDirectories: true, attributes: nil, error: nil)
+}
+
+planetPlistFilePath = planetPlistFilePath.stringByAppendingPathComponent("Turn0.plist")
+
+var persManager = PersistenceManager(aPlanetArray:planets)
+persManager.writePlanetPListWithPlanetArray(planetPlistFilePath)
 
 

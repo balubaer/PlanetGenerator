@@ -11,7 +11,8 @@ import Foundation
 class PersistenceManager {
     
     var planetArray: Array <Planet>?
-    
+    var allPlayerDict: [String: Player] = Dictionary()
+
     init(aPlanetArray: Array <Planet>) {
         planetArray = aPlanetArray
     }
@@ -35,8 +36,11 @@ class PersistenceManager {
                 
                 planetDict["number"] = planet.number
                 planetDict["name"] = planet.name
-                if planet.player != nil && planet.player!.role != nil {
+                if planet.player != nil {
                     planetDict["player"] = planet.player!.name
+                    if planet.player!.role == nil {
+                        planet.player!.role = Role()
+                    }
                     playerDictForPList[planet.player!.name] = ["points":planet.player!.points, "role": planet.player!.role!.name]
                 }
                 
@@ -108,8 +112,25 @@ class PersistenceManager {
                 var playerName:String? = planetDict["player"] as String?
                 
                 if playerName != nil {
-                    var playerDict = playerDictFormPList![playerName!] as? Dictionary<String, AnyObject>
-                    //TODO: player
+                    var player: Player? = allPlayerDict[playerName!]
+                    
+                    if player == nil {
+                        var playerDict = playerDictFormPList![playerName!] as? Dictionary<String, AnyObject>
+                        player = Player()
+                        player!.name = playerName!
+                        if playerDict != nil {
+                            intValue = playerDict!["points"]
+                            player!.points = Int((intValue as NSNumber))
+                            var role = Role()
+                            var roleName = (playerDict!["role"] as? String)
+                            if roleName != nil {
+                                role.name = roleName!
+                            }
+                            player!.role = role
+                        }
+                        allPlayerDict[playerName!] = player!
+                    }
+                    planet.player = player!
                 }
                 
                 var fleetArray: Array<Int>? = planetDict["fleets"] as? Array<Int>
@@ -176,8 +197,10 @@ class PersistenceManager {
                         var playerName:String? = fleetFromPlist!["player"] as String?
                         
                         if playerName != nil {
-                            var playerDict = playerDictFormPList![playerName!] as? Dictionary<String, AnyObject>
-                            //TODO: player
+                            var player = allPlayerDict[playerName!]
+                            if player != nil {
+                                fleet.player = player
+                            }
                         }
                         fleet.cargo = Int(fleetFromPlist!["cargo"] as NSNumber)
                         fleet.moved = (fleetFromPlist!["moved"] as Bool)

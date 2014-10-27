@@ -22,6 +22,27 @@ class Player: Equatable {
         name = "NO Name"
     }
     
+    class func isPlayOnPlanet(player: Player, planet: Planet) -> Bool {
+        var result = false
+        
+        if planet.player != nil {
+            if planet.player! == player {
+                result = true
+            }
+            
+            if result == false {
+                for fleet in planet.fleets {
+                    if fleet.player != nil {
+                        if fleet.player! == player {
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
 }
 
 func ==(lhs: Player, rhs: Player) -> Bool {
