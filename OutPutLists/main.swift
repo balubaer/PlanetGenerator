@@ -23,10 +23,9 @@ var turnNumber = Int(dictFormPList!["turn"] as NSNumber)
 var turnPath = playPath.stringByAppendingPathComponent(playName)
 
 
-turnPath = turnPath.stringByAppendingPathComponent("Turn0")
+turnPath = turnPath.stringByAppendingPathComponent("Turn\(turnNumber)")
 
-var planetPlistFilePath = turnPath.stringByAppendingPathComponent("Turn0.plist")
-
+var planetPlistFilePath = turnPath.stringByAppendingPathComponent("Turn\(turnNumber).plist")
 
 var fileManager = NSFileManager.defaultManager()
 
@@ -36,10 +35,8 @@ if fileManager.fileExistsAtPath(planetPlistFilePath, isDirectory: &isDir) == fal
     NSLog("Fehler: Planeten File \(planetPlistFilePath) ist nicht vorhanden!!!")
 }
 
-var planets:Array <Planet> = Array()
-
 var persManager = PersistenceManager()
-planets = persManager.readPlanetPListWithPath(planetPlistFilePath)
+var planets = persManager.readPlanetPListWithPath(planetPlistFilePath)
 
 var allPlayerDict = persManager.allPlayerDict
 
