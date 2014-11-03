@@ -11,6 +11,7 @@ import Foundation
 class FleetMovement {
     var fleet: Fleet?
     var toPlanet: Planet?
+    var fromPlanet: Planet?
     
     var description: String {
         var desc = "(---)"
