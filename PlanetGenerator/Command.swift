@@ -100,12 +100,14 @@ class MoveCommand: Command, ExecuteCommand{
                 break
             }
             //TODO: Test Ships
+            if isError == false {
+                if fleet.fired {
+                    isError = true
+                }
+            }
         }
         
         if isError == false {
-            homePlanet.fleets.removeObject(fleet)
-            var counter = 0
-            var planetCount = planets.count
             fromPlanet = homePlanet
             
             for planet in planets {
@@ -113,13 +115,11 @@ class MoveCommand: Command, ExecuteCommand{
                 var fleetMovement = FleetMovement()
                 fleetMovement.fleet = fleet
                 fleetMovement.toPlanet = toPlanet
+                fleetMovement.fromPlanet = fromPlanet
                 
-                fromPlanet.fleetMovements.append(fleetMovement)
+                fleet.fleetMovements.append(fleetMovement)
                 
-                counter++
-                if counter == planetCount {
-                    planet.fleets.append(fleet)
-                }
+                fromPlanet = toPlanet
             }
         }
     }
@@ -254,6 +254,197 @@ class TransferShipsFleetToFleet: Command, ExecuteCommand {
         }
     }
 }
+
+//FaaTxxD
+class TransferShipsFleetToDShips: Command, ExecuteCommand {
+    var fromFleet: Fleet
+    var fromHomePlanet: Planet
+    var shipsToTransfer: Int
+    
+    init(aFromFleet: Fleet, aFromHomePlanet: Planet, aShipsToTransfer: Int, aString: String, aPlayer: Player) {
+        fromFleet = aFromFleet
+        fromHomePlanet = aFromHomePlanet
+        shipsToTransfer = aShipsToTransfer
+        
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+    }
+    
+    func executeCommand() {
+        var isError = false
+        
+        if isError == false {
+            if isError == false {
+                if fromFleet.ships < shipsToTransfer {
+                    //TODO: Fehler art zufügen
+                    isError = true
+                }
+            }
+        }
+        
+        //TODO: Weiter Tests implementieren
+        
+        if (isError == false) {
+            fromFleet.ships -= shipsToTransfer
+            fromHomePlanet.dShips += shipsToTransfer
+        }
+    }
+}
+
+//DaaTxxFbb
+class TransferDShipsToFleet: Command, ExecuteCommand {
+    var toFleet: Fleet
+    var fromHomePlanet: Planet
+    var toHomePlanet: Planet
+    var shipsToTransfer: Int
+    
+    init(aToFleet: Fleet, aFromHomePlanet: Planet, aToHomePlanet: Planet, aShipsToTransfer: Int, aString: String, aPlayer: Player) {
+        toFleet = aToFleet
+        fromHomePlanet = aFromHomePlanet
+        toHomePlanet = aToHomePlanet
+        shipsToTransfer = aShipsToTransfer
+        
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+    }
+    
+    func executeCommand() {
+        var isError = false
+        
+        if isError == false {
+            if fromHomePlanet != toHomePlanet  {
+                //TODO: Fehler art zufügen
+                isError = true
+            }
+            if isError == false {
+                if fromHomePlanet.dShips < shipsToTransfer {
+                    //TODO: Fehler art zufügen
+                    isError = true
+                }
+            }
+            //TODO: Check Owner Man kann einer Neutralen Flotte keine Schiffe Transverieren
+        }
+        
+        //TODO: Weiter Tests implementieren
+        
+        if (isError == false) {
+            fromHomePlanet.dShips -= shipsToTransfer
+            toFleet.ships += shipsToTransfer
+        }
+    }
+}
+
+class BuildDShips: Command, ExecuteCommand {
+    var planets: Array <Planet>
+   
+    init(aPlanetArray: Array <Planet>, aPlayer: Player) {
+        planets = aPlanetArray
+        
+        super.init(aString: "", aPlayer: aPlayer, aTurnPhase: TurnPhase.Building)
+    }
+    
+    func executeCommand() {
+        for planet in planets {
+            if planet.player == self.player {
+                planet.dShips++
+                //TODO: Abstandsregel implementieren
+            }
+        }
+    }
+}
+
+//FaaAFbb
+class FireFleetToFleet: Command, ExecuteCommand {
+    var fromFleet: Fleet
+    var toFleet: Fleet
+    var fromHomePlanet: Planet
+    var toHomePlanet: Planet
+
+    init(aFromFleet: Fleet, aToFleet: Fleet, aFromHomePlanet: Planet, aToHomePlanet: Planet, aString: String, aPlayer: Player) {
+        fromFleet = aFromFleet
+        toFleet = aToFleet
+        fromHomePlanet = aFromHomePlanet
+        toHomePlanet = aToHomePlanet
+        
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+    }
+
+    func executeCommand() {
+        var isError = false
+        
+        if isError == false {
+            if fromHomePlanet != toHomePlanet  {
+                //TODO: Fehler art zufügen
+                isError = true
+            }
+        }
+        
+        //TODO: Weiter Tests implementieren
+        
+        if (isError == false) {
+            toFleet.hitedShots += fromFleet.ships
+            fromFleet.fired = true
+        }
+    }
+}
+
+//DaaAFbb
+class FireDShipsToFleet: Command, ExecuteCommand {
+    var toFleet: Fleet
+    var fromHomePlanet: Planet
+    var toHomePlanet: Planet
+    
+    init(aToFleet: Fleet, aFromHomePlanet: Planet, aToHomePlanet: Planet, aString: String, aPlayer: Player) {
+        toFleet = aToFleet
+        fromHomePlanet = aFromHomePlanet
+        toHomePlanet = aToHomePlanet
+        
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+    }
+    
+    func executeCommand() {
+        var isError = false
+        
+        if isError == false {
+            if fromHomePlanet != toHomePlanet  {
+                //TODO: Fehler art zufügen
+                isError = true
+            }
+        }
+        
+        //TODO: Weiter Tests implementieren
+        
+        if (isError == false) {
+            toFleet.hitedShots += fromHomePlanet.dShips
+        }
+    }
+}
+
+//FaaAD
+class FireFleetToDShips: Command, ExecuteCommand {
+    var fromFleet: Fleet
+    var fromHomePlanet: Planet
+    
+    init(aFromFleet: Fleet, aFromHomePlanet: Planet, aString: String, aPlayer: Player) {
+        fromFleet = aFromFleet
+        fromHomePlanet = aFromHomePlanet
+        
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+    }
+    
+    func executeCommand() {
+        var isError = false
+        
+        if isError == false {
+        }
+        
+        //TODO: Weiter Tests implementieren
+        
+        if (isError == false) {
+            fromHomePlanet.hitedShotsDShips += fromFleet.ships
+            fromFleet.fired = true
+        }
+    }
+}
+
 
 struct CommandError {
     var errorCode = 0
