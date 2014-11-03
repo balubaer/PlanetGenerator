@@ -78,6 +78,7 @@ class PersistenceManager {
                 planetDict["round"] = planet.round
                 planetDict["iShips"] = planet.iShips
                 planetDict["pShips"] = planet.pShips
+                planetDict["dShips"] = planet.dShips
                 planetArrayForPList.append(planetDict)
             }
         }
@@ -167,6 +168,14 @@ class PersistenceManager {
 
                 intValue = planetDict["pShips"]
                 planet.pShips = Int((intValue as NSNumber))
+                
+                intValue = planetDict["dShips"]
+                
+                var aNumber = intValue as? NSNumber
+                if aNumber != nil {
+                    planet.dShips = Int(aNumber!)
+                }
+
 
                 planetArray.append(planet)
             }
