@@ -49,6 +49,9 @@ class Planet: Comparable, Equatable {
     var round: Int = 0
     var iShips: Int = 0
     var pShips: Int = 0
+    var dShips: Int = 0
+    
+    var hitedShotsDShips: Int = 0
     
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     
@@ -134,7 +137,9 @@ class Planet: Comparable, Equatable {
         if pShips != 0 {
             resourceArray.append("P-Schiffe=\(pShips)")
         }
-        
+        if dShips != 0 {
+            resourceArray.append("D-Schiffe=\(dShips)")
+        }
         if resourceArray.count != 0 {
             
             result = createBracketAndCommarStringWithStringArray(resourceArray)
