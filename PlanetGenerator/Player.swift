@@ -34,8 +34,18 @@ class Player: Equatable {
                 for fleet in planet.fleets {
                     if fleet.player != nil {
                         if fleet.player! == player {
-                            return true
+                            result = true
+                            break
                         }
+                    }
+                }
+            }
+        } else {
+            for fleet in planet.fleets {
+                if fleet.player != nil {
+                    if fleet.player! == player {
+                        result = true
+                        break
                     }
                 }
             }
