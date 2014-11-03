@@ -10,7 +10,46 @@ Festlegungen
 
 - PlanetGenerator legt sein Ergebnis in Verzeichnie "Turn0" ab
 
+- Es müssen immer alle Commandfiles von allen Spielern vorhanden sein auch wenn keine Befehler abgegeben wurden
 
+Festlegung Core Game
+- Anzahl Flotten beim Start pro Spieler
+5
+- Anzahl Schiffe pro Flotte beim Start
+6
+
+- 20 Punket pro Planet pro Runde
+- Jeder Planet Produziert mindestens ein Schiff pro Runde
+
+- 2 feuernde Schiffe zerstören 1 feindliches Schiff
+- D-Schiffe haben die selbe Feuerkraft wie Schiffe einer Flotte
+- Wenn eine Flotte sich von einem Kampf entfernt bekommt es nur den halben Schaden (erst mit 4 Schiffen zerstört man ein Schiff)
+
+- Ambush ein feuerndes Schiff zertört ein Schiff
+- Es könnnen nur Schiffe im Ambush feueren die sich weder bewegen noch selber einen Feuerbefehl erhalten haben
+- Im Ambush schießen alle Schiffe auf alle gegner die vorbeifliegen
+
+Fragen:
+??? D-Schiffe können Ambush wenn sie im selben zu feueren? ???
+
+Phasen:
+
+Phase 1 : Initial
+- Ambush control
+- Alliances
+
+Phase 2 : Transfer
+- Transfer ships from place to place
+
+Phase 3 : Building
+- D-Schiffe werden gebaut
+
+Phase 4 and 5 : Combat and Movement
+- Fire orders
+- Move a fleet one, two, or three worlds
+
+Phase 6 : Final
+- Capturing Worlds and Fleets
 
 TODOs:
 
