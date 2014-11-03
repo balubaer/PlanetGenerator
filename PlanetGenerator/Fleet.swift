@@ -40,7 +40,11 @@ class Fleet: Comparable, Equatable {
     var cargo: Int = 0
     var moved: Bool = false
     var ambush: Bool = false
+    var hitedShots: Int = 0
     
+    var fleetMovements: Array <FleetMovement> = Array()
+    var fired: Bool = false
+
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     //TODO: niklas schenken
 
