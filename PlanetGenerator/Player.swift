@@ -22,33 +22,70 @@ class Player: Equatable {
         name = "NO Name"
     }
     
-    class func isPlayOnPlanet(player: Player, planet: Planet) -> Bool {
+    class func isPlayerInFleetsWithPlayer(player: Player, fleets: Array <Fleet>) -> Bool {
         var result = false
-        
-        if planet.player != nil {
-            if planet.player! == player {
-                result = true
-            }
-            
-            if result == false {
-                for fleet in planet.fleets {
-                    if fleet.player != nil {
-                        if fleet.player! == player {
-                            result = true
-                            break
-                        }
-                    }
+        for fleet in fleets {
+            if fleet.player != nil {
+                if fleet.player! == player {
+                    result = true
+                    break
                 }
             }
-        } else {
-            for fleet in planet.fleets {
-                if fleet.player != nil {
-                    if fleet.player! == player {
+        }
+        return result
+    }
+    
+    class func isPlayerInFleetMovementWithPlayer(player: Player, fleetMovements: Array <FleetMovement>) -> Bool {
+        var result = false
+        for fleetMovement in fleetMovements {
+            if fleetMovement.fleet != nil {
+                if fleetMovement.fleet!.player != nil {
+                    var movementPlayer = fleetMovement.fleet!.player!
+                    if movementPlayer == player {
                         result = true
                         break
                     }
                 }
             }
+        }
+        return result
+    }
+    
+    class func isPlanetOwnedByPlayer(player: Player, planet: Planet) -> Bool {
+        var result = false
+
+        if planet.player != nil {
+            if planet.player! == player {
+                result = true
+            }
+        }
+        return result
+    }
+    
+    class func isPlayOnPlanetWithPlayer(player: Player, planet: Planet) -> Bool {
+        //Test Planet
+        var result = self.isPlanetOwnedByPlayer(player, planet: planet)
+        
+        //Test Fleets
+        if result == false {
+            result = self.isPlayerInFleetsWithPlayer(player, fleets: planet.fleets)
+        }
+
+        return result
+    }
+    
+    class func isPlanetOutPutForPlayer(player: Player, planet: Planet) -> Bool {
+        //Test Planet
+        var result = self.isPlanetOwnedByPlayer(player, planet: planet)
+        
+        //Test Fleets
+        if result == false {
+            result = self.isPlayerInFleetsWithPlayer(player, fleets: planet.fleets)
+        }
+        
+        //Test FleetMovement
+        if result == false {
+            result = self.isPlayerInFleetMovementWithPlayer(player, fleetMovements: planet.fleetMovements)
         }
         return result
     }
