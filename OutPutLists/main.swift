@@ -45,7 +45,7 @@ var allPlayerDict = persManager.allPlayerDict
 for (playerName, player) in allPlayerDict {
     var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber)\n\n"
     for planet in planets {
-        if Player.isPlayOnPlanet(player, planet: planet) {
+        if Player.isPlayOnPlanetWithPlayer(player, planet: planet) {
             outPutString += "\(planet.description)\n\n"
         }
     }
