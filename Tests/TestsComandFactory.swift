@@ -12,6 +12,7 @@ import XCTest
 class TestsCommandFactory: XCTestCase {
     var commandsString: String?
     var planetArray: Array<Planet>?
+    var allPlayerDict: [String: Player]?
     
     func getBundle() -> NSBundle? {
         var result: NSBundle? = nil
@@ -46,6 +47,8 @@ class TestsCommandFactory: XCTestCase {
                 var persManager = PersistenceManager()
 
                 planetArray = persManager.readPlanetPListWithPath(path!)
+                allPlayerDict = persManager.allPlayerDict
+
             }
 
         }
@@ -57,8 +60,8 @@ class TestsCommandFactory: XCTestCase {
     }
     
     func testFactory() {
-        if planetArray != nil {
-            var commandFactory = CommandFactory(aPlanetArray: planetArray!)
+        if planetArray != nil && allPlayerDict != nil {
+            var commandFactory = CommandFactory(aPlanetArray: planetArray!, aAllPlayerDict: allPlayerDict!)
             if commandsString != nil {
                 
                 //Test Flotte 1
@@ -106,9 +109,15 @@ class TestsCommandFactory: XCTestCase {
                     XCTFail("### Flotte 5 nicht gefunden  ###")
                 }
 
-                commandFactory.setCommandStringsWithLongString(commandsString!)
+                commandFactory.setCommandStringsWithLongString("ZAPHOD", commandString:commandsString!)
+                commandFactory.coreGame = true
+
                 commandFactory.executeCommands()
                 
+                var finalPhase = FinalPhaseCoreGame(aPlanetArray: planetArray!, aAllPlayerDict: allPlayerDict!)
+                
+                finalPhase.doFinal()
+
                 for planet in planetArray! {
                     if planet.number == 1 {
                         var twoFleetsThere = (planet.fleets.count == 2)
@@ -186,7 +195,7 @@ class TestsCommandFactory: XCTestCase {
                 XCTFail("### TestsCommandFactory.testFactory commandsString is nil ###")
             }
         } else {
-            XCTFail("### TestsCommandFactory.testFactory planetArray is nil ###")
+            XCTFail("### TestsCommandFactory.testFactory planetArray and allPlayerDict are nil ###")
         }
     }
     

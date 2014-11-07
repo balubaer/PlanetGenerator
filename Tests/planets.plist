@@ -83,6 +83,8 @@
 	<key>planets</key>
 	<array>
 		<dict>
+			<key>player</key>
+			<string>ZAPHOD</string>
 			<key>fleets</key>
 			<array>
 				<integer>5</integer>
@@ -110,6 +112,8 @@
 			<integer>0</integer>
 		</dict>
 		<dict>
+			<key>player</key>
+			<string>ZAPHOD</string>
 			<key>fleets</key>
 			<array>
 				<integer>1</integer>
@@ -136,6 +140,8 @@
 			<integer>0</integer>
 		</dict>
 		<dict>
+			<key>player</key>
+			<string>ZAPHOD</string>
 			<key>fleets</key>
 			<array>
 				<integer>2</integer>
@@ -162,6 +168,8 @@
 			<integer>0</integer>
 		</dict>
 		<dict>
+			<key>player</key>
+			<string>ZAPHOD</string>
 			<key>fleets</key>
 			<array>
 				<integer>3</integer>
@@ -189,7 +197,15 @@
 		</dict>
 	</array>
 	<key>player</key>
-	<dict/>
+	<dict>
+		<key>ZAPHOD</key>
+		<dict>
+			<key>points</key>
+			<integer>0</integer>
+			<key>role</key>
+			<string>NO Name</string>
+		</dict>
+	</dict>
 	<key>ports</key>
 	<dict>
 		<key>4</key>
