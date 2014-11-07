@@ -334,6 +334,7 @@ class TransferDShipsToFleet: Command, ExecuteCommand {
 
 class BuildDShips: Command, ExecuteCommand {
     var planets: Array <Planet>
+    let maxBuild = 4
    
     init(aPlanetArray: Array <Planet>, aPlayer: Player) {
         planets = aPlanetArray
@@ -341,11 +342,58 @@ class BuildDShips: Command, ExecuteCommand {
         super.init(aString: "", aPlayer: aPlayer, aTurnPhase: TurnPhase.Building)
     }
     
+    func testPlayerInNextLevelPlanets(nextLevelPlanets: Array <Planet>) -> Bool {
+        var result = true
+        
+        if nextLevelPlanets.count > 0 {
+            for planet in nextLevelPlanets {
+                if planet.player != nil {
+                    if self.player != planet.player! {
+                        result = false
+                        break
+                    }
+                } else {
+                    result = false
+                    break
+                }
+            }
+        } else {
+            result = false
+        }
+        return result
+    }
+    
+    func calculateNumberOfShipsToBuild(planet: Planet) -> Int {
+        var result = 0
+        var foundDistanceLevel = false
+        var disLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: 1)
+        
+        while foundDistanceLevel != true {
+            if self.testPlayerInNextLevelPlanets(disLevel.nextLevelPlanets) == false {
+                foundDistanceLevel = true
+            } else {
+                if maxBuild <= disLevel.distanceLevel {
+                    foundDistanceLevel = true
+                } else {
+                    disLevel.goNextLevel()
+                }
+            }
+        }
+        
+        result = disLevel.distanceLevel
+
+        if result < 1 {
+            result = 1
+        }
+        return result
+    }
+    
     func executeCommand() {
         for planet in planets {
             if planet.player == self.player {
-                planet.dShips++
-                //TODO: Abstandsregel implementieren
+                var shipsToBuild = calculateNumberOfShipsToBuild(planet)
+                
+                planet.dShips += shipsToBuild
             }
         }
     }

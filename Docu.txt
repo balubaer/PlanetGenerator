@@ -7,6 +7,7 @@ Festlegungen
 - 13 - 20 Planeten pro Spieler
 - 2.5 - 5 Verbindungen pro Planet
 - Keine Planeten ohne Verbindung zu den anderen Planeten
+- Abstand der Heimatplaneten 6 Sprünge (DistanceLevel 6)
 
 - PlanetGenerator legt sein Ergebnis in Verzeichnie "Turn0" ab
 
@@ -53,9 +54,10 @@ Phase 6 : Final
 
 TODOs:
 
+- Ausgabe von Welten von denen ich mich weg bewege (FleetMovement für einen Speiler werden alle Welten mit Ausgegeben) ### Implementiert aber nicht geteste ###
+
 - Flotten verschenken
 - Kunstwerke behandeln
-- Player im PersistenceManager
 - Fehler Implementieren
 
 

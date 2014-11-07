@@ -12,7 +12,9 @@ class PlayerFactory {
     var planetDice: Dice
     var fleetDice: Dice
     var playerNameArray: Array <String>
-    
+    var passedPlanets: Array <Planet> = Array()
+    var nextLevelPlanets: Array <Planet> = Array()
+
     init(aPlayerNameArray: Array <String>) {
         planetDice = Dice()
         fleetDice = Dice()
@@ -52,16 +54,50 @@ class PlayerFactory {
         return (fleet!, planet!)
     }
     
-    func createWithPlanetArray(planetArray:Array <Planet>, fleetCount: Int, aFleetsOnHomePlanet: Int, startShipsCount: Int) {
+    func createWithPlanetArray(planetArray:Array <Planet>, fleetCount: Int, aFleetsOnHomePlanet: Int, startShipsCount: Int, distanceLevelHomes: Int) {
+        var counter = 1
         planetDice.setSites(planetArray.count)
         fleetDice.setSites(fleetCount)
         
         for name in playerNameArray {
             var fleetsOnHomePlanet = aFleetsOnHomePlanet
             var player = Player()
+            var planet: Planet
+            
             player.name = name
 
-            var planet: Planet = findPlanetWithDice(planetDice, planetArray: planetArray)
+            if counter == 1 {
+                planet = findPlanetWithDice(planetDice, planetArray: planetArray)
+                var distLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: distanceLevelHomes)
+                self.passedPlanets = distLevel.passedPlanets
+                self.nextLevelPlanets = distLevel.nextLevelPlanets
+            } else {
+                planet = findPlanetWithDice(planetDice, planetArray: self.nextLevelPlanets)
+                var distLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: distanceLevelHomes)
+                for planetFromPassedPlanets in distLevel.passedPlanets {
+                    if contains(self.passedPlanets, planetFromPassedPlanets) != true {
+                        self.passedPlanets.append(planetFromPassedPlanets)
+                    }
+                }
+                
+                var removePlanets: Array <Planet> = Array()
+                for planetFromNextLevel in self.nextLevelPlanets {
+                    if contains(self.passedPlanets, planetFromNextLevel) {
+                        removePlanets.append(planetFromNextLevel)
+                    }
+                }
+                for removePlanet in removePlanets {
+                    self.nextLevelPlanets.removeObject(removePlanet)
+                }
+
+                for planetFromNextLevel in distLevel.nextLevelPlanets {
+                    if contains(self.passedPlanets, planetFromNextLevel) != true {
+                        if contains(self.nextLevelPlanets, planetFromNextLevel) != true {
+                            self.nextLevelPlanets.append(planetFromNextLevel)
+                        }
+                    }
+                }
+            }
             planet.player = player
             
             fleetsOnHomePlanet -= planet.fleets.count
@@ -78,6 +114,7 @@ class PlayerFactory {
                 fleetAndPlanet.planet.fleets.removeObject(fleetAndPlanet.fleet)
                 planet.fleets.append(fleetAndPlanet.fleet)
             }
+            counter++
         }
     }
 }

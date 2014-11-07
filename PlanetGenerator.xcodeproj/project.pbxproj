@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8518BF1819F1550A0088CC20 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; };
 		852B2D0019EA4C8A005B9623 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852B2CFF19EA4C8A005B9623 /* Utils.swift */; };
+		852D5A031A0BBF4F004E1962 /* DistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDB1A0A1B8700600AC1 /* DistanceLevel.swift */; };
 		852EB71319EEAEBC000BE7DB /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
 		852EB71519EEF0AC000BE7DB /* planets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 852EB71419EEF0AC000BE7DB /* planets.plist */; };
 		8550D0551A0100BD005927F7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */; };
@@ -22,6 +23,7 @@
 		8550D05D1A0103A2005927F7 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
 		8550D05E1A0103BE005927F7 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; };
 		8550D05F1A0103D0005927F7 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C90B9419F6CDB100800CE8 /* Error.swift */; };
+		856E652D1A0C2C99000BDDF0 /* DistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDB1A0A1B8700600AC1 /* DistanceLevel.swift */; };
 		857E13E91A0837760073E721 /* ExecuteCommands.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85D18ED019FE7B17002E7EE2 /* ExecuteCommands.plist */; };
 		85844FB219EA015F00291C9C /* TestPlanetPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB119EA015F00291C9C /* TestPlanetPort.swift */; };
 		85844FB419EA0B1000291C9C /* TestPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB319EA0B1000291C9C /* TestPlayer.swift */; };
@@ -34,7 +36,6 @@
 		859750B219FB6F310017A38F /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
 		859750B319FB6F420017A38F /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; };
 		859750B419FB6F5B0017A38F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852B2CFF19EA4C8A005B9623 /* Utils.swift */; };
-		859DB42A19EB03AD00B10E56 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
 		859DB42C19EB10B300B10E56 /* FleetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42B19EB10B300B10E56 /* FleetFactory.swift */; };
 		859F661A19EA693D005B5E2D /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F661919EA693D005B5E2D /* TestUtils.swift */; };
 		859F661B19EA6EF8005B5E2D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852B2CFF19EA4C8A005B9623 /* Utils.swift */; };
@@ -45,7 +46,7 @@
 		85A117CE19E4B2E00045A39D /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117CA19E4B2E00045A39D /* Planet.swift */; };
 		85A6216A19EFDF3A00E61699 /* PortFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C719E4B2E00045A39D /* PortFactory.swift */; };
 		85AD60F51A05A4BF0058DC90 /* FinalPhaseCoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AD60F41A05A4BF0058DC90 /* FinalPhaseCoreGame.swift */; };
-		85C90B9519F6CDB100800CE8 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C90B9419F6CDB100800CE8 /* Error.swift */; };
+		85C0D90A1A0BF1FD00F93093 /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; };
 		85C90B9619F6CDB100800CE8 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C90B9419F6CDB100800CE8 /* Error.swift */; };
 		85D18ECB19FE79EB002E7EE2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D18ECA19FE79EB002E7EE2 /* main.swift */; };
 		85D81ADF19EE2EA200B2F3E0 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
@@ -54,7 +55,6 @@
 		85DE741D19E8CF3100952C10 /* Fleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741C19E8CF3100952C10 /* Fleet.swift */; };
 		85DE741F19E8D04400952C10 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741E19E8D04400952C10 /* Player.swift */; };
 		85DE742119E8D15200952C10 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
-		85DE742519E8D81000952C10 /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; };
 		85DE743319E8E35700952C10 /* TestsFleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE743219E8E35700952C10 /* TestsFleetMovement.swift */; };
 		85DE743719E8E42C00952C10 /* TestFleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742919E8E25200952C10 /* TestFleet.swift */; };
 		85DE743819E8E4C900952C10 /* Fleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741C19E8CF3100952C10 /* Fleet.swift */; };
@@ -63,7 +63,9 @@
 		85DE743B19E8EB6800952C10 /* Port.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C819E4B2E00045A39D /* Port.swift */; };
 		85DE743C19E8EB6D00952C10 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C919E4B2E00045A39D /* Dice.swift */; };
 		85DE743D19E8EB7400952C10 /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; };
-		85EF07ED19EAEFBC00705298 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; };
+		85F1DEDC1A0A1B8700600AC1 /* DistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDB1A0A1B8700600AC1 /* DistanceLevel.swift */; };
+		85F1DEDD1A0A234500600AC1 /* FinalPhaseCoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AD60F41A05A4BF0058DC90 /* FinalPhaseCoreGame.swift */; };
+		85F1DEDF1A0AC86200600AC1 /* TestDistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDE1A0AC86200600AC1 /* TestDistanceLevel.swift */; };
 		85F2621019FAC78200BF51A4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2620F19FAC78200BF51A4 /* main.swift */; };
 		85FA590519F99909009FA889 /* PlanetGenerator.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85FA590419F992FE009FA889 /* PlanetGenerator.plist */; };
 		85FA590719F99E6F009FA889 /* PlayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA590619F99E6F009FA889 /* PlayerFactory.swift */; };
@@ -138,6 +140,8 @@
 		85DE743119E8E35700952C10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85DE743219E8E35700952C10 /* TestsFleetMovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsFleetMovement.swift; sourceTree = "<group>"; };
 		85EF07EC19EAEFBC00705298 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		85F1DEDB1A0A1B8700600AC1 /* DistanceLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DistanceLevel.swift; path = ../DistanceLevel.swift; sourceTree = "<group>"; };
+		85F1DEDE1A0AC86200600AC1 /* TestDistanceLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestDistanceLevel.swift; path = ../TestDistanceLevel.swift; sourceTree = "<group>"; };
 		85F2620D19FAC78200BF51A4 /* OutPutLists */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OutPutLists; sourceTree = BUILT_PRODUCTS_DIR; };
 		85F2620F19FAC78200BF51A4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		85FA590419F992FE009FA889 /* PlanetGenerator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlanetGenerator.plist; sourceTree = "<group>"; };
@@ -228,9 +232,10 @@
 				85C90B9419F6CDB100800CE8 /* Error.swift */,
 				85A117C919E4B2E00045A39D /* Dice.swift */,
 				852B2CFF19EA4C8A005B9623 /* Utils.swift */,
-				85A117C019E4B27E0045A39D /* main.swift */,
 				85DE742719E8E08600952C10 /* MyPlayground.playground */,
 				85AD60F41A05A4BF0058DC90 /* FinalPhaseCoreGame.swift */,
+				85F1DEDB1A0A1B8700600AC1 /* DistanceLevel.swift */,
+				85A117C019E4B27E0045A39D /* main.swift */,
 			);
 			path = PlanetGenerator;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				85844FB319EA0B1000291C9C /* TestPlayer.swift */,
 				859F661919EA693D005B5E2D /* TestUtils.swift */,
 				85FDC83A19EDF83000ACA91B /* TestPersistenceManager.swift */,
+				85F1DEDE1A0AC86200600AC1 /* TestDistanceLevel.swift */,
 				85DE743019E8E35700952C10 /* Supporting Files */,
 				85DD0C9419ECD090009F8146 /* Resources */,
 			);
@@ -441,8 +447,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				856E652D1A0C2C99000BDDF0 /* DistanceLevel.swift in Sources */,
+				85C0D90A1A0BF1FD00F93093 /* FleetMovement.swift in Sources */,
 				85A117CC19E4B2E00045A39D /* Port.swift in Sources */,
-				85DE742519E8D81000952C10 /* FleetMovement.swift in Sources */,
 				85A117C119E4B27E0045A39D /* main.swift in Sources */,
 				85FA590719F99E6F009FA889 /* PlayerFactory.swift in Sources */,
 				85A117CD19E4B2E00045A39D /* Dice.swift in Sources */,
@@ -452,10 +459,7 @@
 				85DE741F19E8D04400952C10 /* Player.swift in Sources */,
 				85DE741D19E8CF3100952C10 /* Fleet.swift in Sources */,
 				85A117CE19E4B2E00045A39D /* Planet.swift in Sources */,
-				85EF07ED19EAEFBC00705298 /* Command.swift in Sources */,
 				859DB42C19EB10B300B10E56 /* FleetFactory.swift in Sources */,
-				859DB42A19EB03AD00B10E56 /* CommandFactory.swift in Sources */,
-				85C90B9519F6CDB100800CE8 /* Error.swift in Sources */,
 				85DE742119E8D15200952C10 /* Role.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				852D5A031A0BBF4F004E1962 /* DistanceLevel.swift in Sources */,
 				8550D05F1A0103D0005927F7 /* Error.swift in Sources */,
 				85AD60F51A05A4BF0058DC90 /* FinalPhaseCoreGame.swift in Sources */,
 				8550D05E1A0103BE005927F7 /* Command.swift in Sources */,
@@ -484,8 +489,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85F1DEDD1A0A234500600AC1 /* FinalPhaseCoreGame.swift in Sources */,
 				8518BF1819F1550A0088CC20 /* Command.swift in Sources */,
 				85A6216A19EFDF3A00E61699 /* PortFactory.swift in Sources */,
+				85F1DEDC1A0A1B8700600AC1 /* DistanceLevel.swift in Sources */,
 				852EB71319EEAEBC000BE7DB /* Role.swift in Sources */,
 				85D81ADF19EE2EA200B2F3E0 /* CommandFactory.swift in Sources */,
 				85FDC83C19EDFE5100ACA91B /* PersistenceManager.swift in Sources */,
@@ -501,6 +508,7 @@
 				85844FB219EA015F00291C9C /* TestPlanetPort.swift in Sources */,
 				85DD0C9619ECD1A7009F8146 /* TestsComandFactory.swift in Sources */,
 				85DE743919E8E51A00952C10 /* Player.swift in Sources */,
+				85F1DEDF1A0AC86200600AC1 /* TestDistanceLevel.swift in Sources */,
 				85DE743819E8E4C900952C10 /* Fleet.swift in Sources */,
 				85DE743719E8E42C00952C10 /* TestFleet.swift in Sources */,
 				85DE743319E8E35700952C10 /* TestsFleetMovement.swift in Sources */,
