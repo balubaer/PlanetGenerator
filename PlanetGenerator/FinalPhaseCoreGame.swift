@@ -21,7 +21,7 @@ class FinalPhaseCoreGame {
         var result = false
         
         for (playerName, player) in allPlayerDict {
-            if Player.isPlayOnPlanet(player, planet: planet) {
+            if Player.isPlayOnPlanetWithPlayer(player, planet: planet) {
                 result = true
                 break
             }
