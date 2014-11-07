@@ -27,6 +27,7 @@ var fleetCount = Int(dictFormPList!["fleetCount"] as NSNumber)
 
 var fleetsOnHomePlanet = Int(dictFormPList!["fleetsOnHomePlanet"] as NSNumber)
 var startShipsCount = Int(dictFormPList!["startShipsCount"] as NSNumber)
+var distanceLevelHomes = Int(dictFormPList!["distanceLevelHomes"] as NSNumber)
 
 var playPath = dictFormPList!["playPath"] as String
 var playName = dictFormPList!["playName"] as String
@@ -55,7 +56,7 @@ fleetFactory.createWithPlanetArray(planets)
 
 var playerFactory = PlayerFactory(aPlayerNameArray: playerNames)
 
-playerFactory.createWithPlanetArray(planets, fleetCount: fleetCount, aFleetsOnHomePlanet: fleetsOnHomePlanet, startShipsCount: startShipsCount)
+playerFactory.createWithPlanetArray(planets, fleetCount: fleetCount, aFleetsOnHomePlanet: fleetsOnHomePlanet, startShipsCount: startShipsCount, distanceLevelHomes: distanceLevelHomes)
 
 var planetPlistFilePath = playPath.stringByAppendingPathComponent(playName)
 
