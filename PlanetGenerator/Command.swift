@@ -113,7 +113,10 @@ class MoveCommand: Command, ExecuteCommand{
             for planet in planets {
                 toPlanet = planet
                 var fleetMovement = FleetMovement()
-                fleetMovement.fleet = fleet
+                var fleetCopy = Fleet()
+                fleetCopy.player = fleet.player
+                fleetCopy.number = fleet.number
+                fleetMovement.fleet = fleetCopy
                 fleetMovement.toPlanet = toPlanet
                 fleetMovement.fromPlanet = fromPlanet
                 
@@ -430,6 +433,7 @@ class FireFleetToFleet: Command, ExecuteCommand {
         if (isError == false) {
             toFleet.hitedShots += fromFleet.ships
             fromFleet.fired = true
+            fromFleet.firesTo = toFleet.name
         }
     }
 }
@@ -462,6 +466,7 @@ class FireDShipsToFleet: Command, ExecuteCommand {
         
         if (isError == false) {
             toFleet.hitedShots += fromHomePlanet.dShips
+            fromHomePlanet.dShipsFired = true
         }
     }
 }
@@ -489,10 +494,52 @@ class FireFleetToDShips: Command, ExecuteCommand {
         if (isError == false) {
             fromHomePlanet.hitedShotsDShips += fromFleet.ships
             fromFleet.fired = true
+            fromFleet.firesTo = "D-Schiffe"
         }
     }
 }
 
+//Znn
+class AmbushOffForPlanet: Command, ExecuteCommand {
+    var planet: Planet
+    
+    init(aPlanet: Planet, aString: String, aPlayer: Player){
+        planet = aPlanet
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Initial)
+    }
+    
+    func executeCommand() {
+        var planetPlayer = planet.player
+        if planetPlayer != nil {
+            if planetPlayer! == player {
+                planet.ambushOff = true
+            } else {
+                //TODO: Fehler
+            }
+        }
+    }
+}
+
+//Z
+class AmbushOffForPlayer: Command, ExecuteCommand {
+    var planets: Array <Planet>
+    
+    init(aPlanetsArray: Array <Planet>, aString: String, aPlayer: Player){
+        planets = aPlanetsArray
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Initial)
+    }
+    
+    func executeCommand() {
+        for planet in planets {
+            var planetPlayer = planet.player
+            if planetPlayer != nil {
+                if planetPlayer! == player {
+                    planet.ambushOff = true
+                }
+            }
+        }
+    }
+}
 
 struct CommandError {
     var errorCode = 0

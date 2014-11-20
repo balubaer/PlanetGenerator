@@ -351,7 +351,37 @@ class CommandFactory {
         var fromDShipsFireToFleetAndPlanets = findFromDShipsFireToFleetAndPlanets()
         return FireDShipsToFleet(aToFleet: fromDShipsFireToFleetAndPlanets.toFleet, aFromHomePlanet: fromDShipsFireToFleetAndPlanets.fromHomePlanet, aToHomePlanet: fromDShipsFireToFleetAndPlanets.toHomePlanet, aString: processCommand!, aPlayer: commandPlayer!)
     }
+    
+    // Znn
+    func findPlanet() -> Planet {
+        var planet: Planet = Planet()
+        var counter = 0
+        
+        for commantElement in commandElements {
+            if counter == 0 {
+                var planetNumber: Int? = extractNumberString(commantElement).toInt()
+                if planetNumber != nil {
+                    var planetFromNumber = planetWithNumber(planets, planetNumber!)
+                    if planetFromNumber != nil {
+                        planet = planetFromNumber!
+                    }
+                }
+            }
+            counter++
+        }
+        return planet
+    }
 
+    
+    func createAmbushOffForPlanet() -> AmbushOffForPlanet {
+        var planet = findPlanet()
+        return AmbushOffForPlanet(aPlanet: planet, aString: processCommand!, aPlayer: commandPlayer!)
+    }
+
+    func createAmbushOffForPlayer() -> AmbushOffForPlayer {
+        return AmbushOffForPlayer(aPlanetsArray: planets, aString: processCommand!, aPlayer: commandPlayer!)
+    }
+    
     func getCommandInstance() -> AnyObject? {
         var result: AnyObject? = nil
         if commandChars != nil {
@@ -419,6 +449,15 @@ class CommandFactory {
                     default:
                         result = nil
                     }
+                case "Z":
+                    result = createAmbushOffForPlanet()
+                default:
+                    result = nil
+                }
+            } else if characterArray.count == 1 {
+                switch characterArray[0] {
+                    case "Z":
+                    result = createAmbushOffForPlayer()
                 default:
                     result = nil
                 }

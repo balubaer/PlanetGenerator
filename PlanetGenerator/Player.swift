@@ -12,9 +12,13 @@ class Player: Equatable {
     var name: String
     var points: Int = 0
     var role: Role?
+    var ambushOff: Bool = false
     
     var description: String {
         var desc = "[\(name)]"
+        if ambushOff {
+            desc += "(Ambush aus)"
+        }
         return desc
     }
     
@@ -74,6 +78,18 @@ class Player: Equatable {
         return result
     }
     
+    class func isPlayerInPlanetHitAmbuschPlayersWithPlayer(aPlayer: Player, hitAmbuschPlayers: Array <Player>) -> Bool {
+        var result = false
+        
+        for player in hitAmbuschPlayers {
+            if player == aPlayer {
+                result = true
+                break
+            }
+        }
+        return result;
+    }
+    
     class func isPlanetOutPutForPlayer(player: Player, planet: Planet) -> Bool {
         //Test Planet
         var result = self.isPlanetOwnedByPlayer(player, planet: planet)
@@ -86,6 +102,11 @@ class Player: Equatable {
         //Test FleetMovement
         if result == false {
             result = self.isPlayerInFleetMovementWithPlayer(player, fleetMovements: planet.fleetMovements)
+        }
+        
+        //Test planet.hitAmbuschPlayers
+        if result == false {
+            result = self.isPlayerInPlanetHitAmbuschPlayersWithPlayer(player, hitAmbuschPlayers: planet.hitAmbuschPlayers)
         }
         return result
     }

@@ -38,12 +38,15 @@ class Fleet: Comparable, Equatable {
     var ships: Int = 0
     var player: Player?
     var cargo: Int = 0
-    var moved: Bool = false
+    var moved: Bool {
+        return fleetMovements.count > 0
+    }
     var ambush: Bool = false
     var hitedShots: Int = 0
     
     var fleetMovements: Array <FleetMovement> = Array()
     var fired: Bool = false
+    var firesTo: String = ""
 
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     //TODO: niklas schenken
@@ -73,6 +76,9 @@ class Fleet: Comparable, Equatable {
         }
         if ambush {
             infoArray.append("Ambush")
+        }
+        if fired {
+            infoArray.append("feuert auf \(firesTo)")
         }
         if cargo != 0 {
             infoArray.append("Fracht=\(cargo)")

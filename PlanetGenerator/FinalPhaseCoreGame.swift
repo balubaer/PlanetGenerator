@@ -44,7 +44,77 @@ class FinalPhaseCoreGame {
                 fleet.ships -= fleet.hitedShots/2
             }
             fleet.hitedShots = 0
+            if fleet.ships < 0 {
+                fleet.ships = 0
+            }
         }
+    }
+    
+    func isAmbushFromMovementCount(movementCount: Int, movementHoleCount: Int) -> Bool {
+        var result = false
+        
+        switch movementHoleCount {
+        case 2:
+            switch movementCount {
+            case 1:
+                result = true
+            default:
+                result = false
+            }
+        case 3:
+            switch movementCount {
+            case 1, 2:
+                result = true
+            default:
+                result = false
+            }
+        default:
+            result = false
+        }
+        
+        return result
+    }
+    
+    func isAmbushPlanet(planet: Planet?, passingFleet: Fleet, movementCount: Int) -> Bool {
+        var result = false
+        if planet!.ambushOff == false {
+            if isAmbushFromMovementCount(movementCount, movementHoleCount: passingFleet.fleetMovements.count) {
+                if planet != nil {
+                    var planetPlayer = planet!.player
+                    var fleetPlayer = passingFleet.player
+                    
+                    if planetPlayer != nil {
+                        if fleetPlayer != nil {
+                            if planetPlayer! != fleetPlayer! {
+                                result = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return result
+    }
+    
+    func getFirePowerForAmbushPlanet(planet: Planet?) -> Int {
+        var firePower = 0
+        
+        if planet != nil {
+            if planet!.dShipsFired == false {
+                firePower += planet!.dShips
+                planet!.dShipsAmbush = true
+            }
+            for fleet in planet!.fleets {
+                if fleet.fired == false {
+                    if fleet.moved == false {
+                        firePower += fleet.ships
+                        fleet.ambush = true
+                    }
+                }
+            }
+        }
+        return firePower
     }
     
     func checkFleetMovement(planet: Planet) {
@@ -56,7 +126,12 @@ class FinalPhaseCoreGame {
             if fleetMovementCount > 0 {
                 if fleet.ships > 0 {
                     removeFleets.append(fleet)
+                    var movementCount = 1
                     for fleetMovement in fleet.fleetMovements {
+                        if fleet.ships <= 0 {
+                            break
+                        }
+
                         var fromPlanet = fleetMovement.fromPlanet
                         if planet != fromPlanet {
                             fromPlanet?.fleets.removeObject(fleet)
@@ -65,10 +140,19 @@ class FinalPhaseCoreGame {
                         fromPlanet?.fleetMovements.append(fleetMovement)
                         toPlanet?.fleets.append(fleet)
                         
-                        //TODO: Ambush
+                        if isAmbushPlanet(toPlanet?, passingFleet: fleet, movementCount: movementCount) {
+                            var firePower = self.getFirePowerForAmbushPlanet(toPlanet?)
+                            fleet.ships -= firePower
+                            if fleet.ships < 0 {
+                                fleet.ships = 0
+                            }
+                            if toPlanet != nil && fleet.player != nil {
+                                toPlanet!.addHitAmbushPlayer(fleet.player!)
+                            }
+                        }
+                        movementCount++
                     }
                 }
-                fleet.fleetMovements.removeAll()
             }
         }
         for fleet in removeFleets {

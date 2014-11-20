@@ -31,6 +31,7 @@ class Planet: Comparable, Equatable {
     var player: Player?
     var fleets: Array <Fleet>
     var fleetMovements: Array <FleetMovement> = Array()
+    var ambushOff: Bool = false
     var industry: Int = 0
     var usedIndustry: Int = 0
     var effectiveIndustry: Int {
@@ -50,6 +51,10 @@ class Planet: Comparable, Equatable {
     var iShips: Int = 0
     var pShips: Int = 0
     var dShips: Int = 0
+    var dShipsFired: Bool = false
+    var dShipsAmbush: Bool = false
+    
+    var hitAmbuschPlayers: Array <Player> = Array()
     
     var hitedShotsDShips: Int = 0
     
@@ -73,7 +78,7 @@ class Planet: Comparable, Equatable {
 
         if fleets.count > 0 {
             for fleet in fleets {
-                desc += "\n"
+                desc += "\n   "
                 desc += fleet.description
             }
         }
@@ -83,7 +88,7 @@ class Planet: Comparable, Equatable {
         if fleetMovementsCount > 0 {
             var counter = 0
             
-            desc += "\n("
+            desc += "\n   ("
             for fleetMovement in fleetMovements {
                 desc += fleetMovement.description
                 counter++
@@ -101,6 +106,12 @@ class Planet: Comparable, Equatable {
         fleets = Array()
     }
     
+    func addHitAmbushPlayer(aPlayer: Player) {
+        if contains(hitAmbuschPlayers, aPlayer) != true {
+            hitAmbuschPlayers.append(aPlayer)
+        }
+    }
+    
     func hasConnectionToPlanet(aPlant : Planet) -> Bool {
         var result = false
         if port != nil {
@@ -113,6 +124,9 @@ class Planet: Comparable, Equatable {
         var resourceArray:Array <String> = Array()
         var result:String = ""
         
+        if ambushOff {
+            resourceArray.append("Ambush 'Aus' für diese Runde!!!")
+        }
         if industry != 0 {
             resourceArray.append("Industrie=\(industry)")
         }
@@ -138,7 +152,12 @@ class Planet: Comparable, Equatable {
             resourceArray.append("P-Schiffe=\(pShips)")
         }
         if dShips != 0 {
-            resourceArray.append("D-Schiffe=\(dShips)")
+            if dShipsAmbush {
+                resourceArray.append("D-Schiffe=\(dShips) (Ambusch)")
+
+            } else {
+                resourceArray.append("D-Schiffe=\(dShips)")
+            }
         }
         if resourceArray.count != 0 {
             

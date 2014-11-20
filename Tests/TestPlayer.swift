@@ -26,4 +26,46 @@ class TestPlayer: XCTestCase {
         
         XCTAssertEqual("[ZAPHOD]", player.description, "### player.description Fehler ###")
     }
+    
+    func testIsPlayerInFleetsWithPlayer() {
+        var player = Player()
+        
+        player.name = "Test"
+
+        var fleets: Array <Fleet> = Array()
+        var fleet = Fleet()
+        
+        fleet.number = 1
+        
+        fleets.append(fleet)
+        
+        fleet = Fleet()
+        fleet.number = 2
+        fleet.player = player
+        fleets.append(fleet)
+
+        
+        XCTAssertTrue(Player.isPlayerInFleetsWithPlayer(player, fleets: fleets), "### Player.isPlayerInFleetsWithPlayer liefert falsches Ergebnis ###")
+        
+        player = Player()
+        player.name = "Test2"
+        XCTAssertFalse(Player.isPlayerInFleetsWithPlayer(player, fleets: fleets), "### Player.isPlayerInFleetsWithPlayer liefert falsches Ergebnis ###")
+        
+    }
+
+    func testIsPlayerInFleetMovementWithPlayer() {
+        //TODO: niklas
+        
+    }
+
+    func testIsPlayOnPlanetWithPlayer() {
+        //TODO: niklas
+
+    }
+    
+    func testIsPlanetOutPutForPlayer() {
+        //TODO: niklas
+
+    }
+
 }
