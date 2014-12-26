@@ -26,7 +26,12 @@ class CommandFactory {
     }
     
     func setCommandStringsWithLongString(playerName:String, commandString: String) {
-        commandStringsDict[playerName] = commandString.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: " \n\r"))
+        var aSet = NSSet(array: commandString.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: " \n\r")))
+        var array = aSet.allObjects as? Array<String>
+        
+        if array != nil {
+            commandStringsDict[playerName] = array
+        }
     }
 
     //WnnnBqqqFmmm
