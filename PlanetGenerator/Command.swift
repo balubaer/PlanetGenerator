@@ -86,52 +86,51 @@ class MoveCommand: Command, ExecuteCommand{
     }
     
     func executeCommand() {
-        var fromPlanet: Planet = homePlanet
-        var toPlanet: Planet
-        var isError = false
-        for planet in planets {
-            toPlanet = planet
-            if fromPlanet.hasConnectionToPlanet(toPlanet) {
-                fromPlanet = planet
-                //Ambush
-            } else {
-                //TODO: Fehler
-                isError = true
-                break
-            }
-            
-            if fleet.ships == 0 {
-                isError = true
-            }
-            
-            if fleet.player == nil {
-                isError = true
+        if player.name == fleet.player?.name {
+            var fromPlanet: Planet = homePlanet
+            var toPlanet: Planet
+            var isError = false
+            for planet in planets {
+                toPlanet = planet
+                if fromPlanet.hasConnectionToPlanet(toPlanet) {
+                    fromPlanet = planet
+                } else {
+                    //TODO: Fehler
+                    isError = true
+                    break
+                }
+                
+                if fleet.ships == 0 {
+                    isError = true
+                }
+                
+                if isError == false {
+                    if fleet.fired {
+                        isError = true
+                    }
+                }
             }
             
             if isError == false {
-                if fleet.fired {
-                    isError = true
+                fromPlanet = homePlanet
+                
+                for planet in planets {
+                    toPlanet = planet
+                    var fleetMovement = FleetMovement()
+                    var fleetCopy = Fleet()
+                    fleetCopy.player = fleet.player
+                    fleetCopy.number = fleet.number
+                    fleetMovement.fleet = fleetCopy
+                    fleetMovement.toPlanet = toPlanet
+                    fleetMovement.fromPlanet = fromPlanet
+                    
+                    fleet.fleetMovements.append(fleetMovement)
+                    
+                    fromPlanet = toPlanet
                 }
             }
-        }
-        
-        if isError == false {
-            fromPlanet = homePlanet
-            
-            for planet in planets {
-                toPlanet = planet
-                var fleetMovement = FleetMovement()
-                var fleetCopy = Fleet()
-                fleetCopy.player = fleet.player
-                fleetCopy.number = fleet.number
-                fleetMovement.fleet = fleetCopy
-                fleetMovement.toPlanet = toPlanet
-                fleetMovement.fromPlanet = fromPlanet
-                
-                fleet.fleetMovements.append(fleetMovement)
-                
-                fromPlanet = toPlanet
-            }
+        } else {
+            //TODO: Fehler Flotte ist nicht vom Spieler
         }
     }
 }
@@ -153,31 +152,35 @@ class BuildFleetShip: Command, ExecuteCommand {
     }
 
     func executeCommand() {
-        var isError = false
-
-        if homePlanet.number != planetNumber {
-            //TODO: Fehler Plante wo die Flotte ist ist nich der gleiche auf dem gebaut werden muss 
-            isError = true
-        }
-        
-        if isError == false {
-            if contains(homePlanet.fleets, fleet) == false  {
-                errors.append(FleetNotOnPlanet_Error)
+        if homePlanet.player?.name == player.name {
+            var isError = false
+            
+            if homePlanet.number != planetNumber {
+                //TODO: Fehler Plante wo die Flotte ist ist nich der gleiche auf dem gebaut werden muss
                 isError = true
             }
-        }
-        
-        if isError == false {
-            if homePlanet.metal < shipsToBuild {
-                //TODO: Fehler zuwenig Metalle
+            
+            if isError == false {
+                if contains(homePlanet.fleets, fleet) == false  {
+                    errors.append(FleetNotOnPlanet_Error)
+                    isError = true
+                }
             }
-        }
-        
-        //TODO: Weiter Tests implementieren
-        
-        if (isError == false) {
-            fleet.ships += shipsToBuild
-            homePlanet.metal -= shipsToBuild
+            
+            if isError == false {
+                if homePlanet.metal < shipsToBuild {
+                    //TODO: Fehler zuwenig Metalle
+                }
+            }
+            
+            //TODO: Weiter Tests implementieren
+            
+            if (isError == false) {
+                fleet.ships += shipsToBuild
+                homePlanet.metal -= shipsToBuild
+            }
+        } else {
+            //TODO: Fehler Welt ist nicht vom Spieler
         }
     }
 }
@@ -197,27 +200,31 @@ class UnloadingMetal: Command, ExecuteCommand {
     }
     
     func executeCommand() {
-        var isError = false
-        
-        if isError == false {
-            if contains(homePlanet.fleets, fleet) == false  {
-                errors.append(FleetNotOnPlanet_Error)
-                isError = true
+        if player.name == fleet.player?.name {
+            var isError = false
+            
+            if isError == false {
+                if contains(homePlanet.fleets, fleet) == false  {
+                    errors.append(FleetNotOnPlanet_Error)
+                    isError = true
+                }
             }
-        }
-        
-        
-        //TODO: Weiter Tests implementieren
-        
-        if (isError == false) {
-            //Mit metalToUnload == 0 alle Metalle ausladen
-            if metalToUnload == 0 || fleet.cargo < metalToUnload {
-                homePlanet.metal += fleet.cargo
-                fleet.cargo = 0
-            } else {
-                fleet.cargo -= metalToUnload
-                homePlanet.metal += metalToUnload
+            
+            
+            //TODO: Weiter Tests implementieren
+            
+            if (isError == false) {
+                //Mit metalToUnload == 0 alle Metalle ausladen
+                if metalToUnload == 0 || fleet.cargo < metalToUnload {
+                    homePlanet.metal += fleet.cargo
+                    fleet.cargo = 0
+                } else {
+                    fleet.cargo -= metalToUnload
+                    homePlanet.metal += metalToUnload
+                }
             }
+        } else {
+            //TODO: Fehler Flotte ist nicht vom Spieler
         }
     }
 }
@@ -241,27 +248,32 @@ class TransferShipsFleetToFleet: Command, ExecuteCommand {
     }
     
     func executeCommand() {
-        var isError = false
-        
-        if isError == false {
-            if fromHomePlanet != toHomePlanet  {
-                //TODO: Fehler art zufügen
-                isError = true
-            }
+        if player.name == fromFleet.player?.name {
+            var isError = false
+            
             if isError == false {
-                if fromFleet.ships < shipsToTransfer {
+                if fromHomePlanet != toHomePlanet  {
                     //TODO: Fehler art zufügen
                     isError = true
                 }
+                if isError == false {
+                    if fromFleet.ships < shipsToTransfer {
+                        //TODO: Fehler art zufügen
+                        isError = true
+                    }
+                }
+                //TODO: Check Owner Man kann einer Neutralen Flotte keine Schiffe Transverieren
             }
-            //TODO: Check Owner Man kann einer Neutralen Flotte keine Schiffe Transverieren
-        }
-        
-        //TODO: Weiter Tests implementieren
-        
-        if (isError == false) {
-            fromFleet.ships -= shipsToTransfer
-            toFleet.ships += shipsToTransfer
+            
+            //TODO: Weiter Tests implementieren
+            
+            if (isError == false) {
+                fromFleet.ships -= shipsToTransfer
+                toFleet.ships += shipsToTransfer
+            }
+        } else {
+            //TODO: Fehler Flotte ist nicht vom Spieler
+ 
         }
     }
 }
@@ -281,22 +293,26 @@ class TransferShipsFleetToDShips: Command, ExecuteCommand {
     }
     
     func executeCommand() {
-        var isError = false
-        
-        if isError == false {
+        if player.name == fromFleet.player?.name {
+            var isError = false
+            
             if isError == false {
-                if fromFleet.ships < shipsToTransfer {
-                    //TODO: Fehler art zufügen
-                    isError = true
+                if isError == false {
+                    if fromFleet.ships < shipsToTransfer {
+                        //TODO: Fehler art zufügen
+                        isError = true
+                    }
                 }
             }
-        }
-        
-        //TODO: Weiter Tests implementieren
-        
-        if (isError == false) {
-            fromFleet.ships -= shipsToTransfer
-            fromHomePlanet.dShips += shipsToTransfer
+            
+            //TODO: Weiter Tests implementieren
+            
+            if (isError == false) {
+                fromFleet.ships -= shipsToTransfer
+                fromHomePlanet.dShips += shipsToTransfer
+            }
+        } else {
+            //TODO: Fehler Flotte ist nicht vom Spieler
         }
     }
 }
@@ -318,27 +334,31 @@ class TransferDShipsToFleet: Command, ExecuteCommand {
     }
     
     func executeCommand() {
-        var isError = false
-        
-        if isError == false {
-            if fromHomePlanet != toHomePlanet  {
-                //TODO: Fehler art zufügen
-                isError = true
-            }
+        if fromHomePlanet.player?.name == player.name {
+            var isError = false
+            
             if isError == false {
-                if fromHomePlanet.dShips < shipsToTransfer {
+                if fromHomePlanet != toHomePlanet  {
                     //TODO: Fehler art zufügen
                     isError = true
                 }
+                if isError == false {
+                    if fromHomePlanet.dShips < shipsToTransfer {
+                        //TODO: Fehler art zufügen
+                        isError = true
+                    }
+                }
+                //TODO: Check Owner Man kann einer Neutralen Flotte keine Schiffe Transverieren
             }
-            //TODO: Check Owner Man kann einer Neutralen Flotte keine Schiffe Transverieren
-        }
-        
-        //TODO: Weiter Tests implementieren
-        
-        if (isError == false) {
-            fromHomePlanet.dShips -= shipsToTransfer
-            toFleet.ships += shipsToTransfer
+            
+            //TODO: Weiter Tests implementieren
+            
+            if (isError == false) {
+                fromHomePlanet.dShips -= shipsToTransfer
+                toFleet.ships += shipsToTransfer
+            }
+        } else {
+            //TODO: Fehler Welt ist nicht vom Spieler
         }
     }
 }
@@ -427,21 +447,25 @@ class FireFleetToFleet: Command, ExecuteCommand {
     }
 
     func executeCommand() {
-        var isError = false
-        
-        if isError == false {
-            if fromHomePlanet != toHomePlanet  {
-                //TODO: Fehler art zufügen
-                isError = true
+        if player.name == fromFleet.player?.name {
+            var isError = false
+            
+            if isError == false {
+                if fromHomePlanet != toHomePlanet  {
+                    //TODO: Fehler art zufügen
+                    isError = true
+                }
             }
-        }
-        
-        //TODO: Weiter Tests implementieren
-        
-        if (isError == false) {
-            toFleet.hitedShots += fromFleet.ships
-            fromFleet.fired = true
-            fromFleet.firesTo = toFleet.name
+            
+            //TODO: Weiter Tests implementieren
+            
+            if (isError == false) {
+                toFleet.hitedShots += fromFleet.ships
+                fromFleet.fired = true
+                fromFleet.firesTo = toFleet.name
+            }
+        } else {
+            //TODO: Fehler Flotte ist nicht vom Spieler
         }
     }
 }
@@ -461,20 +485,24 @@ class FireDShipsToFleet: Command, ExecuteCommand {
     }
     
     func executeCommand() {
-        var isError = false
-        
-        if isError == false {
-            if fromHomePlanet != toHomePlanet  {
-                //TODO: Fehler art zufügen
-                isError = true
+        if fromHomePlanet.player?.name == player.name {
+            var isError = false
+            
+            if isError == false {
+                if fromHomePlanet != toHomePlanet  {
+                    //TODO: Fehler art zufügen
+                    isError = true
+                }
             }
-        }
-        
-        //TODO: Weiter Tests implementieren
-        
-        if (isError == false) {
-            toFleet.hitedShots += fromHomePlanet.dShips
-            fromHomePlanet.dShipsFired = true
+            
+            //TODO: Weiter Tests implementieren
+            
+            if (isError == false) {
+                toFleet.hitedShots += fromHomePlanet.dShips
+                fromHomePlanet.dShipsFired = true
+            }
+        } else {
+            //TODO: Fehler Welt ist nicht vom Spieler
         }
     }
 }
@@ -492,17 +520,21 @@ class FireFleetToDShips: Command, ExecuteCommand {
     }
     
     func executeCommand() {
-        var isError = false
-        
-        if isError == false {
-        }
-        
-        //TODO: Weiter Tests implementieren
-        
-        if (isError == false) {
-            fromHomePlanet.hitedShotsDShips += fromFleet.ships
-            fromFleet.fired = true
-            fromFleet.firesTo = "D-Schiffe"
+        if player.name == fromFleet.player?.name {
+            var isError = false
+            
+            if isError == false {
+            }
+            
+            //TODO: Weiter Tests implementieren
+            
+            if (isError == false) {
+                fromHomePlanet.hitedShotsDShips += fromFleet.ships
+                fromFleet.fired = true
+                fromFleet.firesTo = "D-Schiffe"
+            }
+        } else {
+            //TODO: Fehler Flotte ist nicht vom Spieler
         }
     }
 }
@@ -517,13 +549,18 @@ class AmbushOffForPlanet: Command, ExecuteCommand {
     }
     
     func executeCommand() {
-        var planetPlayer = planet.player
-        if planetPlayer != nil {
-            if planetPlayer! == player {
-                planet.ambushOff = true
-            } else {
-                //TODO: Fehler
+        if planet.player?.name == player.name {
+            var planetPlayer = planet.player
+            
+            if planetPlayer != nil {
+                if planetPlayer! == player {
+                    planet.ambushOff = true
+                } else {
+                    //TODO: Fehler
+                }
             }
+        } else {
+            //TODO: Fehler Welt ist nicht vom Spieler
         }
     }
 }
