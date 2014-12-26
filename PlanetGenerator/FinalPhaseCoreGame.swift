@@ -194,6 +194,12 @@ class FinalPhaseCoreGame {
             for fleet in planet.fleets {
                 fleet.player = players[0]
             }
+        } else {
+            for fleet in planet.fleets {
+                if fleet.ships == 0 {
+                    fleet.player = nil
+                }
+            }
         }
     }
     
