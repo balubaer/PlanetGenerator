@@ -99,7 +99,15 @@ class MoveCommand: Command, ExecuteCommand{
                 isError = true
                 break
             }
-            //TODO: Test Ships
+            
+            if fleet.ships == 0 {
+                isError = true
+            }
+            
+            if fleet.player == nil {
+                isError = true
+            }
+            
             if isError == false {
                 if fleet.fired {
                     isError = true
