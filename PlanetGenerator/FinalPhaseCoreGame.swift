@@ -118,45 +118,37 @@ class FinalPhaseCoreGame {
     }
     
     func checkFleetMovement(planet: Planet) {
-        var removeFleets: Array <Fleet> = Array()
         var counter = 0
         for fleet in planet.fleets {
             var fleetMovementCount = fleet.fleetMovements.count
             
             if fleetMovementCount > 0 {
                 if fleet.ships > 0 {
-                    removeFleets.append(fleet)
                     var movementCount = 1
                     for fleetMovement in fleet.fleetMovements {
-                        if fleet.ships <= 0 {
-                            break
-                        }
-
-                        var fromPlanet = fleetMovement.fromPlanet
-                        if planet != fromPlanet {
+                        if fleetMovement.isMovementDone == false {
+                            var fromPlanet = fleetMovement.fromPlanet
+                            var toPlanet = fleetMovement.toPlanet
                             fromPlanet?.fleets.removeObject(fleet)
-                        }
-                        var toPlanet = fleetMovement.toPlanet
-                        fromPlanet?.fleetMovements.append(fleetMovement)
-                        toPlanet?.fleets.append(fleet)
-                        
-                        if isAmbushPlanet(toPlanet?, passingFleet: fleet, movementCount: movementCount) {
-                            var firePower = self.getFirePowerForAmbushPlanet(toPlanet?)
-                            fleet.ships -= firePower
-                            if fleet.ships < 0 {
-                                fleet.ships = 0
+                            fromPlanet?.fleetMovements.append(fleetMovement)
+                            toPlanet?.fleets.append(fleet)
+                            fleetMovement.isMovementDone = true
+                            
+                            if isAmbushPlanet(toPlanet?, passingFleet: fleet, movementCount: movementCount) {
+                                var firePower = self.getFirePowerForAmbushPlanet(toPlanet?)
+                                fleet.ships -= firePower
+                                if fleet.ships < 0 {
+                                    fleet.ships = 0
+                                }
+                                if toPlanet != nil && fleet.player != nil {
+                                    toPlanet!.addHitAmbushPlayer(fleet.player!)
+                                }
                             }
-                            if toPlanet != nil && fleet.player != nil {
-                                toPlanet!.addHitAmbushPlayer(fleet.player!)
-                            }
+                            movementCount++
                         }
-                        movementCount++
                     }
                 }
             }
-        }
-        for fleet in removeFleets {
-            planet.fleets.removeObject(fleet)
         }
     }
     
