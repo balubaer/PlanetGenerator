@@ -443,7 +443,7 @@ class FireFleetToFleet: Command, ExecuteCommand {
         fromHomePlanet = aFromHomePlanet
         toHomePlanet = aToHomePlanet
         
-        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Combat)
     }
 
     func executeCommand() {
@@ -481,7 +481,7 @@ class FireDShipsToFleet: Command, ExecuteCommand {
         fromHomePlanet = aFromHomePlanet
         toHomePlanet = aToHomePlanet
         
-        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Combat)
     }
     
     func executeCommand() {
@@ -516,7 +516,7 @@ class FireFleetToDShips: Command, ExecuteCommand {
         fromFleet = aFromFleet
         fromHomePlanet = aFromHomePlanet
         
-        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Combat)
     }
     
     func executeCommand() {
