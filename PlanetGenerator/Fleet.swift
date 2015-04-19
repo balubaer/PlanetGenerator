@@ -56,7 +56,7 @@ class Fleet: Comparable, Equatable {
         
         var infoString = createInfoString()
         
-        if countElements(infoString) != 0 {
+        if count(infoString) != 0 {
             desc += " "
             desc += infoString
         }

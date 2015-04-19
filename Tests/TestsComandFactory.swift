@@ -35,11 +35,11 @@ class TestsCommandFactory: XCTestCase {
         
         var aBundle: NSBundle? = self.getBundle()
         if aBundle != nil {
-            var path: NSString? = aBundle!.resourcePath
+            var path: String? = aBundle!.resourcePath as String?
             path = path?.stringByAppendingPathComponent("commands.txt")
             
             if path != nil {
-                commandsString = NSString(contentsOfFile:path!, encoding: NSUTF8StringEncoding, error: nil)
+                commandsString = NSString(contentsOfFile:path! , encoding: NSUTF8StringEncoding, error: nil) as! String?
             }
             path = aBundle!.resourcePath
             path = path?.stringByAppendingPathComponent("planets.plist")

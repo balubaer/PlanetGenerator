@@ -9,28 +9,28 @@
 import Foundation
 
 var processInfo = NSProcessInfo.processInfo()
-var arguments = processInfo.arguments
-var programmFilePath = arguments[0] as String
+var arguments = processInfo.arguments as NSArray
+var programmFilePath = arguments[0] as! String
 var plistFilePath = programmFilePath.stringByAppendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
-var planetCount = Int(dictFormPList!["planetCount"] as NSNumber)
+var planetCount = Int(dictFormPList!["planetCount"] as! NSNumber)
 
-var playerNamesFromPlist = Array(dictFormPList!["player"] as NSArray)
+var playerNamesFromPlist = Array(dictFormPList!["player"] as! NSArray)
 var playerNames: Array <String> = Array()
 
 for playerName in playerNamesFromPlist {
-    playerNames.append(String(playerName as String))
+    playerNames.append(String(playerName as! String))
 }
 
-var fleetCount = Int(dictFormPList!["fleetCount"] as NSNumber)
+var fleetCount = Int(dictFormPList!["fleetCount"] as! NSNumber)
 
-var fleetsOnHomePlanet = Int(dictFormPList!["fleetsOnHomePlanet"] as NSNumber)
-var startShipsCount = Int(dictFormPList!["startShipsCount"] as NSNumber)
-var distanceLevelHomes = Int(dictFormPList!["distanceLevelHomes"] as NSNumber)
+var fleetsOnHomePlanet = Int(dictFormPList!["fleetsOnHomePlanet"] as! NSNumber)
+var startShipsCount = Int(dictFormPList!["startShipsCount"] as! NSNumber)
+var distanceLevelHomes = Int(dictFormPList!["distanceLevelHomes"] as! NSNumber)
 
-var playPath = dictFormPList!["playPath"] as String
-var playName = dictFormPList!["playName"] as String
+var playPath = dictFormPList!["playPath"] as! String
+var playName = dictFormPList!["playName"] as! String
 
 var planets:Array <Planet> = Array()
 

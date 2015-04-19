@@ -134,8 +134,8 @@ class FinalPhaseCoreGame {
                             toPlanet?.fleets.append(fleet)
                             fleetMovement.isMovementDone = true
                             
-                            if isAmbushPlanet(toPlanet?, passingFleet: fleet, movementCount: movementCount) {
-                                var firePower = self.getFirePowerForAmbushPlanet(toPlanet?)
+                            if isAmbushPlanet(toPlanet, passingFleet: fleet, movementCount: movementCount) {
+                                var firePower = self.getFirePowerForAmbushPlanet(toPlanet)
                                 fleet.ships -= firePower
                                 if fleet.ships < 0 {
                                     fleet.ships = 0

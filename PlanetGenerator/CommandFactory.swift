@@ -480,7 +480,7 @@ class CommandFactory {
                 processCommand = command
                 commandElements = Array()
                 var counter = 0
-                var charCount = countElements(command)
+                var charCount = count(command)
                 var foundCommandElementEnd = false
                 var commandElement = String()
                 
@@ -509,7 +509,7 @@ class CommandFactory {
                 var commandInstance:AnyObject? = self.getCommandInstance()
                 if commandInstance != nil {
                     if commandInstance is Command {
-                        commandArray.append(commandInstance as Command)
+                        commandArray.append(commandInstance as! Command)
                     }
                 }
             }
@@ -525,7 +525,7 @@ class CommandFactory {
         commandArray.sort { $0 < $1 }
         
         for command in commandArray {
-            (command as ExecuteCommand).executeCommand()
+            (command as! ExecuteCommand).executeCommand()
         }
     }
 }

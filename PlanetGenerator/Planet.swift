@@ -71,7 +71,7 @@ class Planet: Comparable, Equatable {
         
         var resouceString = createResourceString()
         
-        if countElements(resouceString) != 0 {
+        if count(resouceString) != 0 {
             desc += " "
             desc += resouceString
         }

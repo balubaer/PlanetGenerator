@@ -39,7 +39,7 @@ class TestDistanceLevel: XCTestCase {
             if path != nil {
                 var persManager = PersistenceManager()
                 
-                planetArray = persManager.readPlanetPListWithPath(path!)
+                planetArray = persManager.readPlanetPListWithPath(path! as String)
                 allPlayerDict = persManager.allPlayerDict
             }
             

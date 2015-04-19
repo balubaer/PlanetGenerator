@@ -10,15 +10,15 @@ import Foundation
 
 var processInfo = NSProcessInfo.processInfo()
 var arguments = processInfo.arguments
-var programmFilePath = arguments[0] as String
+var programmFilePath = arguments[0] as! String
 var plistFilePath = programmFilePath.stringByAppendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
 
-var playPath = dictFormPList!["playPath"] as String
-var playName = dictFormPList!["playName"] as String
+var playPath = dictFormPList!["playPath"] as! String
+var playName = dictFormPList!["playName"] as! String
 
-var turnNumber = Int(dictFormPList!["turn"] as NSNumber)
+var turnNumber = Int(dictFormPList!["turn"] as! NSNumber)
 
 var turnPath = playPath.stringByAppendingPathComponent(playName)
 

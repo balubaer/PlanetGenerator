@@ -10,17 +10,17 @@ import Foundation
 
 var processInfo = NSProcessInfo.processInfo()
 var arguments = processInfo.arguments
-var programmFilePath = arguments[0] as String
+var programmFilePath = arguments[0] as! String
 var plistFilePath = programmFilePath.stringByAppendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
 
-var playPath = dictFormPList!["playPath"] as String
-var playName = dictFormPList!["playName"] as String
-var coreGame = dictFormPList!["coreGame"] as Bool
+var playPath = dictFormPList!["playPath"] as! String
+var playName = dictFormPList!["playName"] as! String
+var coreGame = dictFormPList!["coreGame"] as! Bool
 
 
-var turnNumber = Int(dictFormPList!["turn"] as NSNumber)
+var turnNumber = Int(dictFormPList!["turn"] as! NSNumber)
 var turnNumberBefore = turnNumber - 1
 
 var turnPath = playPath.stringByAppendingPathComponent(playName)
@@ -57,7 +57,7 @@ for (playerName, player) in allPlayerDict {
     
     var commandsString = NSString(contentsOfFile:commandFilePath, encoding: NSUTF8StringEncoding, error: nil)
     if commandsString != nil {
-        commandFactory.setCommandStringsWithLongString(playerName, commandString: commandsString!)
+        commandFactory.setCommandStringsWithLongString(playerName, commandString: commandsString! as String)
     } else {
         NSLog("Fehler: CommandsString konnte nicht erzeugt werden für Spieler [\(playerName)]!!!")
     }

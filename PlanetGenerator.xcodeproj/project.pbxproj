@@ -23,6 +23,7 @@
 		8550D05D1A0103A2005927F7 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
 		8550D05E1A0103BE005927F7 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; };
 		8550D05F1A0103D0005927F7 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C90B9419F6CDB100800CE8 /* Error.swift */; };
+		85569D021ADC3D9900841A0A /* TestFleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742919E8E25200952C10 /* TestFleet.swift */; };
 		856E652D1A0C2C99000BDDF0 /* DistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDB1A0A1B8700600AC1 /* DistanceLevel.swift */; };
 		857E13E91A0837760073E721 /* ExecuteCommands.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85D18ED019FE7B17002E7EE2 /* ExecuteCommands.plist */; };
 		85844FB219EA015F00291C9C /* TestPlanetPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB119EA015F00291C9C /* TestPlanetPort.swift */; };
@@ -56,7 +57,6 @@
 		85DE741F19E8D04400952C10 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741E19E8D04400952C10 /* Player.swift */; };
 		85DE742119E8D15200952C10 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
 		85DE743319E8E35700952C10 /* TestsFleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE743219E8E35700952C10 /* TestsFleetMovement.swift */; };
-		85DE743719E8E42C00952C10 /* TestFleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742919E8E25200952C10 /* TestFleet.swift */; };
 		85DE743819E8E4C900952C10 /* Fleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741C19E8CF3100952C10 /* Fleet.swift */; };
 		85DE743919E8E51A00952C10 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741E19E8D04400952C10 /* Player.swift */; };
 		85DE743A19E8EB3C00952C10 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117CA19E4B2E00045A39D /* Planet.swift */; };
@@ -498,6 +498,7 @@
 				85FDC83C19EDFE5100ACA91B /* PersistenceManager.swift in Sources */,
 				85DE743D19E8EB7400952C10 /* FleetMovement.swift in Sources */,
 				85FDC83B19EDF83000ACA91B /* TestPersistenceManager.swift in Sources */,
+				85569D021ADC3D9900841A0A /* TestFleet.swift in Sources */,
 				85DE743C19E8EB6D00952C10 /* Dice.swift in Sources */,
 				85C90B9619F6CDB100800CE8 /* Error.swift in Sources */,
 				859F661A19EA693D005B5E2D /* TestUtils.swift in Sources */,
@@ -510,7 +511,6 @@
 				85DE743919E8E51A00952C10 /* Player.swift in Sources */,
 				85F1DEDF1A0AC86200600AC1 /* TestDistanceLevel.swift in Sources */,
 				85DE743819E8E4C900952C10 /* Fleet.swift in Sources */,
-				85DE743719E8E42C00952C10 /* TestFleet.swift in Sources */,
 				85DE743319E8E35700952C10 /* TestsFleetMovement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
