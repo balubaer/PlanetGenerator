@@ -203,6 +203,12 @@ class FinalPhaseCoreGame {
         }
     }
     
+    func calculatePoints(planet: Planet) {
+        if planet.player != nil {
+            planet.player!.points += 20
+        }
+    }
+    
     func doFinal() {
         for planet in planets {
             if self.isSomeBodyOnPlanet(planet) {
@@ -213,6 +219,7 @@ class FinalPhaseCoreGame {
         for planet in planets {
             if self.isSomeBodyOnPlanet(planet) {
                 self.checkOwnership(planet)
+                self.calculatePoints(planet)
             }
         }
     }

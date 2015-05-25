@@ -71,7 +71,10 @@ var finalPhase = FinalPhaseCoreGame(aPlanetArray: planets, aAllPlayerDict: allPl
 finalPhase.doFinal()
 
 for (playerName, player) in allPlayerDict {
-    var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber) \n\n"
+    var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber) \n"
+    var outPutStatistic = OutputPlyerStatisticCoreGame(aPlanets: planets, aPlayer: player)
+    outPutStatistic.calculateStatistic()
+    outPutString += "\(outPutStatistic.description)\n"
     for planet in planets {
         if Player.isPlanetOutPutForPlayer(player, planet: planet) {
             outPutString += "\(planet.description)\n\n"

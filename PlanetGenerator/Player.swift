@@ -29,16 +29,21 @@ class Player: Equatable {
     class func isPlayerInFleetsWithPlayer(player: Player, fleets: Array <Fleet>) -> Bool {
         var result = false
         for fleet in fleets {
-            if fleet.player != nil {
-                if fleet.player! == player {
-                    result = true
-                    break
-                }
-            }
+            result = self.isFleetOwnedByPlayer(player, fleet: fleet)
         }
         return result
     }
     
+    class func isFleetOwnedByPlayer(player: Player, fleet: Fleet) -> Bool {
+        var result = false
+        if fleet.player != nil {
+            if fleet.player! == player {
+                result = true
+            }
+        }
+        return result
+    }
+
     class func isPlayerInFleetMovementWithPlayer(player: Player, fleetMovements: Array <FleetMovement>) -> Bool {
         var result = false
         for fleetMovement in fleetMovements {
