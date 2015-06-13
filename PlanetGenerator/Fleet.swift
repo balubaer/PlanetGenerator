@@ -92,6 +92,35 @@ class Fleet: Comparable, Equatable {
         return result
     }
     
+    func addXMLFleetOnParent(parent : NSXMLElement) {
+        var childElementFleet = NSXMLElement(name: "fleet")
+        if let attribute = NSXMLNode.attributeWithName("completeInfo", stringValue: "True") as? NSXMLNode {
+            childElementFleet.addAttribute(attribute)
+        }
+        if let attribute = NSXMLNode.attributeWithName("index", stringValue: "\(number)") as? NSXMLNode {
+            childElementFleet.addAttribute(attribute)
+        }
+        var movedString = "False"
+        if moved {
+            movedString = "True"
+        }
+        if let attribute = NSXMLNode.attributeWithName("moved", stringValue: movedString) as? NSXMLNode {
+            childElementFleet.addAttribute(attribute)
+        }
+        if let aPlayer = player {
+            if let attribute = NSXMLNode.attributeWithName("owner", stringValue: aPlayer.name) as? NSXMLNode {
+                childElementFleet.addAttribute(attribute)
+            }
+            if let attribute = NSXMLNode.attributeWithName("prevOwner", stringValue: aPlayer.name) as? NSXMLNode {
+                childElementFleet.addAttribute(attribute)
+            }
+        }
+        if let attribute = NSXMLNode.attributeWithName("ships", stringValue: "\(ships)") as? NSXMLNode {
+            childElementFleet.addAttribute(attribute)
+        }
+        parent.addChild(childElementFleet)
+    }
+    
 }
 
 func <=(lhs: Fleet, rhs: Fleet) -> Bool {

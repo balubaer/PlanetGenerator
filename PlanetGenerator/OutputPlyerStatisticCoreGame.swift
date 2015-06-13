@@ -19,6 +19,7 @@ class OutputPlyerStatisticCoreGame {
     
     var description: String {
         var desc = "Punkte: \(player.points) | "
+        desc += "Planeten: \(planetsCount) | "
         desc += "Flotten: \(fleetCount) | "
         desc += "Schiffe auf Flotten: \(shipsOnFleetsCount) | "
         desc += "D-Schiffe: \(dShipCount)\n"

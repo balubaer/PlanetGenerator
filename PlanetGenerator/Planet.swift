@@ -189,6 +189,7 @@ class Planet: Comparable, Equatable {
             childElementPlanet.addAttribute(attribute)
         }
         self.addXMLConnectOnParent(childElementPlanet)
+        self.addXMLFleetOnParent(childElementPlanet)
         var childElementHomeFleet = NSXMLElement(name: "homeFleet")
         if let attribute = NSXMLNode.attributeWithName("key", stringValue: "D") as? NSXMLNode {
             childElementHomeFleet.addAttribute(attribute)
@@ -207,7 +208,9 @@ class Planet: Comparable, Equatable {
     }
     
     func addXMLFleetOnParent(parent : NSXMLElement) {
-        //TODO add Fleet....
+        for fleet in fleets {
+            fleet.addXMLFleetOnParent(parent)
+        }
     }
 }
 

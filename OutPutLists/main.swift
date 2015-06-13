@@ -63,7 +63,7 @@ for (playerName, player) in allPlayerDict {
         xmlRoot.addAttribute(attribute)
     }
     
-    if let attribute = NSXMLNode.attributeWithName("turnNumber", stringValue: "\(turnNumber)") as? NSXMLNode {
+    if let attribute = NSXMLNode.attributeWithName("turnNumber", stringValue: "\(turnNumber + 1)") as? NSXMLNode {
         xmlRoot.addAttribute(attribute)
     }
     
@@ -82,7 +82,7 @@ for (playerName, player) in allPlayerDict {
     }
     xmlRoot.addChild(childElementPlayer)
 
-    var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber)\n\n"
+    var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber + 1)\n\n"
     for planet in planets {
         if Player.isPlanetOutPutForPlayer(player, planet: planet) {
             var childElementPlanet = planet.getXMLElementForPlayer(player)
