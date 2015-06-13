@@ -44,5 +44,15 @@ class Port {
     func hasConnectionToPlanet(aPlant : Planet) -> Bool {
         return contains(planets, aPlant)
     }
-
+    
+    func addXMLConnectOnParent(parent : NSXMLElement) {
+        for planet in planets {
+            var childElementConnect = NSXMLElement(name: "connect")
+            if let attribute = NSXMLNode.attributeWithName("index", stringValue: "\(planet.number)") as? NSXMLNode {
+                childElementConnect.addAttribute(attribute)
+                parent.addChild(childElementConnect)
+            }
+        }
+    }
+    
 }

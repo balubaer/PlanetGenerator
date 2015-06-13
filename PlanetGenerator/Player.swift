@@ -116,6 +116,30 @@ class Player: Equatable {
         return result
     }
     
+    func getXMLElement() -> NSXMLElement {
+        var childElementPlayer = NSXMLElement(name: "player")
+        //TODO: niklas woher kommt diese?
+        if let attribute = NSXMLNode.attributeWithName("accountId", stringValue: "01601386") as? NSXMLNode {
+            childElementPlayer.addAttribute(attribute)
+        }
+        if let attribute = NSXMLNode.attributeWithName("handle", stringValue: name) as? NSXMLNode {
+            childElementPlayer.addAttribute(attribute)
+        }
+        if let attribute = NSXMLNode.attributeWithName("fullName", stringValue: name) as? NSXMLNode {
+            childElementPlayer.addAttribute(attribute)
+        }
+        if let attribute = NSXMLNode.attributeWithName("stillInGame", stringValue: "True") as? NSXMLNode {
+            childElementPlayer.addAttribute(attribute)
+        }
+        if let attribute = NSXMLNode.attributeWithName("prevScore", stringValue: "\(points)") as? NSXMLNode {
+            childElementPlayer.addAttribute(attribute)
+        }
+        //TODO niklas das ist so noch nicht richtig
+        if let attribute = NSXMLNode.attributeWithName("score", stringValue: "\(points)") as? NSXMLNode {
+            childElementPlayer.addAttribute(attribute)
+        }
+        return childElementPlayer;
+    }
 }
 
 func ==(lhs: Player, rhs: Player) -> Bool {
