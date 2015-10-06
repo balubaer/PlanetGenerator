@@ -49,7 +49,7 @@ class Player: Equatable {
         for fleetMovement in fleetMovements {
             if fleetMovement.fleet != nil {
                 if fleetMovement.fleet!.player != nil {
-                    var movementPlayer = fleetMovement.fleet!.player!
+                    let movementPlayer = fleetMovement.fleet!.player!
                     if movementPlayer == player {
                         result = true
                         break
@@ -117,7 +117,7 @@ class Player: Equatable {
     }
     
     func getXMLElement() -> NSXMLElement {
-        var childElementPlayer = NSXMLElement(name: "player")
+        let childElementPlayer = NSXMLElement(name: "player")
         //TODO: niklas woher kommt diese?
         if let attribute = NSXMLNode.attributeWithName("accountId", stringValue: "01601386") as? NSXMLNode {
             childElementPlayer.addAttribute(attribute)
@@ -143,9 +143,9 @@ class Player: Equatable {
 }
 
 func ==(lhs: Player, rhs: Player) -> Bool {
-    var lName = lhs.name
-    var rName = rhs.name
-    var result = (lName == rName)
+    let lName = lhs.name
+    let rName = rhs.name
+    let result = (lName == rName)
     
     return result
 }

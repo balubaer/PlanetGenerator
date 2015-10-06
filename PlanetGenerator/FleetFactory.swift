@@ -22,10 +22,10 @@ class FleetFactory {
 
         //Create Fleets
         for index in 1...fleetCount {
-            var planet: Planet? = planetWithNumber(planetArray, dice.roll())
+            let planet: Planet? = planetWithNumber(planetArray, number: dice.roll())
             
             if planet != nil {
-                var fleet = Fleet()
+                let fleet = Fleet()
                 fleet.number = index
                 planet!.fleets.append(fleet)
             }

@@ -25,7 +25,7 @@ class DistanceLevel {
         for levelCount in 1...distanceLevel {
             if levelCount == 1 {
                 passedPlanets.append(startPlanet)
-                var planets = startPlanet.port?.planets
+                let planets = startPlanet.port?.planets
                 if planets != nil {
                     for planet in planets! {
                         nextLevelPlanets.append(planet)
@@ -42,25 +42,25 @@ class DistanceLevel {
     }
     
     func createNewNextLevelPlanets() {
-        var oldNextLevelPlanets = nextLevelPlanets
+        let oldNextLevelPlanets = nextLevelPlanets
         var newPassedPlanets = passedPlanets
         
         for planet in nextLevelPlanets {
-            if contains(newPassedPlanets, planet) == false {
+            if newPassedPlanets.contains(planet) == false {
                 newPassedPlanets.append(planet)
             }
         }
         nextLevelPlanets.removeAll()
         
         for planet in oldNextLevelPlanets {
-            var port = planet.port
+            let port = planet.port
             
             if port != nil {
-                var planetsFromPort = port!.planets
+                let planetsFromPort = port!.planets
                 
                 for planetFromPort in planetsFromPort {
-                    if contains(newPassedPlanets, planetFromPort) == false {
-                        if contains(nextLevelPlanets, planetFromPort) == false {
+                    if newPassedPlanets.contains(planetFromPort) == false {
+                        if nextLevelPlanets.contains(planetFromPort) == false {
                             nextLevelPlanets.append(planetFromPort)
                         }
                     }

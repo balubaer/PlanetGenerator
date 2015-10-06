@@ -20,7 +20,7 @@ class FinalPhaseCoreGame {
     func isSomeBodyOnPlanet(planet: Planet) -> Bool {
         var result = false
         
-        for (playerName, player) in allPlayerDict {
+        for (_, player) in allPlayerDict {
             if Player.isPlayOnPlanetWithPlayer(player, planet: planet) {
                 result = true
                 break
@@ -80,8 +80,8 @@ class FinalPhaseCoreGame {
         if planet!.ambushOff == false {
             if isAmbushFromMovementCount(movementCount, movementHoleCount: passingFleet.fleetMovements.count) {
                 if planet != nil {
-                    var planetPlayer = planet!.player
-                    var fleetPlayer = passingFleet.player
+                    let planetPlayer = planet!.player
+                    let fleetPlayer = passingFleet.player
                     
                     if planetPlayer != nil {
                         if fleetPlayer != nil {
@@ -120,22 +120,22 @@ class FinalPhaseCoreGame {
     func checkFleetMovement(planet: Planet) {
         var counter = 0
         for fleet in planet.fleets {
-            var fleetMovementCount = fleet.fleetMovements.count
+            let fleetMovementCount = fleet.fleetMovements.count
             
             if fleetMovementCount > 0 {
                 if fleet.ships > 0 {
                     var movementCount = 1
                     for fleetMovement in fleet.fleetMovements {
                         if fleetMovement.isMovementDone == false {
-                            var fromPlanet = fleetMovement.fromPlanet
-                            var toPlanet = fleetMovement.toPlanet
+                            let fromPlanet = fleetMovement.fromPlanet
+                            let toPlanet = fleetMovement.toPlanet
                             fromPlanet?.fleets.removeObject(fleet)
                             fromPlanet?.fleetMovements.append(fleetMovement)
                             toPlanet?.fleets.append(fleet)
                             fleetMovement.isMovementDone = true
                             
                             if isAmbushPlanet(toPlanet, passingFleet: fleet, movementCount: movementCount) {
-                                var firePower = self.getFirePowerForAmbushPlanet(toPlanet)
+                                let firePower = self.getFirePowerForAmbushPlanet(toPlanet)
                                 fleet.ships -= firePower
                                 if fleet.ships < 0 {
                                     fleet.ships = 0
@@ -157,10 +157,10 @@ class FinalPhaseCoreGame {
         
         for fleet in fleets {
             if fleet.ships > 0 {
-                var player = fleet.player
+                let player = fleet.player
                 
                 if player != nil {
-                    if contains(players, player!) == false {
+                    if players.contains(player!) == false {
                         players.append(player!)
                     }
                 }
@@ -179,7 +179,7 @@ class FinalPhaseCoreGame {
             }
         } else {
             if planet.dShips == 0 {
-                var player = planet.player!
+                let player = planet.player!
                 
                 if players.count == 1 {
                     

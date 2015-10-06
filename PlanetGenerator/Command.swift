@@ -32,40 +32,40 @@ class Command: Comparable  {
 }
 
 func <=(lhs: Command, rhs: Command) -> Bool {
-    var lTurnPhase = lhs.turnPhase
-    var rTurnPhase = rhs.turnPhase
+    let lTurnPhase = lhs.turnPhase
+    let rTurnPhase = rhs.turnPhase
     
-    var result = lTurnPhase.rawValue <= rTurnPhase.rawValue
+    let result = lTurnPhase.rawValue <= rTurnPhase.rawValue
     return result
 }
 
 func >=(lhs: Command, rhs: Command) -> Bool {
-    var lTurnPhase = lhs.turnPhase
-    var rTurnPhase = rhs.turnPhase
-    var result = lTurnPhase.rawValue >= rTurnPhase.rawValue
+    let lTurnPhase = lhs.turnPhase
+    let rTurnPhase = rhs.turnPhase
+    let result = lTurnPhase.rawValue >= rTurnPhase.rawValue
     return result
 }
 
 func >(lhs: Command, rhs: Command) -> Bool {
-    var lTurnPhase = lhs.turnPhase
-    var rTurnPhase = rhs.turnPhase
-    var result = lTurnPhase.rawValue > rTurnPhase.rawValue
+    let lTurnPhase = lhs.turnPhase
+    let rTurnPhase = rhs.turnPhase
+    let result = lTurnPhase.rawValue > rTurnPhase.rawValue
     
     return result
 }
 
 func <(lhs: Command, rhs: Command) -> Bool {
-    var lTurnPhase = lhs.turnPhase
-    var rTurnPhase = rhs.turnPhase
-    var result = lTurnPhase.rawValue < rTurnPhase.rawValue
+    let lTurnPhase = lhs.turnPhase
+    let rTurnPhase = rhs.turnPhase
+    let result = lTurnPhase.rawValue < rTurnPhase.rawValue
     
     return result
 }
 
 func ==(lhs: Command, rhs: Command) -> Bool {
-    var lTurnPhase = lhs.turnPhase
-    var rTurnPhase = rhs.turnPhase
-    var result = lTurnPhase == rTurnPhase
+    let lTurnPhase = lhs.turnPhase
+    let rTurnPhase = rhs.turnPhase
+    let result = lTurnPhase == rTurnPhase
     
     return result
 }
@@ -116,8 +116,8 @@ class MoveCommand: Command, ExecuteCommand{
                 
                 for planet in planets {
                     toPlanet = planet
-                    var fleetMovement = FleetMovement()
-                    var fleetCopy = Fleet()
+                    let fleetMovement = FleetMovement()
+                    let fleetCopy = Fleet()
                     fleetCopy.player = fleet.player
                     fleetCopy.number = fleet.number
                     fleetMovement.fleet = fleetCopy
@@ -161,7 +161,7 @@ class BuildFleetShip: Command, ExecuteCommand {
             }
             
             if isError == false {
-                if contains(homePlanet.fleets, fleet) == false  {
+                if homePlanet.fleets.contains(fleet) == false  {
                     errors.append(FleetNotOnPlanet_Error)
                     isError = true
                 }
@@ -204,7 +204,7 @@ class UnloadingMetal: Command, ExecuteCommand {
             var isError = false
             
             if isError == false {
-                if contains(homePlanet.fleets, fleet) == false  {
+                if homePlanet.fleets.contains(fleet) == false  {
                     errors.append(FleetNotOnPlanet_Error)
                     isError = true
                 }
@@ -397,7 +397,7 @@ class BuildDShips: Command, ExecuteCommand {
     func calculateNumberOfShipsToBuild(planet: Planet) -> Int {
         var result = 0
         var foundDistanceLevel = false
-        var disLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: 1)
+        let disLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: 1)
         
         while foundDistanceLevel != true {
             if self.testPlayerInNextLevelPlanets(disLevel.nextLevelPlanets) == false {
@@ -422,7 +422,7 @@ class BuildDShips: Command, ExecuteCommand {
     @objc func executeCommand() {
         for planet in planets {
             if planet.player == self.player {
-                var shipsToBuild = calculateNumberOfShipsToBuild(planet)
+                let shipsToBuild = calculateNumberOfShipsToBuild(planet)
                 
                 planet.dShips += shipsToBuild
             }
@@ -521,7 +521,7 @@ class FireFleetToDShips: Command, ExecuteCommand {
     
     @objc func executeCommand() {
         if player.name == fromFleet.player?.name {
-            var isError = false
+            let isError = false
             
             if isError == false {
             }
@@ -550,7 +550,7 @@ class AmbushOffForPlanet: Command, ExecuteCommand {
     
     @objc func executeCommand() {
         if planet.player?.name == player.name {
-            var planetPlayer = planet.player
+            let planetPlayer = planet.player
             
             if planetPlayer != nil {
                 if planetPlayer! == player {
@@ -576,7 +576,7 @@ class AmbushOffForPlayer: Command, ExecuteCommand {
     
     @objc func executeCommand() {
         for planet in planets {
-            var planetPlayer = planet.player
+            let planetPlayer = planet.player
             if planetPlayer != nil {
                 if planetPlayer! == player {
                     planet.ambushOff = true

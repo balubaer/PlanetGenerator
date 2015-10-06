@@ -54,9 +54,9 @@ class Fleet: Comparable, Equatable {
     var description: String {
         var desc = "\(name) = \(ships)"
         
-        var infoString = createInfoString()
+        let infoString = createInfoString()
         
-        if count(infoString) != 0 {
+        if infoString.characters.count != 0 {
             desc += " "
             desc += infoString
         }
@@ -93,7 +93,7 @@ class Fleet: Comparable, Equatable {
     }
     
     func addXMLFleetOnParent(parent : NSXMLElement) {
-        var childElementFleet = NSXMLElement(name: "fleet")
+        let childElementFleet = NSXMLElement(name: "fleet")
         if let attribute = NSXMLNode.attributeWithName("completeInfo", stringValue: "True") as? NSXMLNode {
             childElementFleet.addAttribute(attribute)
         }
@@ -124,39 +124,39 @@ class Fleet: Comparable, Equatable {
 }
 
 func <=(lhs: Fleet, rhs: Fleet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber <= rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber <= rNumber
     return result
 }
 
 func >=(lhs: Fleet, rhs: Fleet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber >= rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber >= rNumber
     return result
 }
 
 func >(lhs: Fleet, rhs: Fleet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber > rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber > rNumber
     
     return result
 }
 
 func <(lhs: Fleet, rhs: Fleet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber < rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber < rNumber
     
     return result
 }
 
 func ==(lhs: Fleet, rhs: Fleet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber == rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber == rNumber
     
     return result
 }

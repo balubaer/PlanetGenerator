@@ -31,7 +31,7 @@ class PlayerFactory {
         var found = false
         
         while (!found) {
-            result = planetWithNumber(planetArray, dice.roll())
+            result = planetWithNumber(planetArray, number: dice.roll())
             if result != nil {
                 if result!.player == nil {
                     found = true
@@ -47,7 +47,7 @@ class PlayerFactory {
         var found = false
 
         while (!found) {
-        var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray, dice.roll())
+        let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray, number: dice.roll())
             if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                 if aFleetAndHomePlanet.fleet!.player == nil {
                     found = true
@@ -60,10 +60,10 @@ class PlayerFactory {
     }
     
     func findePlayerWithDice() -> Player {
-        var result = Player()
+        let result = Player()
         playerDice.setSites(playerNameArray.count)
-        var index = playerDice.roll() - 1
-        var playerName =  playerNameArray.removeAtIndex(index)
+        let index = playerDice.roll() - 1
+        let playerName =  playerNameArray.removeAtIndex(index)
         result.name = playerName
         return result
     }
@@ -76,9 +76,9 @@ class PlayerFactory {
         let playerNameCount: Int = playerNameArray.count;
         self.distanceLevelHomes = distanceLevelHomes
 
-        for i in 1...playerNameCount {
+        for _ in 1...playerNameCount {
             var fleetsOnHomePlanet = aFleetsOnHomePlanet
-            var player = findePlayerWithDice();
+            let player = findePlayerWithDice();
             var planet : Planet;
             if (counter == 1) {
                 planet = findPlanetWithDice(planetDice, planetArray: planetArray)
@@ -95,8 +95,8 @@ class PlayerFactory {
                 fleet.ships = startShipsCount;
             }
             
-            for index in 1...fleetsOnHomePlanet {
-                var fleetAndPlanet = findFleetAndPlanetWithDice(fleetDice, planetArray: planetArray)
+            for _ in 1...fleetsOnHomePlanet {
+                let fleetAndPlanet = findFleetAndPlanetWithDice(fleetDice, planetArray: planetArray)
                 fleetAndPlanet.fleet.player = player
                 fleetAndPlanet.fleet.ships = startShipsCount
                 fleetAndPlanet.planet.fleets.removeObject(fleetAndPlanet.fleet)
@@ -117,19 +117,19 @@ class PlayerFactory {
         
         while finishCreate == false {
             for planet in  homePlanetsDict.values {
-                var distLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: startDistanceLevelHomes);
+                let distLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: startDistanceLevelHomes);
                 for planetFromPassedPlanets in distLevel.passedPlanets {
-                    if contains(allPassedPlanets, planetFromPassedPlanets) == false {
+                    if allPassedPlanets.contains(planetFromPassedPlanets) == false {
                         allPassedPlanets.append(planetFromPassedPlanets)
                     }
                 }
                 for planetFromNextLevel in distLevel.nextLevelPlanets {
-                    if contains(allNextLevelPlanets, planetFromNextLevel) == false{
+                    if allNextLevelPlanets.contains(planetFromNextLevel) == false {
                         allNextLevelPlanets.append(planetFromNextLevel)
                     }
                 }
                 for planetFromNextLevel in allNextLevelPlanets {
-                    if contains(allPassedPlanets, planetFromNextLevel) == false{
+                    if allPassedPlanets.contains( planetFromNextLevel) == false {
                         result.append(planetFromNextLevel)
                     }
                 }

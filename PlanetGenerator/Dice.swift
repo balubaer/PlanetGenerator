@@ -24,9 +24,9 @@ class Dice {
     }
     
     func roll() -> Int {
-        var resultRandom = Int(arc4random_uniform(UInt32(sides)))
+        let resultRandom = Int(arc4random_uniform(UInt32(sides)))
             
-        var result = resultRandom + 1
+        let result = resultRandom + 1
 
         return result
     }

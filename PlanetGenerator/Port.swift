@@ -18,7 +18,7 @@ class Port {
     
     var description: String {
         var desc = ""
-        var connectionCount = planets.count
+        let connectionCount = planets.count
         if planet != nil {
             desc = planet!.name
         }  else {
@@ -27,9 +27,9 @@ class Port {
         if (connectionCount > 0) {
             var counter = 0
             desc += "("
-            planets.sort { $0 < $1 }
+            planets.sortInPlace { $0 < $1 }
             for item in planets {
-                var number = item.number
+                let number = item.number
                 desc += "\(number)"
                 if counter < (connectionCount - 1) {
                     desc += ","
@@ -42,12 +42,12 @@ class Port {
     }
     
     func hasConnectionToPlanet(aPlant : Planet) -> Bool {
-        return contains(planets, aPlant)
+        return planets.contains(aPlant)
     }
     
     func addXMLConnectOnParent(parent : NSXMLElement) {
         for planet in planets {
-            var childElementConnect = NSXMLElement(name: "connect")
+            let childElementConnect = NSXMLElement(name: "connect")
             if let attribute = NSXMLNode.attributeWithName("index", stringValue: "\(planet.number)") as? NSXMLNode {
                 childElementConnect.addAttribute(attribute)
                 parent.addChild(childElementConnect)

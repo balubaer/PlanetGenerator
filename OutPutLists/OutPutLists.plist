@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>turn</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>playName</key>
-	<string>GalaxyTest</string>
+	<string>Galaxy04</string>
 	<key>playPath</key>
 	<string>/Users/niklas</string>
 </dict>

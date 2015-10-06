@@ -10,12 +10,12 @@ import Foundation
 
 var processInfo = NSProcessInfo.processInfo()
 var arguments = processInfo.arguments
-var programmFilePath = arguments[0] as! String
+var programmFilePath = arguments[0] as NSString
 var plistFilePath = programmFilePath.stringByAppendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
 
-var playPath = dictFormPList!["playPath"] as! String
+var playPath = dictFormPList!["playPath"] as! NSString
 var playName = dictFormPList!["playName"] as! String
 var coreGame = dictFormPList!["coreGame"] as! Bool
 
@@ -23,12 +23,12 @@ var coreGame = dictFormPList!["coreGame"] as! Bool
 var turnNumber = Int(dictFormPList!["turn"] as! NSNumber)
 var turnNumberBefore = turnNumber - 1
 
-var turnPath = playPath.stringByAppendingPathComponent(playName)
+var turnPath = playPath.stringByAppendingPathComponent(playName) as NSString
 
-var turnBeforePath = turnPath.stringByAppendingPathComponent("Turn\(turnNumberBefore)")
+var turnBeforePath = turnPath.stringByAppendingPathComponent("Turn\(turnNumberBefore)") as NSString
 turnPath = turnPath.stringByAppendingPathComponent("Turn\(turnNumber)")
 
-var planetPlistFileBeforePath = turnBeforePath.stringByAppendingPathComponent("Turn\(turnNumberBefore).plist")
+var planetPlistFileBeforePath = turnBeforePath.stringByAppendingPathComponent("Turn\(turnNumberBefore).plist") as NSString
 var planetPlistFilePath = turnPath.stringByAppendingPathComponent("Turn\(turnNumber).plist")
 
 
@@ -36,13 +36,16 @@ var fileManager = NSFileManager.defaultManager()
 
 var isDir : ObjCBool = false
 
-if fileManager.fileExistsAtPath(turnPath, isDirectory: &isDir) == false {
-    fileManager.createDirectoryAtPath(turnPath, withIntermediateDirectories: true, attributes: nil, error: nil)
+if fileManager.fileExistsAtPath(turnPath as String, isDirectory: &isDir) == false {
+    do {
+        try fileManager.createDirectoryAtPath(turnPath as String, withIntermediateDirectories: true, attributes: nil)
+    } catch _ {
+    }
 }
 
 var persManager = PersistenceManager()
 
-var planets = persManager.readPlanetPListWithPath(planetPlistFileBeforePath)
+var planets = persManager.readPlanetPListWithPath(planetPlistFileBeforePath as String)
 
 
 var allPlayerDict = persManager.allPlayerDict
@@ -55,7 +58,7 @@ commandFactory.coreGame = coreGame
 for (playerName, player) in allPlayerDict {
     var commandFilePath = turnPath.stringByAppendingPathComponent("\(playerName).txt")
     
-    var commandsString = NSString(contentsOfFile:commandFilePath, encoding: NSUTF8StringEncoding, error: nil)
+    var commandsString = try? NSString(contentsOfFile:commandFilePath, encoding: NSUTF8StringEncoding)
     if commandsString != nil {
         commandFactory.setCommandStringsWithLongString(playerName, commandString: commandsString! as String)
     } else {
@@ -127,8 +130,11 @@ for (playerName, player) in allPlayerDict {
             outPutString += "\(planet.description)\n\n"
         }
     }
-    var outPutFilePath = turnPath.stringByAppendingPathComponent("\(playerName).out")
-    outPutString.writeToFile(outPutFilePath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    var outPutFilePath = turnPath.stringByAppendingPathComponent("\(playerName).out") as NSString
+    do {
+        try outPutString.writeToFile(outPutFilePath as String, atomically: true, encoding: NSUTF8StringEncoding)
+    } catch _ {
+    }
     if let xmlReport = NSXMLDocument.documentWithRootElement(xmlRoot) as? NSXMLDocument{
         xmlReport.version = "1.0"
         xmlReport.characterEncoding = "UTF-8"

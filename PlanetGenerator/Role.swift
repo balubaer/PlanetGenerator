@@ -12,7 +12,7 @@ class Role {
     var name: String
     
     var description: String {
-        var desc = "Character Name: \(name)"
+        let desc = "Character Name: \(name)"
         return desc
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 var processInfo = NSProcessInfo.processInfo()
 var arguments = processInfo.arguments as NSArray
-var programmFilePath = arguments[0] as! String
+var programmFilePath = arguments[0] as! NSString
 var plistFilePath = programmFilePath.stringByAppendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
@@ -29,7 +29,7 @@ var fleetsOnHomePlanet = Int(dictFormPList!["fleetsOnHomePlanet"] as! NSNumber)
 var startShipsCount = Int(dictFormPList!["startShipsCount"] as! NSNumber)
 var distanceLevelHomes = Int(dictFormPList!["distanceLevelHomes"] as! NSNumber)
 
-var playPath = dictFormPList!["playPath"] as! String
+var playPath = dictFormPList!["playPath"] as! NSString
 var playName = dictFormPList!["playName"] as! String
 
 var planets:Array <Planet> = Array()
@@ -65,16 +65,24 @@ var fileManager = NSFileManager.defaultManager()
 var isDir : ObjCBool = false
 
 if fileManager.fileExistsAtPath(planetPlistFilePath, isDirectory: &isDir) == false {
-    fileManager.createDirectoryAtPath(planetPlistFilePath, withIntermediateDirectories: true, attributes: nil, error: nil)
+    do {
+        try fileManager.createDirectoryAtPath(planetPlistFilePath, withIntermediateDirectories: true, attributes: nil)
+    } catch {
+        NSLog("Fehler createDirectoryAtPath")
+    }
 }
 
-planetPlistFilePath = planetPlistFilePath.stringByAppendingPathComponent("Turn0")
+var planetPlistFilePathTurn = planetPlistFilePath as NSString
+
+planetPlistFilePath = planetPlistFilePathTurn.stringByAppendingPathComponent("Turn0")
 
 if fileManager.fileExistsAtPath(planetPlistFilePath, isDirectory: &isDir) == false {
-    fileManager.createDirectoryAtPath(planetPlistFilePath, withIntermediateDirectories: true, attributes: nil, error: nil)
+    try fileManager.createDirectoryAtPath(planetPlistFilePath, withIntermediateDirectories: true, attributes: nil)
 }
 
-planetPlistFilePath = planetPlistFilePath.stringByAppendingPathComponent("Turn0.plist")
+planetPlistFilePathTurn = planetPlistFilePath as NSString
+
+planetPlistFilePath = planetPlistFilePathTurn.stringByAppendingPathComponent("Turn0.plist")
 
 var persManager = PersistenceManager(aPlanetArray:planets)
 persManager.writePlanetPListWithPlanetArray(planetPlistFilePath)

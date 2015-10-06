@@ -24,7 +24,7 @@ func planetWithNumber(planets:Array<Planet>, number:Int) -> Planet? {
 class Planet: Comparable, Equatable {
     var number: Int = 0
     var name: String {
-        var aName = "W\(number)"
+        let aName = "W\(number)"
         return aName
     }
     var port: Port?
@@ -69,9 +69,9 @@ class Planet: Comparable, Equatable {
             desc += " \(player!.description)"
         }
         
-        var resouceString = createResourceString()
+        let resouceString = createResourceString()
         
-        if count(resouceString) != 0 {
+        if resouceString.characters.count != 0 {
             desc += " "
             desc += resouceString
         }
@@ -83,7 +83,7 @@ class Planet: Comparable, Equatable {
             }
         }
         
-        var fleetMovementsCount = fleetMovements.count
+        let fleetMovementsCount = fleetMovements.count
         
         if fleetMovementsCount > 0 {
             var counter = 0
@@ -107,7 +107,7 @@ class Planet: Comparable, Equatable {
     }
     
     func addHitAmbushPlayer(aPlayer: Player) {
-        if contains(hitAmbuschPlayers, aPlayer) != true {
+        if hitAmbuschPlayers.contains(aPlayer) != true {
             hitAmbuschPlayers.append(aPlayer)
         }
     }
@@ -167,7 +167,7 @@ class Planet: Comparable, Equatable {
     }
     
     func getXMLElementForPlayer(aPlayer: Player) -> NSXMLElement {
-        var childElementPlanet = NSXMLElement(name: "world")
+        let childElementPlanet = NSXMLElement(name: "world")
         if let attribute = NSXMLNode.attributeWithName("completeInfo", stringValue: "True") as? NSXMLNode {
             childElementPlanet.addAttribute(attribute)
         }
@@ -190,7 +190,7 @@ class Planet: Comparable, Equatable {
         }
         self.addXMLConnectOnParent(childElementPlanet)
         self.addXMLFleetOnParent(childElementPlanet)
-        var childElementHomeFleet = NSXMLElement(name: "homeFleet")
+        let childElementHomeFleet = NSXMLElement(name: "homeFleet")
         if let attribute = NSXMLNode.attributeWithName("key", stringValue: "D") as? NSXMLNode {
             childElementHomeFleet.addAttribute(attribute)
         }
@@ -215,39 +215,39 @@ class Planet: Comparable, Equatable {
 }
 
 func <=(lhs: Planet, rhs: Planet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber <= rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber <= rNumber
     return result
 }
 
 func >=(lhs: Planet, rhs: Planet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber >= rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber >= rNumber
     return result
 }
 
 func >(lhs: Planet, rhs: Planet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber > rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber > rNumber
 
     return result
 }
 
 func <(lhs: Planet, rhs: Planet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber < rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber < rNumber
 
     return result
 }
 
 func ==(lhs: Planet, rhs: Planet) -> Bool {
-    var lNumber = lhs.number
-    var rNumber = rhs.number
-    var result = lNumber == rNumber
+    let lNumber = lhs.number
+    let rNumber = rhs.number
+    let result = lNumber == rNumber
    
     return result
 }

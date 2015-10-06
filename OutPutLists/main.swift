@@ -10,17 +10,17 @@ import Foundation
 
 var processInfo = NSProcessInfo.processInfo()
 var arguments = processInfo.arguments
-var programmFilePath = arguments[0] as! String
+var programmFilePath = arguments[0] as NSString
 var plistFilePath = programmFilePath.stringByAppendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
 
-var playPath = dictFormPList!["playPath"] as! String
+var playPath = dictFormPList!["playPath"] as! NSString
 var playName = dictFormPList!["playName"] as! String
 
 var turnNumber = Int(dictFormPList!["turn"] as! NSNumber)
 
-var turnPath = playPath.stringByAppendingPathComponent(playName)
+var turnPath = playPath.stringByAppendingPathComponent(playName) as NSString
 
 
 turnPath = turnPath.stringByAppendingPathComponent("Turn\(turnNumber)")
@@ -92,15 +92,16 @@ for (playerName, player) in allPlayerDict {
         }
     }
     var outPutFilePath = turnPath.stringByAppendingPathComponent("\(playerName).out")
-    outPutString.writeToFile(outPutFilePath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    try outPutString.writeToFile(outPutFilePath, atomically: true, encoding: NSUTF8StringEncoding)
     
     if let xmlReport = NSXMLDocument.documentWithRootElement(xmlRoot) as? NSXMLDocument{
+        var outPutFilePathXML = outPutFilePath as NSString
         xmlReport.version = "1.0"
         xmlReport.characterEncoding = "UTF-8"
         var xmlData = xmlReport.XMLDataWithOptions(Int(NSXMLNodePrettyPrint))
         //var xmlData = xmlReport.XMLData
-        outPutFilePath = outPutFilePath.stringByDeletingPathExtension
-        if let outPutXMLFilePath = outPutFilePath.stringByAppendingPathExtension("xml") {
+        outPutFilePathXML = outPutFilePathXML.stringByDeletingPathExtension
+        if let outPutXMLFilePath = outPutFilePathXML.stringByAppendingPathExtension("xml") {
             xmlData.writeToFile(outPutXMLFilePath, atomically: true)
         }
     }

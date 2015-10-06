@@ -26,8 +26,8 @@ class CommandFactory {
     }
     
     func setCommandStringsWithLongString(playerName:String, commandString: String) {
-        var aSet = NSSet(array: commandString.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: " \n\r")))
-        var array = aSet.allObjects as? Array<String>
+        let aSet = NSSet(array: commandString.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: " \n\r")))
+        let array = aSet.allObjects as? Array<String>
         
         if array != nil {
             commandStringsDict[playerName] = array
@@ -45,19 +45,19 @@ class CommandFactory {
 
         for commantElement in commandElements {
             if counter == 0 {
-                var aPlanetNumber = extractNumberString(commantElement).toInt()
+                var aPlanetNumber = Int(extractNumberString(commantElement))
                 if aPlanetNumber != nil {
                     planetNumber = aPlanetNumber!
                 }
             } else if counter == 1 {
-                var aShipsToBuild = extractNumberString(commantElement).toInt()
+                var aShipsToBuild = Int(extractNumberString(commantElement))
                 if aShipsToBuild != nil {
                     shipsToBuild = aShipsToBuild!
                 }
             } else {
-                var fleetNumber: Int? = extractNumberString(commantElement).toInt()
+                var fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fleet = aFleetAndHomePlanet.fleet!
                         homePlanet = aFleetAndHomePlanet.homePlanet!
@@ -70,7 +70,7 @@ class CommandFactory {
     }
     
     func createBuildFleetShipCommand() -> BuildFleetShip {
-        var bulidParameterForFleet = findBuildParameterForFleet()
+        let bulidParameterForFleet = findBuildParameterForFleet()
         return BuildFleetShip(aFleet: bulidParameterForFleet.fleet, aHomePlanet: bulidParameterForFleet.homePlanet, aPlanetNumber: bulidParameterForFleet.planetNumber,  aShipsToBuild: bulidParameterForFleet.shipsToBuild, aString: processCommand!, aPlayer: commandPlayer!)
     }
 
@@ -83,16 +83,16 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber: Int? = extractNumberString(commantElement).toInt()
+                var fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fleet = aFleetAndHomePlanet.fleet!
                         homePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             } else if counter == 1 {
-                var aMetalToUnload = extractNumberString(commantElement).toInt()
+                var aMetalToUnload = Int(extractNumberString(commantElement))
                 if aMetalToUnload != nil {
                     metalToUnload = aMetalToUnload!
                 }
@@ -103,7 +103,7 @@ class CommandFactory {
     }
     
     func createUnloadingMetalCommand() -> UnloadingMetal {
-        var parameterForUnlodingMetal = findParameterForUnloadingMetal()
+        let parameterForUnlodingMetal = findParameterForUnloadingMetal()
         return UnloadingMetal(aFleet: parameterForUnlodingMetal.fleet, aHomePlanet: parameterForUnlodingMetal.homePlanet,  aMetalToUnload: parameterForUnlodingMetal.metalToUnload, aString: processCommand!, aPlayer: commandPlayer!)
     
     }
@@ -117,18 +117,18 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber: Int? = extractNumberString(commantElement).toInt()
+                var fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fleet = aFleetAndHomePlanet.fleet!
                         homePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             } else {
-                var planetNumber: Int? = extractNumberString(commantElement).toInt()
+                var planetNumber: Int? = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
-                    var planet = planetWithNumber(planets, planetNumber!)
+                    var planet = planetWithNumber(planets, number: planetNumber!)
                     
                     if planet != nil {
                         planetArray.append(planet!)
@@ -141,7 +141,7 @@ class CommandFactory {
     }
     
     func createMoveCommand() -> MoveCommand {
-        var fleetAndPlanets = findFleetAndPlanets()
+        let fleetAndPlanets = findFleetAndPlanets()
         return MoveCommand(aFleet: fleetAndPlanets.fleet, aHomePlanet:fleetAndPlanets.homePlanet, aPlanetArray: fleetAndPlanets.planetArray, aString: processCommand!, aPlayer: commandPlayer!)
     }
     
@@ -155,23 +155,23 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber = extractNumberString(commantElement).toInt()
+                var fleetNumber = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fromFleet = aFleetAndHomePlanet.fleet!
                         fromHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             } else if counter == 1 {
-                var aShipsToTransfer = extractNumberString(commantElement).toInt()
+                var aShipsToTransfer = Int(extractNumberString(commantElement))
                 if aShipsToTransfer != nil {
                     shipsToTransfer = aShipsToTransfer!
                 }
             } else {
-                var fleetNumber: Int? = extractNumberString(commantElement).toInt()
+                var fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         toFleet = aFleetAndHomePlanet.fleet!
                         toHomePlanet = aFleetAndHomePlanet.homePlanet!
@@ -184,7 +184,7 @@ class CommandFactory {
     }
     
     func createTransferShipsFleetToFleetCommand() -> TransferShipsFleetToFleet {
-        var fromFleetToFleetAndPlanets = findFromFleetToFleetAndPlanets()
+        let fromFleetToFleetAndPlanets = findFromFleetToFleetAndPlanets()
         return TransferShipsFleetToFleet(aFromFleet: fromFleetToFleetAndPlanets.fromFleet, aToFleet: fromFleetToFleetAndPlanets.toFleet, aFromHomePlanet: fromFleetToFleetAndPlanets.fromHomePlanet, aToHomePlanet: fromFleetToFleetAndPlanets.toHomePlanet, aShipsToTransfer: fromFleetToFleetAndPlanets.shipsToTransfer, aString: processCommand!, aPlayer: commandPlayer!)
     }
     func findFromFleetToDShipsAndPlanet() -> (fromFleet: Fleet, fromHomePlanet:Planet, shipsToTransfer: Int) {
@@ -195,16 +195,16 @@ class CommandFactory {
 
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber = extractNumberString(commantElement).toInt()
+                var fleetNumber = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fromFleet = aFleetAndHomePlanet.fleet!
                         fromHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             } else if counter == 1 {
-                var aShipsToTransfer = extractNumberString(commantElement).toInt()
+                var aShipsToTransfer = Int(extractNumberString(commantElement))
                 if aShipsToTransfer != nil {
                     shipsToTransfer = aShipsToTransfer!
                 }
@@ -216,7 +216,7 @@ class CommandFactory {
     }
 
     func createTransferShipsFleetToDShipsCommand() -> TransferShipsFleetToDShips {
-        var fromFleetToDShipsAndPlanet = findFromFleetToDShipsAndPlanet()
+        let fromFleetToDShipsAndPlanet = findFromFleetToDShipsAndPlanet()
         return TransferShipsFleetToDShips(aFromFleet: fromFleetToDShipsAndPlanet.fromFleet, aFromHomePlanet: fromFleetToDShipsAndPlanet.fromHomePlanet, aShipsToTransfer: fromFleetToDShipsAndPlanet.shipsToTransfer, aString: processCommand!, aPlayer: commandPlayer!)
     }
     
@@ -229,19 +229,19 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var planetNumber = extractNumberString(commantElement).toInt()
+                var planetNumber = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
-                    fromHomePlanet = planetWithNumber(planets, planetNumber!) as Planet!
+                    fromHomePlanet = planetWithNumber(planets, number: planetNumber!) as Planet!
                 }
             } else if counter == 1 {
-                var aShipsToTransfer = extractNumberString(commantElement).toInt()
+                var aShipsToTransfer = Int(extractNumberString(commantElement))
                 if aShipsToTransfer != nil {
                     shipsToTransfer = aShipsToTransfer!
                 }
             } else {
-                var fleetNumber: Int? = extractNumberString(commantElement).toInt()
+                var fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         toFleet = aFleetAndHomePlanet.fleet!
                         toHomePlanet = aFleetAndHomePlanet.homePlanet!
@@ -254,7 +254,7 @@ class CommandFactory {
     }
 
     func createTransferDShipsToFleetCommand() -> TransferDShipsToFleet {
-        var transferDShipsToFleetAndPlanets = findTransferDShipsToFleetAndPlanets()
+        let transferDShipsToFleetAndPlanets = findTransferDShipsToFleetAndPlanets()
         return TransferDShipsToFleet(aToFleet: transferDShipsToFleetAndPlanets.toFleet, aFromHomePlanet: transferDShipsToFleetAndPlanets.fromHomePlanet, aToHomePlanet: transferDShipsToFleetAndPlanets.toHomePlanet, aShipsToTransfer: transferDShipsToFleetAndPlanets.shipsToTransfer, aString: processCommand!, aPlayer: commandPlayer!)
     }
     
@@ -267,9 +267,9 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber = extractNumberString(commantElement).toInt()
+                var fleetNumber = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fromFleet = aFleetAndHomePlanet.fleet!
                         fromHomePlanet = aFleetAndHomePlanet.homePlanet!
@@ -278,9 +278,9 @@ class CommandFactory {
             } else if counter == 1 {
                 //Nichts zu tun
             } else {
-                var fleetNumber: Int? = extractNumberString(commantElement).toInt()
+                var fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         toFleet = aFleetAndHomePlanet.fleet!
                         toHomePlanet = aFleetAndHomePlanet.homePlanet!
@@ -293,7 +293,7 @@ class CommandFactory {
     }
 
     func createFireFleetToFleetCommand() -> FireFleetToFleet {
-        var fromFleetFireToFleetAndPlanets = findFromFleetFireToFleetAndPlanets()
+        let fromFleetFireToFleetAndPlanets = findFromFleetFireToFleetAndPlanets()
         return FireFleetToFleet(aFromFleet: fromFleetFireToFleetAndPlanets.fromFleet, aToFleet: fromFleetFireToFleetAndPlanets.toFleet, aFromHomePlanet: fromFleetFireToFleetAndPlanets.fromHomePlanet, aToHomePlanet: fromFleetFireToFleetAndPlanets.toHomePlanet, aString: processCommand!, aPlayer: commandPlayer!)
     }
     
@@ -304,9 +304,9 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber = extractNumberString(commantElement).toInt()
+                var fleetNumber = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fromFleet = aFleetAndHomePlanet.fleet!
                         fromHomePlanet = aFleetAndHomePlanet.homePlanet!
@@ -319,7 +319,7 @@ class CommandFactory {
     }
 
     func createFireFleetToDShipsCommand() -> FireFleetToDShips {
-        var fromFleetFireToDShipsAndPlanets = findFromFleetFireToDShipsAndPlanets()
+        let fromFleetFireToDShipsAndPlanets = findFromFleetFireToDShipsAndPlanets()
        return FireFleetToDShips(aFromFleet: fromFleetFireToDShipsAndPlanets.fromFleet, aFromHomePlanet: fromFleetFireToDShipsAndPlanets.fromHomePlanet, aString: processCommand!, aPlayer: commandPlayer!)
     }
 
@@ -331,16 +331,16 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var planetNumber = extractNumberString(commantElement).toInt()
+                var planetNumber = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
-                    fromHomePlanet = planetWithNumber(planets, planetNumber!) as Planet!
+                    fromHomePlanet = planetWithNumber(planets, number: planetNumber!) as Planet!
                 }
             } else if counter == 1 {
                 //Nichts zu tun
             } else {
-                var fleetNumber: Int? = extractNumberString(commantElement).toInt()
+                var fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, fleetNumber!)
+                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         toFleet = aFleetAndHomePlanet.fleet!
                         toHomePlanet = aFleetAndHomePlanet.homePlanet!
@@ -353,7 +353,7 @@ class CommandFactory {
     }
 
     func createFireDShipsToFleetCommand() -> FireDShipsToFleet {
-        var fromDShipsFireToFleetAndPlanets = findFromDShipsFireToFleetAndPlanets()
+        let fromDShipsFireToFleetAndPlanets = findFromDShipsFireToFleetAndPlanets()
         return FireDShipsToFleet(aToFleet: fromDShipsFireToFleetAndPlanets.toFleet, aFromHomePlanet: fromDShipsFireToFleetAndPlanets.fromHomePlanet, aToHomePlanet: fromDShipsFireToFleetAndPlanets.toHomePlanet, aString: processCommand!, aPlayer: commandPlayer!)
     }
     
@@ -364,9 +364,9 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var planetNumber: Int? = extractNumberString(commantElement).toInt()
+                var planetNumber: Int? = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
-                    var planetFromNumber = planetWithNumber(planets, planetNumber!)
+                    var planetFromNumber = planetWithNumber(planets, number: planetNumber!)
                     if planetFromNumber != nil {
                         planet = planetFromNumber!
                     }
@@ -379,7 +379,7 @@ class CommandFactory {
 
     
     func createAmbushOffForPlanet() -> AmbushOffForPlanet {
-        var planet = findPlanet()
+        let planet = findPlanet()
         return AmbushOffForPlanet(aPlanet: planet, aString: processCommand!, aPlayer: commandPlayer!)
     }
 
@@ -390,7 +390,7 @@ class CommandFactory {
     func getCommandInstance() -> AnyObject? {
         var result: AnyObject? = nil
         if commandChars != nil {
-            var characterArray: Array <Character> = Array(commandChars!)
+            var characterArray: Array <Character> = Array((commandChars!).characters)
             
             if characterArray.count >= 2 {
                 switch characterArray[0] {
@@ -480,11 +480,11 @@ class CommandFactory {
                 processCommand = command
                 commandElements = Array()
                 var counter = 0
-                var charCount = count(command)
+                let charCount = command.characters.count
                 var foundCommandElementEnd = false
                 var commandElement = String()
                 
-                for character in command as String {
+                for character in (command as String).characters {
                     
                     if isCharacterANumber(character) == false {
                         commandChars?.append(character)
@@ -506,7 +506,7 @@ class CommandFactory {
                     }
                 }
                 commandPlayer = allPlayerDict[playerName]
-                var commandInstance:AnyObject? = self.getCommandInstance()
+                let commandInstance:AnyObject? = self.getCommandInstance()
                 if commandInstance != nil {
                     if commandInstance is Command {
                         commandArray.append(commandInstance as! Command)
@@ -517,12 +517,12 @@ class CommandFactory {
         
         if coreGame {
             for (playerName, player) in allPlayerDict {
-                var buildDShips = BuildDShips(aPlanetArray: planets, aPlayer: player)
+                let buildDShips = BuildDShips(aPlanetArray: planets, aPlayer: player)
                 commandArray.append(buildDShips as Command)
             }
         }
         
-        commandArray.sort { $0 < $1 }
+        commandArray.sortInPlace { $0 < $1 }
         
         for command in commandArray {
             (command as! ExecuteCommand).executeCommand()

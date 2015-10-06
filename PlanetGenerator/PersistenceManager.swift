@@ -28,7 +28,7 @@ class PersistenceManager {
         var fleetDictForPList = [String:AnyObject]()
         var playerDictForPList = [String:AnyObject]()
 
-        var TestList = [Int]()
+        _ = [Int]()
         
         if planetArray != nil {
             for planet in planetArray! {
@@ -93,7 +93,7 @@ class PersistenceManager {
         var planetArray: Array <Planet> = Array()
         var dictFormPList = NSDictionary(contentsOfFile: aPath) as? Dictionary<String, AnyObject>
         if dictFormPList != nil {
-            var planetArrayFormPList:NSArray? = (dictFormPList!["planets"] as! NSArray)
+            let planetArrayFormPList:NSArray? = (dictFormPList!["planets"] as! NSArray)
             var portDictFormPList = (dictFormPList!["ports"] as? Dictionary<String, AnyObject>)
             var fleetDictFormPList = dictFormPList?["fleets"] as? Dictionary<String, AnyObject>
             // var playerDictFormPList:AnyObject? = dictFormPList?.objectForKey("player")
@@ -189,7 +189,7 @@ class PersistenceManager {
                     var intArrayWithPlanetNumbers = portDictFormPList![String(planet.number)] as! Array <NSNumber>
                     
                     for planetNumber in intArrayWithPlanetNumbers {
-                        var aPlanet: Planet? = planetWithNumber(planetArray, Int(planetNumber))
+                        var aPlanet: Planet? = planetWithNumber(planetArray, number: Int(planetNumber))
                         
                         if aPlanet != nil {
                             port.planets.append(aPlanet!)
