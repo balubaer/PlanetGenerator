@@ -8,11 +8,20 @@
 
 import Foundation
 
-class Player: Equatable {
+class Player: Equatable, Hashable {
     var name: String
     var points: Int = 0
     var role: Role?
     var ambushOff: Bool = false
+    var teammates: Set <Player> = Set()
+    
+    var teanmatesNames: Array <String> {
+        var result = Array<String>()
+        for teammatePlayer in teammates {
+            result.append(teammatePlayer.name)
+        }
+        return result
+    }
     
     var description: String {
         var desc = "[\(name)]"
@@ -22,6 +31,10 @@ class Player: Equatable {
         return desc
     }
     
+    internal var hashValue: Int {
+        return name.hashValue
+    }
+
     init() {
         name = "NO Name"
     }
@@ -30,6 +43,9 @@ class Player: Equatable {
         var result = false
         for fleet in fleets {
             result = self.isFleetOwnedByPlayer(player, fleet: fleet)
+            if result {
+                break;
+            }
         }
         return result
     }
@@ -140,7 +156,8 @@ class Player: Equatable {
         }
         return childElementPlayer;
     }
-}
+    
+ }
 
 func ==(lhs: Player, rhs: Player) -> Bool {
     let lName = lhs.name

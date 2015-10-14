@@ -23,6 +23,7 @@ class OutputPlyerStatisticCoreGame {
         desc += "Flotten: \(fleetCount) | "
         desc += "Schiffe auf Flotten: \(shipsOnFleetsCount) | "
         desc += "D-Schiffe: \(dShipCount)\n"
+        desc += self.teammatesDescription()
         return desc
     }
     
@@ -33,6 +34,25 @@ class OutputPlyerStatisticCoreGame {
         fleetCount = 0
         shipsOnFleetsCount = 0
         dShipCount = 0
+    }
+    
+    func teammatesDescription() -> String {
+        var desc = "Verbündete: "
+        var counter = 0
+        
+        desc += "("
+        var teammateNames = player.teanmatesNames
+        teammateNames.sortInPlace { $0 < $1 }
+        let namesCount = teammateNames.count
+        for name in teammateNames {
+            desc += "\(name)"
+            if counter < (namesCount - 1) {
+                desc += ","
+            }
+            counter++;
+        }
+        desc += ")\n"
+        return desc
     }
     
     func calculateStatistic() {

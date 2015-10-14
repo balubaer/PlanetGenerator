@@ -387,6 +387,14 @@ class CommandFactory {
         return AmbushOffForPlayer(aPlanetsArray: planets, aString: processCommand!, aPlayer: commandPlayer!)
     }
     
+    func createTeammateForPlayer() -> AddTeammate {
+     return AddTeammate(aAllPlayerDict: allPlayerDict, aString: processCommand!, aPlayer: commandPlayer!)
+    }
+
+    func createRemoveTeammateForPlayer() -> RemoveTeammate {
+        return RemoveTeammate(aAllPlayerDict: allPlayerDict, aString: processCommand!, aPlayer: commandPlayer!)
+    }
+
     func getCommandInstance() -> AnyObject? {
         var result: AnyObject? = nil
         if commandChars != nil {
@@ -456,6 +464,14 @@ class CommandFactory {
                     }
                 case "Z":
                     result = createAmbushOffForPlanet()
+                case "A":
+                    if characterArray[1] == "=" {
+                        result = createTeammateForPlayer();
+                    }
+                case "N":
+                    if characterArray[1] == "=" {
+                        result = createRemoveTeammateForPlayer();
+                    }
                 default:
                     result = nil
                 }

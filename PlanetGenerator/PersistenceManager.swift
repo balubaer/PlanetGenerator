@@ -41,7 +41,7 @@ class PersistenceManager {
                     if planet.player!.role == nil {
                         planet.player!.role = Role()
                     }
-                    playerDictForPList[planet.player!.name] = ["points":planet.player!.points, "role": planet.player!.role!.name]
+                    playerDictForPList[planet.player!.name] = ["points":planet.player!.points, "role": planet.player!.role!.name, "teammates": planet.player!.teanmatesNames]
                 }
                 
                 var fleetArray: Array <Int> = Array()
@@ -99,46 +99,55 @@ class PersistenceManager {
             // var playerDictFormPList:AnyObject? = dictFormPList?.objectForKey("player")
             var playerDictFormPList = dictFormPList?["player"] as? Dictionary<String, AnyObject>
             
-            var portConnections: [Int: Array<Int>] = Dictionary()
-            
+            if playerDictFormPList != nil {
+                for (playerName, playerDict) in playerDictFormPList! {
+                    let player = Player()
+                    player.name = playerName
+                    let intValue = playerDict["points"]
+                    player.points = Int((intValue as! NSNumber))
+                    let role = Role()
+                    let roleName = (playerDict["role"] as? String)
+                    if roleName != nil {
+                        role.name = roleName!
+                    }
+                    player.role = role
+                    
+                    allPlayerDict[playerName] = player
+                }
+                for (playerName, player) in allPlayerDict {
+                    if let playerDict = playerDictFormPList![playerName] {
+                        if let teammateNames = playerDict["teammates"] as? NSArray {
+                            for teammateName in teammateNames {
+                                if let player2 = allPlayerDict[teammateName as! String] {
+                                    player.teammates.insert(player2)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             if planetArrayFormPList != nil {
                 for planetDict in planetArrayFormPList! {
-                    var planet = Planet()
+                    let planet = Planet()
                     
                     var intValue = planetDict["number"]
                     
                     planet.number = Int((intValue as! NSNumber))
                     
-                    var playerName:String? = planetDict["player"] as! String?
+                    let playerName:String? = planetDict["player"] as! String?
                     
                     if playerName != nil {
-                        var player: Player? = allPlayerDict[playerName!]
                         
-                        if player == nil {
-                            var playerDict = playerDictFormPList![playerName!] as? Dictionary<String, AnyObject>
-                            player = Player()
-                            player!.name = playerName!
-                            if playerDict != nil {
-                                intValue = playerDict!["points"]
-                                player!.points = Int((intValue as! NSNumber))
-                                var role = Role()
-                                var roleName = (playerDict!["role"] as? String)
-                                if roleName != nil {
-                                    role.name = roleName!
-                                }
-                                player!.role = role
-                            }
-                            allPlayerDict[playerName!] = player!
-                        }
-                        planet.player = player!
+                        planet.player = allPlayerDict[playerName!]
                     }
                     
-                    var fleetArray: Array<Int>? = planetDict["fleets"] as? Array<Int>
+                    let fleetArray: Array<Int>? = planetDict["fleets"] as? Array<Int>
                     
                     if fleetArray != nil {
                         for aFleetNumber in fleetArray! {
                             //Create a Fleet
-                            var fleet = Fleet()
+                            let fleet = Fleet()
                             fleet.number = aFleetNumber
                             planet.fleets.append(fleet)
                         }

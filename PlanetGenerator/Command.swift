@@ -586,6 +586,43 @@ class AmbushOffForPlayer: Command, ExecuteCommand {
     }
 }
 
+//A=handel
+class AddTeammate: Command, ExecuteCommand {
+    var allPlayerDict: [String: Player]
+
+    init(aAllPlayerDict: [String: Player], aString: String, aPlayer: Player) {
+        allPlayerDict = aAllPlayerDict
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Initial)
+    }
+    
+    @objc func executeCommand() {
+        let range = string.startIndex...string.startIndex.successor()
+        string.removeRange(range)
+        if let aPlayer = allPlayerDict[string] {
+             player.teammates.insert(aPlayer);
+        }
+    }
+}
+
+//N=handel
+class RemoveTeammate: Command, ExecuteCommand {
+    var allPlayerDict: [String: Player]
+    
+    init(aAllPlayerDict: [String: Player], aString: String, aPlayer: Player) {
+        allPlayerDict = aAllPlayerDict
+        super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Initial)
+    }
+    
+    @objc func executeCommand() {
+        let range = string.startIndex...string.startIndex.successor()
+        string.removeRange(range)
+        if let aPlayer = allPlayerDict[string] {
+            player.teammates.remove(aPlayer);
+        }
+    }
+}
+
+
 struct CommandError {
     var errorCode = 0
     var errorString = ""
