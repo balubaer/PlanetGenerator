@@ -86,7 +86,9 @@ class FinalPhaseCoreGame {
                     if planetPlayer != nil {
                         if fleetPlayer != nil {
                             if planetPlayer! != fleetPlayer! {
-                                result = true
+                                if planetPlayer!.teammates.contains(fleetPlayer!) == false {
+                                    result = true
+                                }
                             }
                         }
                     }
@@ -118,7 +120,6 @@ class FinalPhaseCoreGame {
     }
     
     func checkFleetMovement(planet: Planet) {
-        var counter = 0
         for fleet in planet.fleets {
             let fleetMovementCount = fleet.fleetMovements.count
             
