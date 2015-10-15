@@ -201,7 +201,7 @@
 		<key>ZAPHOD</key>
 		<dict>
 			<key>points</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>role</key>
 			<string>NO Name</string>
 		</dict>

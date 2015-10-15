@@ -16,11 +16,11 @@ class TestsCommandFactory: XCTestCase {
     
     func getBundle() -> NSBundle? {
         var result: NSBundle? = nil
-        var array: Array = NSBundle.allBundles()
+        let array: Array = NSBundle.allBundles()
         
         for aBundle in array {
             if aBundle.bundleIdentifier == "de.berndniklas.Tests" {
-                result = aBundle as? NSBundle
+                result = aBundle
             }
             if result != nil {
                 break
@@ -33,24 +33,27 @@ class TestsCommandFactory: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        var aBundle: NSBundle? = self.getBundle()
+        let aBundle: NSBundle? = self.getBundle()
         if aBundle != nil {
-            var path: String? = aBundle!.resourcePath as String?
-            path = path?.stringByAppendingPathComponent("commands.txt")
+            if let path = aBundle!.resourcePath {
+                var urlPath = NSURL(fileURLWithPath: path)
+                urlPath = urlPath.URLByAppendingPathComponent("commands.txt")
+                
+                if let txtPath = urlPath.path {
+                    commandsString = try? NSString(contentsOfFile: txtPath , encoding: NSUTF8StringEncoding) as String
+                }
+            }
             
-            if path != nil {
-                commandsString = NSString(contentsOfFile:path! , encoding: NSUTF8StringEncoding, error: nil) as! String?
+            if let path = aBundle!.resourcePath {
+                var urlPath = NSURL(fileURLWithPath: path)
+                urlPath = urlPath.URLByAppendingPathComponent("planets.plist")
+                let persManager = PersistenceManager()
+                
+                if let plistPath = urlPath.path {
+                    planetArray = persManager.readPlanetPListWithPath(plistPath)
+                    allPlayerDict = persManager.allPlayerDict
+                }
             }
-            path = aBundle!.resourcePath
-            path = path?.stringByAppendingPathComponent("planets.plist")
-            if path != nil {
-                var persManager = PersistenceManager()
-
-                planetArray = persManager.readPlanetPListWithPath(path!)
-                allPlayerDict = persManager.allPlayerDict
-
-            }
-
         }
     }
     
@@ -61,11 +64,11 @@ class TestsCommandFactory: XCTestCase {
     
     func testFactory() {
         if planetArray != nil && allPlayerDict != nil {
-            var commandFactory = CommandFactory(aPlanetArray: planetArray!, aAllPlayerDict: allPlayerDict!)
+            let commandFactory = CommandFactory(aPlanetArray: planetArray!, aAllPlayerDict: allPlayerDict!)
             if commandsString != nil {
                 
                 //Test Flotte 1
-                var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 1)
+                var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 1)
                 if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                     XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 0,"### Flotte 1 Anzahl Schiffe falsch ###")
                     XCTAssertTrue(fleetAndHomePlanet.homePlanet!.metal == 1,"### Planet 1 Anzahl Metalle falsch ###")
@@ -74,7 +77,7 @@ class TestsCommandFactory: XCTestCase {
                 }
                 
                 //Test Flotte 2 Und Planet auf Metalle
-                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 2)
+                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 2)
                 if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                     XCTAssertTrue(fleetAndHomePlanet.fleet!.cargo == 10,"### Flotte 2 Anzahl Cargo falsch ###")
                     XCTAssertTrue(fleetAndHomePlanet.homePlanet!.metal == 0,"### Planet 2 Anzahl Metalle falsch ###")
@@ -83,7 +86,7 @@ class TestsCommandFactory: XCTestCase {
                 }
 
                 //Test Flotte 3 Und Planet auf Metalle
-                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 3)
+                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 3)
                 if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                     XCTAssertTrue(fleetAndHomePlanet.fleet!.cargo == 5,"### Flotte 3 Anzahl Cargo falsch ###")
                     XCTAssertTrue(fleetAndHomePlanet.homePlanet!.metal == 0,"### Planet 3 Anzahl Metalle falsch ###")
@@ -92,7 +95,7 @@ class TestsCommandFactory: XCTestCase {
                 }
                 
                 //Test Flotte 4 Und Planet auf Metalle
-                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 4)
+                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 4)
                 if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                     XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 7,"### Flotte 4 Anzahl Schiffe falsch ###")
                     XCTAssertTrue(fleetAndHomePlanet.fleet!.cargo == 7,"### Flotte 4 Anzahl Cargo falsch ###")
@@ -102,7 +105,7 @@ class TestsCommandFactory: XCTestCase {
                 }
 
                 //Test Flotte 5 Und Planet auf Schiffe
-                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 5)
+                fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 5)
                 if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                     XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 0,"### Flotte 5 Anzahl Schiffe falsch ###")
                 } else {
@@ -114,18 +117,18 @@ class TestsCommandFactory: XCTestCase {
 
                 commandFactory.executeCommands()
                 
-                var finalPhase = FinalPhaseCoreGame(aPlanetArray: planetArray!, aAllPlayerDict: allPlayerDict!)
+                let finalPhase = FinalPhaseCoreGame(aPlanetArray: planetArray!, aAllPlayerDict: allPlayerDict!)
                 
                 finalPhase.doFinal()
 
                 for planet in planetArray! {
                     if planet.number == 1 {
-                        var twoFleetsThere = (planet.fleets.count == 2)
+                        let twoFleetsThere = (planet.fleets.count == 2)
                         XCTAssertTrue(twoFleetsThere, "### Planet 1 hat nicht die 2 Flotten ###")
                         XCTAssertTrue(planet.metal == 0,"### Planet 1 Anzahl Metalle falsch ###")
                         
                         //Test Flotte 2
-                        var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 2)
+                        var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 2)
                         
                         if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
@@ -138,7 +141,7 @@ class TestsCommandFactory: XCTestCase {
                         }
                         
                         //Test Flotte 3
-                        fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 3)
+                        fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 3)
                         if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
                             XCTAssertEqual(fleetAndHomePlanet.fleet!.number, 3, "### Flotte wurde nicht gefunden ###")
@@ -149,13 +152,13 @@ class TestsCommandFactory: XCTestCase {
                         }
                         
                     } else if planet.number == 2 {
-                        var oneFleetsThere = (planet.fleets.count == 1)
+                        let oneFleetsThere = (planet.fleets.count == 1)
                         XCTAssertTrue(oneFleetsThere, "### Planet 2 hat nicht die 1 Flotte ###")
                         
                         XCTAssertEqual(planet.metal, 10, "### Planet 2 Anzahl Metalle falsch ###")
 
                         //Test Flotte 1
-                        var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 1)
+                        let fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 1)
                         
                         if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.homePlanet!.number, planet.number, "### Flotte ist beim falschen Planeten ###")
@@ -166,7 +169,7 @@ class TestsCommandFactory: XCTestCase {
                             XCTFail("### Flotte 1 nicht gefunden  ###")
                         }
                     } else if planet.number == 3 {
-                        var noFleetsThere = (planet.fleets.count == 0)
+                        let noFleetsThere = (planet.fleets.count == 0)
                         XCTAssertTrue(noFleetsThere, "### Planet 3 hat nicht die 0 Flotten ###")
                         XCTAssertEqual(planet.metal, 2, "### Planet 3 Anzahl Metalle falsch ###")
 
@@ -174,7 +177,7 @@ class TestsCommandFactory: XCTestCase {
                         
                         XCTAssertEqual(planet.metal, 7, "### Planet 4 Anzahl Metalle falsch ###")
 
-                        var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 4)
+                        var fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 4)
                         if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertEqual(fleetAndHomePlanet.fleet!.cargo, 0, "### Flotte 4 Anzahl Cargo falsch ###")
                             XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 5,"### Flotte 4 Anzahl Schiffe falsch ###")
@@ -182,7 +185,7 @@ class TestsCommandFactory: XCTestCase {
                             XCTFail("### Flotte 4 nicht gefunden  ###")
                         }
                         
-                        fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, 5)
+                        fleetAndHomePlanet = fleetAndHomePlanetWithNumber(planetArray!, number: 5)
                         if fleetAndHomePlanet.homePlanet != nil && fleetAndHomePlanet.fleet != nil {
                             XCTAssertTrue(fleetAndHomePlanet.fleet!.ships == 2,"### Flotte 5 Anzahl Schiffe falsch ###")
                         } else {

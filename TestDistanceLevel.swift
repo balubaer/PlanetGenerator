@@ -15,11 +15,11 @@ class TestDistanceLevel: XCTestCase {
     
     func getBundle() -> NSBundle? {
         var result: NSBundle? = nil
-        var array: Array = NSBundle.allBundles()
+        let array: Array = NSBundle.allBundles()
         
         for aBundle in array {
             if aBundle.bundleIdentifier == "de.berndniklas.Tests" {
-                result = aBundle as? NSBundle
+                result = aBundle
             }
             if result != nil {
                 break
@@ -32,12 +32,12 @@ class TestDistanceLevel: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        var aBundle: NSBundle? = self.getBundle()
+        let aBundle: NSBundle? = self.getBundle()
         if aBundle != nil {
             var path: NSString? = aBundle!.resourcePath
             path = path?.stringByAppendingPathComponent("planets.plist")
             if path != nil {
-                var persManager = PersistenceManager()
+                let persManager = PersistenceManager()
                 
                 planetArray = persManager.readPlanetPListWithPath(path! as String)
                 allPlayerDict = persManager.allPlayerDict
@@ -54,7 +54,7 @@ class TestDistanceLevel: XCTestCase {
     func testDistanceLevel() {
         if planetArray != nil && allPlayerDict != nil {
             
-            var planet1 = planetWithNumber(planetArray!, 1)
+            var planet1 = planetWithNumber(planetArray!, number: 1)
             
             if planet1 != nil {
                 var disLevel = DistanceLevel(aStartPlanet: planet1!, aDistanceLevel: 1)

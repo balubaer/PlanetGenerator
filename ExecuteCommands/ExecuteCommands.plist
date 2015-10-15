@@ -5,7 +5,7 @@
 	<key>coreGame</key>
 	<true/>
 	<key>turn</key>
-	<integer>2</integer>
+	<integer>3</integer>
 	<key>playPath</key>
 	<string>/Users/niklas</string>
 	<key>playName</key>

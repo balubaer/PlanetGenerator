@@ -28,8 +28,6 @@ class PersistenceManager {
         var fleetDictForPList = [String:AnyObject]()
         var playerDictForPList = [String:AnyObject]()
 
-        _ = [Int]()
-        
         if planetArray != nil {
             for planet in planetArray! {
                 var planetDict = [String: AnyObject]()
@@ -91,31 +89,27 @@ class PersistenceManager {
     
     func readPlanetPListWithPath(aPath: String) -> Array <Planet> {
         var planetArray: Array <Planet> = Array()
-        var dictFormPList = NSDictionary(contentsOfFile: aPath) as? Dictionary<String, AnyObject>
-        if dictFormPList != nil {
-            let planetArrayFormPList:NSArray? = (dictFormPList!["planets"] as! NSArray)
-            var portDictFormPList = (dictFormPList!["ports"] as? Dictionary<String, AnyObject>)
-            var fleetDictFormPList = dictFormPList?["fleets"] as? Dictionary<String, AnyObject>
-            // var playerDictFormPList:AnyObject? = dictFormPList?.objectForKey("player")
-            var playerDictFormPList = dictFormPList?["player"] as? Dictionary<String, AnyObject>
+        if let dictFormPList = NSDictionary(contentsOfFile: aPath) {
             
-            if playerDictFormPList != nil {
-                for (playerName, playerDict) in playerDictFormPList! {
+            if let playerDictFormPList = dictFormPList["player"] as? Dictionary<String, AnyObject> {
+                for (playerName, playerDict) in playerDictFormPList {
                     let player = Player()
                     player.name = playerName
-                    let intValue = playerDict["points"]
-                    player.points = Int((intValue as! NSNumber))
+                    if let intValueObject = playerDict["points"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            player.points = intValue
+                        }
+                    }
                     let role = Role()
-                    let roleName = (playerDict["role"] as? String)
-                    if roleName != nil {
-                        role.name = roleName!
+                    if let roleName = playerDict["role"] as? String {
+                        role.name = roleName
                     }
                     player.role = role
                     
                     allPlayerDict[playerName] = player
                 }
                 for (playerName, player) in allPlayerDict {
-                    if let playerDict = playerDictFormPList![playerName] {
+                    if let playerDict = playerDictFormPList[playerName] {
                         if let teammateNames = playerDict["teammates"] as? NSArray {
                             for teammateName in teammateNames {
                                 if let player2 = allPlayerDict[teammateName as! String] {
@@ -127,25 +121,22 @@ class PersistenceManager {
                 }
             }
 
-            if planetArrayFormPList != nil {
-                for planetDict in planetArrayFormPList! {
+            if let planetArrayFormPList = dictFormPList["planets"] as? Array <NSDictionary> {
+                for planetDict in planetArrayFormPList {
                     let planet = Planet()
                     
-                    var intValue = planetDict["number"]
-                    
-                    planet.number = Int((intValue as! NSNumber))
-                    
-                    let playerName:String? = planetDict["player"] as! String?
-                    
-                    if playerName != nil {
-                        
-                        planet.player = allPlayerDict[playerName!]
+                    if let intValueObject = planetDict["number"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.number = intValue
+                        }
+                    }
+
+                    if let playerName = planetDict["player"] as? String {
+                        planet.player = allPlayerDict[playerName]
                     }
                     
-                    let fleetArray: Array<Int>? = planetDict["fleets"] as? Array<Int>
-                    
-                    if fleetArray != nil {
-                        for aFleetNumber in fleetArray! {
+                    if let fleetArray = planetDict["fleets"] as? Array<Int> {
+                        for aFleetNumber in fleetArray {
                             //Create a Fleet
                             let fleet = Fleet()
                             fleet.number = aFleetNumber
@@ -153,73 +144,99 @@ class PersistenceManager {
                         }
                     }
                     
-                    intValue = planetDict["industry"]
-                    planet.industry = Int((intValue as! NSNumber))
-                    
-                    intValue = planetDict["metal"]
-                    planet.metal = Int((intValue as! NSNumber))
-                    
-                    intValue = planetDict["mines"]
-                    planet.mines = Int((intValue as! NSNumber))
-                    
-                    intValue = planetDict["population"]
-                    planet.population = Int((intValue as! NSNumber))
-                    
-                    intValue = planetDict["limit"]
-                    planet.limit = Int((intValue as! NSNumber))
-                    
-                    intValue = planetDict["round"]
-                    planet.round = Int((intValue as! NSNumber))
-                    
-                    intValue = planetDict["iShips"]
-                    planet.iShips = Int((intValue as! NSNumber))
-                    
-                    intValue = planetDict["pShips"]
-                    planet.pShips = Int((intValue as! NSNumber))
-                    
-                    intValue = planetDict["dShips"]
-                    
-                    var aNumber = intValue as? NSNumber
-                    if aNumber != nil {
-                        planet.dShips = Int(aNumber!)
+                    if let intValueObject = planetDict["industry"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.industry = intValue
+                        }
+                    }
+
+                    if let intValueObject = planetDict["metal"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.metal = intValue
+                        }
                     }
                     
+                    if let intValueObject = planetDict["mines"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.mines = intValue
+                        }
+                    }
+
+                    if let intValueObject = planetDict["population"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.population = intValue
+                        }
+                    }
+                    
+                    if let intValueObject = planetDict["limit"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.limit = intValue
+                        }
+                    }
+                    
+                    if let intValueObject = planetDict["round"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.round = intValue
+                        }
+                    }
+                    
+                    if let intValueObject = planetDict["iShips"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.iShips = intValue
+                        }
+                    }
+
+                    if let intValueObject = planetDict["dShips"] as? NSObject {
+                        if let intValue = Int(intValueObject.description) {
+                            planet.dShips = intValue
+                        }
+                    }
                     
                     planetArray.append(planet)
                 }
+                
                 //Set Ports to Planet and complete the Fleets
                 for planet in planetArray {
                     //Create a Port
-                    var port = Port()
+                    let port = Port()
                     port.planet = planet
                     planet.port = port
                     
                     //Get Planets Array from Plist-PortArray
-                    var intArrayWithPlanetNumbers = portDictFormPList![String(planet.number)] as! Array <NSNumber>
-                    
-                    for planetNumber in intArrayWithPlanetNumbers {
-                        var aPlanet: Planet? = planetWithNumber(planetArray, number: Int(planetNumber))
-                        
-                        if aPlanet != nil {
-                            port.planets.append(aPlanet!)
-                        }
-                    }
-                    
-                    //Complete the Fleets
-                    for fleet in planet.fleets {
-                        var fleetFromPlist = fleetDictFormPList![String(fleet.number)] as? Dictionary <String, AnyObject>
-                        if fleetFromPlist != nil {
-                            fleet.ships = Int(fleetFromPlist!["ships"] as! NSNumber)
-                            
-                            var playerName:String? = fleetFromPlist!["player"] as! String?
-                            
-                            if playerName != nil {
-                                var player = allPlayerDict[playerName!]
-                                if player != nil {
-                                    fleet.player = player
+                    if let portDictFormPList = (dictFormPList["ports"] as? Dictionary<String, AnyObject>) {
+                        if let intArrayWithPlanetNumbers = portDictFormPList[String(planet.number)] as? Array <NSNumber> {
+                            for planetNumber in intArrayWithPlanetNumbers {
+                                let aPlanet: Planet? = planetWithNumber(planetArray, number: Int(planetNumber))
+                                
+                                if aPlanet != nil {
+                                    port.planets.append(aPlanet!)
                                 }
                             }
-                            fleet.cargo = Int(fleetFromPlist!["cargo"] as! NSNumber)
+                        }
+                    }
+                    //Complete the Fleets
+                    for fleet in planet.fleets {
+                        if let fleetDictFormPList = dictFormPList["fleets"] as? Dictionary<String, AnyObject> {
+                            if let fleetFromPlist = fleetDictFormPList[String(fleet.number)] as? Dictionary <String, AnyObject> {
+                                if let intValueObject = fleetFromPlist["ships"] as? NSObject {
+                                    if let intValue = Int(intValueObject.description) {
+                                        fleet.ships = intValue
+                                    }
+                                }
+
+                                if let playerName = fleetFromPlist["player"] as? String {
+                                    let player = allPlayerDict[playerName]
+                                    if player != nil {
+                                        fleet.player = player
+                                    }
+                                }
+                                
+                                if let intValueObject = fleetFromPlist["cargo"] as? NSObject {
+                                    if let intValue = Int(intValueObject.description) {
+                                        fleet.cargo = intValue
+                                    }
+                                }
+                            }
                         }
                     }
                 }

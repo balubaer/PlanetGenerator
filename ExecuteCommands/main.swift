@@ -118,7 +118,7 @@ for (playerName, player) in allPlayerDict {
     }
     xmlRoot.addChild(childElementPlayer)
 
-    var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber) \n"
+    var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber + 1) \n"
     var outPutStatistic = OutputPlyerStatisticCoreGame(aPlanets: planets, aPlayer: player)
     outPutStatistic.calculateStatistic()
     outPutString += "\(outPutStatistic.description)\n"

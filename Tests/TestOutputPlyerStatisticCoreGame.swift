@@ -16,11 +16,11 @@ class TestOutputPlyerStatisticCoreGame: XCTestCase {
     
     func getBundle() -> NSBundle? {
         var result: NSBundle? = nil
-        var array: Array = NSBundle.allBundles()
+        let array: Array = NSBundle.allBundles()
         
         for aBundle in array {
             if aBundle.bundleIdentifier == "de.berndniklas.Tests" {
-                result = aBundle as? NSBundle
+                result = aBundle
             }
             if result != nil {
                 break
@@ -32,21 +32,21 @@ class TestOutputPlyerStatisticCoreGame: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        var aBundle: NSBundle? = self.getBundle()
+        let aBundle: NSBundle? = self.getBundle()
         if aBundle != nil {
-            var path: String? = aBundle!.resourcePath as String?
-            path = path?.stringByAppendingPathComponent("planets.plist")
-            if path != nil {
-                var persManager = PersistenceManager()
+            if let path = aBundle!.resourcePath as String? {
+                var urlPath = NSURL(fileURLWithPath: path)
+                urlPath = urlPath.URLByAppendingPathComponent("planets.plist")
+                let persManager = PersistenceManager()
                 
-                planetArray = persManager.readPlanetPListWithPath(path!)
-                allPlayerDict = persManager.allPlayerDict
-                
+                if let plistPath = urlPath.path {
+                    planetArray = persManager.readPlanetPListWithPath(plistPath)
+                    allPlayerDict = persManager.allPlayerDict
+                }
             }
-            
         }
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
@@ -55,8 +55,8 @@ class TestOutputPlyerStatisticCoreGame: XCTestCase {
     func testCalculateStatistic() {
         
         if allPlayerDict != nil && planetArray != nil {
-            for (playerName, player) in allPlayerDict! {
-                var outPut = OutputPlyerStatisticCoreGame(aPlanets: planetArray!, aPlayer: player)
+            for (_, player) in allPlayerDict! {
+                let outPut = OutputPlyerStatisticCoreGame(aPlanets: planetArray!, aPlayer: player)
                 outPut.calculateStatistic()
                 XCTAssert(true, "Pass")
 
