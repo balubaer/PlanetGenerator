@@ -189,6 +189,7 @@ class Planet: Comparable, Equatable {
             childElementPlanet.addAttribute(attribute)
         }
         self.addXMLConnectOnParent(childElementPlanet)
+        self.addXMLPassingOnParent(childElementPlanet)
         self.addXMLFleetOnParent(childElementPlanet)
         let childElementHomeFleet = NSXMLElement(name: "homeFleet")
         if let attribute = NSXMLNode.attributeWithName("key", stringValue: "D") as? NSXMLNode {
@@ -204,6 +205,14 @@ class Planet: Comparable, Equatable {
     func addXMLConnectOnParent(parent : NSXMLElement) {
         if let aPort = port {
             aPort.addXMLConnectOnParent(parent)
+        }
+    }
+    
+    func addXMLPassingOnParent(parent: NSXMLElement) {
+        if fleetMovements.count > 0 {
+            for fleetMovement in fleetMovements {
+                fleetMovement.addXMLPassingOnParent(parent)
+            }
         }
     }
     

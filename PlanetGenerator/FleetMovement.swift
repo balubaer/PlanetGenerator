@@ -25,4 +25,22 @@ class FleetMovement {
     init() {
     }
     
+    func addXMLPassingOnParent(parent : NSXMLElement) {
+        if fleet != nil && toPlanet != nil {
+            let childElementConnect = NSXMLElement(name: "passing")
+            if let attribute = NSXMLNode.attributeWithName("index", stringValue: "\(fleet!.number)") as? NSXMLNode {
+                childElementConnect.addAttribute(attribute)
+            }
+            if fleet!.player != nil {
+                if let attribute = NSXMLNode.attributeWithName("owner", stringValue: "\(fleet!.player!.name)") as? NSXMLNode {
+                    childElementConnect.addAttribute(attribute)
+                }
+            }
+            if let attribute = NSXMLNode.attributeWithName("toWorld", stringValue: "\(toPlanet!.number)") as? NSXMLNode {
+                childElementConnect.addAttribute(attribute)
+            }
+            parent.addChild(childElementConnect)
+        }
+    }
+
 }

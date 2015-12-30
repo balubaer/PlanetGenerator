@@ -47,6 +47,7 @@ class Fleet: Comparable, Equatable {
     var fleetMovements: Array <FleetMovement> = Array()
     var fired: Bool = false
     var firesTo: String = ""
+    var firesToCommand: String = ""
 
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     //TODO: niklas schenken
@@ -96,6 +97,12 @@ class Fleet: Comparable, Equatable {
         let childElementFleet = NSXMLElement(name: "fleet")
         if let attribute = NSXMLNode.attributeWithName("completeInfo", stringValue: "True") as? NSXMLNode {
             childElementFleet.addAttribute(attribute)
+        }
+        
+        if firesToCommand != "" {
+            if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "\(firesToCommand)") as? NSXMLNode {
+                childElementFleet.addAttribute(attribute)
+            }
         }
         if let attribute = NSXMLNode.attributeWithName("index", stringValue: "\(number)") as? NSXMLNode {
             childElementFleet.addAttribute(attribute)

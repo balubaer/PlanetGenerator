@@ -463,6 +463,7 @@ class FireFleetToFleet: Command, ExecuteCommand {
                 toFleet.hitedShots += fromFleet.ships
                 fromFleet.fired = true
                 fromFleet.firesTo = toFleet.name
+                fromFleet.firesToCommand = "AF\(toFleet.number)"
             }
         } else {
             //TODO: Fehler Flotte ist nicht vom Spieler
@@ -532,6 +533,8 @@ class FireFleetToDShips: Command, ExecuteCommand {
                 fromHomePlanet.hitedShotsDShips += fromFleet.ships
                 fromFleet.fired = true
                 fromFleet.firesTo = "D-Schiffe"
+                fromFleet.firesToCommand = "AD"
+
             }
         } else {
             //TODO: Fehler Flotte ist nicht vom Spieler
