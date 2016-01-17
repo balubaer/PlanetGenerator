@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>distanceLevelHomes</key>
-	<integer>6</integer>
+	<integer>5</integer>
 	<key>playPath</key>
 	<string>/Users/niklas</string>
 	<key>playName</key>

@@ -65,6 +65,9 @@ class PlayerFactory {
         let logString = "#### Gefundenen Planeten: \(foundPlanetNumber)]"
         NSLog("%@", logString)
 
+        if result == nil {
+            result = findPlanetWithDice(planetDice, planetArray: planetArray)
+        }
 
         return result!
     }
@@ -98,16 +101,14 @@ class PlayerFactory {
 
     
     func createWithPlanetArray(planetArray:Array <Planet>, fleetCount: Int, aFleetsOnHomePlanet: Int, startShipsCount: Int, distanceLevelHomes: Int) {
-        var counter = 1
         planetDice.setSites(planetArray.count)
         fleetDice.setSites(fleetCount)
         let playerNameCount: Int = playerNameArray.count;
         self.distanceLevelHomes = distanceLevelHomes
 
-        for i in 1...playerNameCount {
-            var fleetsOnHomePlanet = aFleetsOnHomePlanet
+        for counter in 1...playerNameCount {
             let player = findePlayerWithDice();
-            var logString = "#### \(i) Player: \(player.name)]"
+            var logString = "#### \(counter) Player: \(player.name)]"
             NSLog("%@", logString)
 
             var planet : Planet;
@@ -118,28 +119,29 @@ class PlayerFactory {
                 planet = findPlanetWithMinPlanetArea(nextLevelPlanets);
             }
             
-            logString = "#### \(i) vor setPlayer Planet: \(planet.number)] Player: \(planet.player)"
+            logString = "#### \(counter) vor setPlayer Planet: \(planet.number)] Player: \(planet.player)"
             NSLog("%@", logString)
 
             planet.player = player;
             homePlanetsDict[player.name] = planet;
-            
+        }
+        
+        for (_, planet) in homePlanetsDict {
+            var fleetsOnHomePlanet = aFleetsOnHomePlanet
+
             fleetsOnHomePlanet -= planet.fleets.count
             for fleet in planet.fleets {
-                fleet.player = player;
+                fleet.player = planet.player;
                 fleet.ships = startShipsCount;
             }
             
             for _ in 1...fleetsOnHomePlanet {
                 let fleetAndPlanet = findFleetAndPlanetWithDice(fleetDice, planetArray: planetArray)
-                fleetAndPlanet.fleet.player = player
+                fleetAndPlanet.fleet.player = planet.player
                 fleetAndPlanet.fleet.ships = startShipsCount
                 fleetAndPlanet.planet.fleets.removeObject(fleetAndPlanet.fleet)
                 planet.fleets.append(fleetAndPlanet.fleet)
             }
-
-            counter++;
-
         }
     }
     

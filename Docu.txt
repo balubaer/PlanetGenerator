@@ -60,7 +60,7 @@ TODOs:
 - Kunstwerke behandeln
 - Fehler Implementieren
 
-+ Flotten auf Homeplanet für Start erst nach verteilung Speiler auf Karte
++ Flotten auf Homeplanet für Start erst nach verteilung Speiler auf Karte ### Erledigt
 + 10 Prozent Planeten mit 2 Ports ### Erledigt
 
 

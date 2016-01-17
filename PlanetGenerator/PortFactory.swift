@@ -16,6 +16,7 @@ class PortFactory {
     var maxCount: Int
     var moreConnectionPlanet : Int
     var lessConectionPlanet : Int
+    var abort : Bool
     
     init() {
         planetsCount = 0
@@ -24,6 +25,7 @@ class PortFactory {
         maxCount = 3
         moreConnectionPlanet = 0
         lessConectionPlanet = 0
+        abort = false
     }
     
     func hasPlanetMaxConnetion(aPlanet: Planet) -> Bool {
@@ -169,8 +171,11 @@ class PortFactory {
     }
     
     func generatePlanetConnection() {
-        while (!isAllConnectionCreated()) {
+        while (!isAllConnectionCreated() && !abort) {
            self.generateOneConnection()
+            if workingPlanets.count < 2 {
+                abort = true
+            }
         }
     }
     
