@@ -49,6 +49,7 @@ for index in 1...planetCount {
 var portFactory = PortFactory()
 
 portFactory.moreConnectionPlanet = planetCount/10
+portFactory.lessConectionPlanet = planetCount/10
 portFactory.createWithPlanetArray(planets)
 
 

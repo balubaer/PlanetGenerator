@@ -15,6 +15,7 @@ class PortFactory {
     var dice: Dice
     var maxCount: Int
     var moreConnectionPlanet : Int
+    var lessConectionPlanet : Int
     
     init() {
         planetsCount = 0
@@ -22,6 +23,7 @@ class PortFactory {
         workingPlanets = Array()
         maxCount = 3
         moreConnectionPlanet = 0
+        lessConectionPlanet = 0
     }
     
     func hasPlanetMaxConnetion(aPlanet: Planet) -> Bool {
@@ -172,6 +174,67 @@ class PortFactory {
         }
     }
     
+    func isPlanetForClearConnectionOK(aPlanet: Planet) -> Bool {
+        var result = false
+        if let port = aPlanet.port {
+            if port.planets.count > 2 {
+                var portsOK = true
+                for planet in port.planets {
+                    if let aPort = planet.port {
+                        if aPort.planets.count < 3 {
+                            portsOK = false
+                            break
+                        }
+                    } else {
+                        portsOK = false
+                        break
+                    }
+                }
+                result = portsOK
+            }
+        }
+        return result
+    }
+    
+    func getPlanetforClearConnectionWithDiceAndPlanetArray() -> Planet {
+        var result:Planet? = nil
+        dice.setSites(workingPlanets.count)
+        
+        var indexNumber = dice.roll()
+        var realIndex = indexNumber - 1
+        result = workingPlanets[realIndex];
+        
+        if result != nil {
+            var found = self.isPlanetForClearConnectionOK(result!)
+            
+           while (!found) {
+                indexNumber = dice.roll()
+                realIndex = indexNumber - 1
+                result = workingPlanets[realIndex];
+                
+                found = self.isPlanetForClearConnectionOK(result!)
+            }
+        }
+        return result!
+    }
+
+    func clearOneConnection() {
+        let planet = getPlanetforClearConnectionWithDiceAndPlanetArray()
+        
+        if let port = planet.port {
+            dice.setSites(port.planets.count)
+            let indexNumber = dice.roll()
+
+            let realIndex = indexNumber - 1
+            let planetFromPort = port.planets[realIndex]
+            port.planets.removeAtIndex(realIndex)
+            
+            if let portFPFP = planetFromPort.port {
+                portFPFP.planets.removeObject(planet)
+            }
+        }
+    }
+    
     func createWithPlanetArray(planetArray:Array <Planet>) {
         
         planetsCount = planetArray.count
@@ -186,13 +249,22 @@ class PortFactory {
             port.planet!.port = port
         }
         self.generatePlanetConnection()
+        
         maxCount = 5
+        workingPlanets.removeAll()
         for planet in planetArray {
-            
             workingPlanets.append(planet)
         }
         for _ in 1...moreConnectionPlanet {
             self.generateOneConnection()
+        }
+        
+        workingPlanets.removeAll()
+        for planet in planetArray {
+            workingPlanets.append(planet)
+        }
+        for _ in 1...lessConectionPlanet {
+            self.clearOneConnection()
         }
     }
 }

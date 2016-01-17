@@ -41,6 +41,34 @@ class PlayerFactory {
         return result!
     }
     
+    func findPlanetWithMinPlanetArea(planetArray: Array <Planet>) -> Planet {
+        var result:Planet? = nil
+        var planetAndAreaCount: [Int: Int] = Dictionary()
+        var foundPlanetNumber = 1
+        var foundAreaCount = planetArray.count
+        
+        for planet in planetArray {
+            let distLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: self.distanceLevelHomes)
+            let count = distLevel.passedPlanets.count
+            planetAndAreaCount[planet.number] = count
+        }
+        
+        for (planetNumber, areaCount) in planetAndAreaCount {
+            if let planet = planetWithNumber(planetArray, number: planetNumber) {
+                if foundAreaCount > areaCount && planet.player == nil{
+                    foundAreaCount = areaCount
+                    foundPlanetNumber = planetNumber
+                }
+            }
+        }
+        result = planetWithNumber(planetArray, number: foundPlanetNumber)
+        let logString = "#### Gefundenen Planeten: \(foundPlanetNumber)]"
+        NSLog("%@", logString)
+
+
+        return result!
+    }
+    
     func findFleetAndPlanetWithDice(dice:Dice, planetArray:Array <Planet>) -> (fleet:Fleet, planet:Planet) {
         var fleet:Fleet? = nil
         var planet:Planet? = nil
@@ -76,16 +104,23 @@ class PlayerFactory {
         let playerNameCount: Int = playerNameArray.count;
         self.distanceLevelHomes = distanceLevelHomes
 
-        for _ in 1...playerNameCount {
+        for i in 1...playerNameCount {
             var fleetsOnHomePlanet = aFleetsOnHomePlanet
             let player = findePlayerWithDice();
+            var logString = "#### \(i) Player: \(player.name)]"
+            NSLog("%@", logString)
+
             var planet : Planet;
             if (counter == 1) {
                 planet = findPlanetWithDice(planetDice, planetArray: planetArray)
             } else {
-                nextLevelPlanets = makeNextLevelPlanets();
-                planet = findPlanetWithDice(planetDice, planetArray: nextLevelPlanets);
+                nextLevelPlanets = Array(makeNextLevelPlanets());
+                planet = findPlanetWithMinPlanetArea(nextLevelPlanets);
             }
+            
+            logString = "#### \(i) vor setPlayer Planet: \(planet.number)] Player: \(planet.player)"
+            NSLog("%@", logString)
+
             planet.player = player;
             homePlanetsDict[player.name] = planet;
             
@@ -108,29 +143,25 @@ class PlayerFactory {
         }
     }
     
-    func makeNextLevelPlanets() -> Array <Planet> {
-        var result = Array<Planet>()
-        var allPassedPlanets = Array<Planet>()
-        var allNextLevelPlanets = Array<Planet>()
+    func makeNextLevelPlanets() -> Set <Planet> {
+        var result = Set<Planet>()
+        var allPassedPlanets = Set<Planet>()
+        var allNextLevelPlanets = Set<Planet>()
         var finishCreate = false
         var startDistanceLevelHomes = distanceLevelHomes
         
         while finishCreate == false {
             for planet in  homePlanetsDict.values {
-                let distLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: startDistanceLevelHomes);
+                let distLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: startDistanceLevelHomes)
                 for planetFromPassedPlanets in distLevel.passedPlanets {
-                    if allPassedPlanets.contains(planetFromPassedPlanets) == false {
-                        allPassedPlanets.append(planetFromPassedPlanets)
-                    }
+                    allPassedPlanets.insert(planetFromPassedPlanets)
                 }
                 for planetFromNextLevel in distLevel.nextLevelPlanets {
-                    if allNextLevelPlanets.contains(planetFromNextLevel) == false {
-                        allNextLevelPlanets.append(planetFromNextLevel)
-                    }
+                    allNextLevelPlanets.insert(planetFromNextLevel)
                 }
                 for planetFromNextLevel in allNextLevelPlanets {
                     if allPassedPlanets.contains( planetFromNextLevel) == false {
-                        result.append(planetFromNextLevel)
+                        result.insert(planetFromNextLevel)
                     }
                 }
             }

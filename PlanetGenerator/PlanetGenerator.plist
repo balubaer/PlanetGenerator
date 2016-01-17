@@ -7,20 +7,26 @@
 	<key>playPath</key>
 	<string>/Users/niklas</string>
 	<key>playName</key>
-	<string>Galaxy03</string>
+	<string>GalaxySolutio</string>
 	<key>startShipsCount</key>
 	<integer>6</integer>
 	<key>fleetsOnHomePlanet</key>
 	<integer>5</integer>
 	<key>fleetCount</key>
-	<integer>60</integer>
+	<integer>200</integer>
 	<key>planetCount</key>
-	<integer>60</integer>
+	<integer>200</integer>
 	<key>player</key>
 	<array>
 		<string>ZAPHOD</string>
-		<string>MARVIN</string>
-		<string>ARTHUR</string>
+		<string>Lul4n</string>
+		<string>Oxyd</string>
+		<string>coldsmith</string>
+		<string>Beerbowl</string>
+		<string>nimosalina</string>
+		<string>ValaOSiris</string>
+		<string>mirkomcfly</string>
+		<string>joniitaan</string>
 	</array>
 </dict>
 </plist>

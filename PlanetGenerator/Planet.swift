@@ -21,7 +21,11 @@ func planetWithNumber(planets:Array<Planet>, number:Int) -> Planet? {
     return result;
 }
 
-class Planet: Comparable, Equatable {
+class Planet: Comparable, Equatable, Hashable {
+    
+    var hashValue: Int {
+        return number
+    }
     var number: Int = 0
     var name: String {
         let aName = "W\(number)"
