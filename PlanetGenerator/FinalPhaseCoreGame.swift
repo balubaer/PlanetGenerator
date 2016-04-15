@@ -85,7 +85,7 @@ class FinalPhaseCoreGame {
                     
                     if planetPlayer != nil {
                         if fleetPlayer != nil {
-                            if planetPlayer! != fleetPlayer! {
+                            if (planetPlayer! == fleetPlayer!) == false {
                                 if planetPlayer!.teammates.contains(fleetPlayer!) == false {
                                     result = true
                                 }
@@ -99,6 +99,28 @@ class FinalPhaseCoreGame {
         return result
     }
     
+    func isAmbushFleet(ambushFleet: Fleet, passingFleet: Fleet, movementCount: Int) -> Bool {
+        var result = false
+        if isAmbushFromMovementCount(movementCount, movementHoleCount: passingFleet.fleetMovements.count) {
+            if (ambushFleet == passingFleet) == false {
+                if ambushFleet.fired == false {
+                    if ambushFleet.moved == false {
+                        if let ambushPlayer = ambushFleet.player {
+                            if let passingFleetPlayer = passingFleet.player {
+                                if (ambushPlayer == passingFleetPlayer) == false {
+                                    if ambushPlayer.teammates.contains(passingFleetPlayer) == false {
+                                        result = true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    
     func getFirePowerForAmbushPlanet(planet: Planet?) -> Int {
         var firePower = 0
         
@@ -107,18 +129,11 @@ class FinalPhaseCoreGame {
                 firePower += planet!.dShips
                 planet!.dShipsAmbush = true
             }
-            for fleet in planet!.fleets {
-                if fleet.fired == false {
-                    if fleet.moved == false {
-                        firePower += fleet.ships
-                        fleet.ambush = true
-                    }
-                }
-            }
         }
         return firePower
     }
     
+    //TODO: niklas func getFirePowerFor
     func checkFleetMovement(planet: Planet) {
         for fleet in planet.fleets {
             let fleetMovementCount = fleet.fleetMovements.count
@@ -128,21 +143,32 @@ class FinalPhaseCoreGame {
                     var movementCount = 1
                     for fleetMovement in fleet.fleetMovements {
                         if fleetMovement.isMovementDone == false {
-                            let fromPlanet = fleetMovement.fromPlanet
-                            let toPlanet = fleetMovement.toPlanet
-                            fromPlanet?.fleets.removeObject(fleet)
-                            fromPlanet?.fleetMovements.append(fleetMovement)
-                            toPlanet?.fleets.append(fleet)
-                            fleetMovement.isMovementDone = true
-                            
-                            if isAmbushPlanet(toPlanet, passingFleet: fleet, movementCount: movementCount) {
-                                let firePower = self.getFirePowerForAmbushPlanet(toPlanet)
-                                fleet.ships -= firePower
-                                if fleet.ships < 0 {
-                                    fleet.ships = 0
-                                }
-                                if toPlanet != nil && fleet.player != nil {
-                                    toPlanet!.addHitAmbushPlayer(fleet.player!)
+                            if let fromPlanet = fleetMovement.fromPlanet {
+                                if let toPlanet = fleetMovement.toPlanet {
+                                    fromPlanet.fleets.removeObject(fleet)
+                                    fromPlanet.fleetMovements.append(fleetMovement)
+                                    toPlanet.fleets.append(fleet)
+                                    fleetMovement.isMovementDone = true
+                                    
+                                    if isAmbushPlanet(toPlanet, passingFleet: fleet, movementCount: movementCount) {
+                                        let firePower = self.getFirePowerForAmbushPlanet(toPlanet)
+                                        fleet.ships -= firePower
+                                        if fleet.ships < 0 {
+                                            fleet.ships = 0
+                                        }
+                                        toPlanet.addHitAmbushFleets(fleet)
+                                    }
+                                    for fleetFromPlant in toPlanet.fleets {
+                                        if isAmbushFleet(fleetFromPlant, passingFleet: fleet, movementCount: movementCount) {
+                                            fleet.ships -= fleetFromPlant.ships;
+                                            fleetFromPlant.addHitAmbushFleets(fleet)
+                                            fleetFromPlant.ambush = true
+                                        }
+                                    }
+                                    
+                                    if fleet.ships == 0 {
+                                        break;
+                                    }
                                 }
                             }
                             movementCount++

@@ -49,6 +49,16 @@ class Fleet: Comparable, Equatable {
     var firesTo: String = ""
     var firesToCommand: String = ""
 
+    var hitAmbuschFleets: Array <Fleet> = Array()
+    
+    var fireAmbuschFleets: String {
+        var desc = "Ambush:"
+        for hitAmbushfleet in hitAmbuschFleets {
+            desc += "F\(hitAmbushfleet.number),"
+        }
+        return String(desc.characters.dropLast())
+    }
+
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     //TODO: niklas schenken
 
@@ -76,7 +86,20 @@ class Fleet: Comparable, Equatable {
             infoArray.append("bewegt")
         }
         if ambush {
-            infoArray.append("Ambush")
+            var desc = "Ambush: {"
+            if hitAmbuschFleets.count > 0 {
+                var counter = 0
+                
+                for fleet in hitAmbuschFleets {
+                    desc += fleet.name
+                    counter++
+                    if counter < hitAmbuschFleets.count {
+                        desc += ", "
+                    }
+                }
+                desc += "}"
+            }
+            infoArray.append(desc)
         }
         if fired {
             infoArray.append("feuert auf \(firesTo)")
@@ -93,6 +116,12 @@ class Fleet: Comparable, Equatable {
         return result
     }
     
+    func addHitAmbushFleets(aFleet: Fleet) {
+        if hitAmbuschFleets.contains(aFleet) != true {
+            hitAmbuschFleets.append(aFleet)
+        }
+    }
+
     func addXMLFleetOnParent(parent : NSXMLElement) {
         let childElementFleet = NSXMLElement(name: "fleet")
         if let attribute = NSXMLNode.attributeWithName("completeInfo", stringValue: "True") as? NSXMLNode {
@@ -101,6 +130,11 @@ class Fleet: Comparable, Equatable {
         
         if firesToCommand != "" {
             if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "\(firesToCommand)") as? NSXMLNode {
+                childElementFleet.addAttribute(attribute)
+            }
+        }
+        if ambush {
+            if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "\(fireAmbuschFleets)") as? NSXMLNode {
                 childElementFleet.addAttribute(attribute)
             }
         }

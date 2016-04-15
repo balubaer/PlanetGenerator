@@ -58,8 +58,15 @@ class Planet: Comparable, Equatable, Hashable {
     var dShipsFired: Bool = false
     var dShipsAmbush: Bool = false
     
-    var hitAmbuschPlayers: Array <Player> = Array()
-    
+    var hitAmbuschFleets: Array <Fleet> = Array()
+    var fireAmbuschFleets: String {
+        var desc = "Ambush:"
+        for hitAmbushfleet in hitAmbuschFleets {
+            desc += "F\(hitAmbushfleet.number),"
+        }
+        return String(desc.characters.dropLast())
+    }
+
     var hitedShotsDShips: Int = 0
     
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
@@ -110,9 +117,9 @@ class Planet: Comparable, Equatable, Hashable {
         fleets = Array()
     }
     
-    func addHitAmbushPlayer(aPlayer: Player) {
-        if hitAmbuschPlayers.contains(aPlayer) != true {
-            hitAmbuschPlayers.append(aPlayer)
+    func addHitAmbushFleets(aFleet: Fleet) {
+        if hitAmbuschFleets.contains(aFleet) != true {
+            hitAmbuschFleets.append(aFleet)
         }
     }
     
@@ -157,8 +164,22 @@ class Planet: Comparable, Equatable, Hashable {
         }
         if dShips != 0 {
             if dShipsAmbush {
-                resourceArray.append("D-Schiffe=\(dShips) (Ambusch)")
-                
+                var desc = "D-Schiffe=\(dShips) (Ambusch: {"
+                if hitAmbuschFleets.count > 0 {
+                    var counter = 0
+                    
+                    for fleet in hitAmbuschFleets {
+                        desc += fleet.name
+                        counter++
+                        if counter < hitAmbuschFleets.count {
+                            desc += ", "
+                        }
+                    }
+                    desc += "}"
+                }
+                desc += ")"
+
+                resourceArray.append(desc)
             } else {
                 resourceArray.append("D-Schiffe=\(dShips)")
             }
@@ -202,6 +223,12 @@ class Planet: Comparable, Equatable, Hashable {
         if let attribute = NSXMLNode.attributeWithName("ships", stringValue: "\(dShips)") as? NSXMLNode {
             childElementHomeFleet.addAttribute(attribute)
         }
+        if dShipsAmbush {
+            if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "\(fireAmbuschFleets)") as? NSXMLNode {
+                childElementHomeFleet.addAttribute(attribute)
+            }
+        }
+
         childElementPlanet.addChild(childElementHomeFleet)
         return childElementPlanet
     }

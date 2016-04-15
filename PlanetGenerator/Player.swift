@@ -99,13 +99,15 @@ class Player: Equatable, Hashable {
         return result
     }
     
-    class func isPlayerInPlanetHitAmbuschPlayersWithPlayer(aPlayer: Player, hitAmbuschPlayers: Array <Player>) -> Bool {
+    class func isPlayerInPlanetHitAmbushFleetWithPlayer(aPlayer: Player, hitAmbuschFleets: Array <Fleet>) -> Bool {
         var result = false
         
-        for player in hitAmbuschPlayers {
-            if player == aPlayer {
-                result = true
-                break
+        for fleet in hitAmbuschFleets {
+            if let player = fleet.player {
+                if player == aPlayer {
+                    result = true
+                    break
+                }
             }
         }
         return result;
@@ -127,7 +129,7 @@ class Player: Equatable, Hashable {
         
         //Test planet.hitAmbuschPlayers
         if result == false {
-            result = self.isPlayerInPlanetHitAmbuschPlayersWithPlayer(player, hitAmbuschPlayers: planet.hitAmbuschPlayers)
+            result = self.isPlayerInPlanetHitAmbushFleetWithPlayer(player, hitAmbuschFleets: planet.hitAmbuschFleets)
         }
         return result
     }
