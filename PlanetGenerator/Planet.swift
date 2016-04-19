@@ -56,6 +56,7 @@ class Planet: Comparable, Equatable, Hashable {
     var pShips: Int = 0
     var dShips: Int = 0
     var dShipsFired: Bool = false
+    var dShipsFiredFleet: Fleet?
     var dShipsAmbush: Bool = false
     
     var hitAmbuschFleets: Array <Fleet> = Array()
@@ -180,6 +181,10 @@ class Planet: Comparable, Equatable, Hashable {
                 desc += ")"
 
                 resourceArray.append(desc)
+            } else if dShipsFired {
+                if let fleet = dShipsFiredFleet {
+                    resourceArray.append("D-Schiffe=\(dShips) (feuert auf \(fleet.name)")
+                }
             } else {
                 resourceArray.append("D-Schiffe=\(dShips)")
             }
@@ -226,6 +231,12 @@ class Planet: Comparable, Equatable, Hashable {
         if dShipsAmbush {
             if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "\(fireAmbuschFleets)") as? NSXMLNode {
                 childElementHomeFleet.addAttribute(attribute)
+            }
+        } else if dShipsFired {
+            if let fleet = dShipsFiredFleet {
+                if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "AF\(fleet.number)") as? NSXMLNode {
+                    childElementHomeFleet.addAttribute(attribute)
+                }
             }
         }
 

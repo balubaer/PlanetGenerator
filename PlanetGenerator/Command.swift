@@ -416,15 +416,37 @@ class BuildDShips: Command, ExecuteCommand {
         if result < 1 {
             result = 1
         }
+        
+        if result > maxBuild {
+            result = maxBuild
+        }
+        return result
+    }
+    
+    func noEnemyFleetOnPlanet(planet: Planet) -> Bool {
+        var result = true
+        for fleet in planet.fleets {
+            if let planetPlayer = planet.player {
+                if let fleetPlayer = fleet.player {
+                    if (planetPlayer == fleetPlayer) == false {
+                        if planetPlayer.teammates.contains(fleetPlayer) == false {
+                            result = false
+                            break
+                        }
+                    }
+                }
+            }
+        }
         return result
     }
     
     @objc func executeCommand() {
         for planet in planets {
             if planet.player == self.player {
-                let shipsToBuild = calculateNumberOfShipsToBuild(planet)
-                
-                planet.dShips += shipsToBuild
+                if noEnemyFleetOnPlanet(planet) {
+                    let shipsToBuild = calculateNumberOfShipsToBuild(planet)
+                    planet.dShips += shipsToBuild
+                }
             }
         }
     }
@@ -501,6 +523,7 @@ class FireDShipsToFleet: Command, ExecuteCommand {
             if (isError == false) {
                 toFleet.hitedShots += fromHomePlanet.dShips
                 fromHomePlanet.dShipsFired = true
+                fromHomePlanet.dShipsFiredFleet = toFleet;
             }
         } else {
             //TODO: Fehler Welt ist nicht vom Spieler
