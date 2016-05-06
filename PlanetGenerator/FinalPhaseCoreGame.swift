@@ -158,11 +158,14 @@ class FinalPhaseCoreGame {
                                         }
                                         toPlanet.addHitAmbushFleets(fleet)
                                     }
-                                    for fleetFromPlant in toPlanet.fleets {
-                                        if isAmbushFleet(fleetFromPlant, passingFleet: fleet, movementCount: movementCount) {
-                                            fleet.ships -= fleetFromPlant.ships;
-                                            fleetFromPlant.addHitAmbushFleets(fleet)
-                                            fleetFromPlant.ambush = true
+                                    for fleetFromPlanet in toPlanet.fleets {
+                                        if isAmbushFleet(fleetFromPlanet, passingFleet: fleet, movementCount: movementCount) {
+                                            fleet.ships -= fleetFromPlanet.ships;
+                                            if fleet.ships < 0 {
+                                                fleet.ships = 0
+                                            }
+                                            fleetFromPlanet.addHitAmbushFleets(fleet)
+                                            fleetFromPlanet.ambush = true
                                         }
                                     }
                                     

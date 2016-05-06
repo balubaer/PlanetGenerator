@@ -120,7 +120,11 @@ class Planet: Comparable, Equatable, Hashable {
     
     func addHitAmbushFleets(aFleet: Fleet) {
         if hitAmbuschFleets.contains(aFleet) != true {
-            hitAmbuschFleets.append(aFleet)
+            let fleetClone = Fleet();
+            fleetClone.player = aFleet.player
+            fleetClone.ships = aFleet.ships
+            fleetClone.number = aFleet.number
+            hitAmbuschFleets.append(fleetClone)
         }
     }
     
