@@ -187,7 +187,7 @@ class Planet: Comparable, Equatable, Hashable {
                 resourceArray.append(desc)
             } else if dShipsFired {
                 if let fleet = dShipsFiredFleet {
-                    resourceArray.append("D-Schiffe=\(dShips) (feuert auf \(fleet.name)")
+                    resourceArray.append("D-Schiffe=\(dShips) (feuert auf \(fleet.name))")
                 }
             } else {
                 resourceArray.append("D-Schiffe=\(dShips)")
