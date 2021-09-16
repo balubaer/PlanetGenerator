@@ -12,8 +12,8 @@ import XCTest
 class TestUtils: XCTestCase {
     
     func testCreateBracketAndCommarStringWithStringArray() {
-        var stringArray = ["Bastian", "Jonathan", "Anke", "Bernd"]
-        var aString = createBracketAndCommarStringWithStringArray(stringArray)
+        let stringArray = ["Bastian", "Jonathan", "Anke", "Bernd"]
+        let aString = createBracketAndCommarStringWithStringArray(stringArray)
         
         XCTAssertEqual("(Bastian,Jonathan,Anke,Bernd)", aString, "### createBracketAndCommarStringWithStringArray Fehler ###")
     }
@@ -52,7 +52,7 @@ class TestUtils: XCTestCase {
             } else if counter == 1 {
                 XCTAssertTrue(aInt == 3, "### removeObject Fehler ###")
             }
-            counter++
+            counter += 1
         }
     }
 }

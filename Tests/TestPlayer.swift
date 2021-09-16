@@ -12,7 +12,7 @@ import XCTest
 class TestPlayer: XCTestCase {
     
     func testName() {
-        var player = Player()
+        let player = Player()
         player.name = "ZAPHOD"
         
         XCTAssertEqual("ZAPHOD", player.name, "### player.name Fehler ###")
@@ -21,7 +21,7 @@ class TestPlayer: XCTestCase {
     }
     
     func testdescription() {
-        var player = Player()
+        let player = Player()
         player.name = "ZAPHOD"
         
         XCTAssertEqual("[ZAPHOD]", player.description, "### player.description Fehler ###")

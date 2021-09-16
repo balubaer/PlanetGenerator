@@ -9,7 +9,7 @@
 import Foundation
 
 
-func planetWithNumber(planets:Array<Planet>, number:Int) -> Planet? {
+func planetWithNumber(_ planets:Array<Planet>, number:Int) -> Planet? {
     var result:Planet? = nil
     for planet in planets {
         if planet.number == number {
@@ -103,7 +103,7 @@ class Planet: Comparable, Equatable, Hashable {
             desc += "\n   ("
             for fleetMovement in fleetMovements {
                 desc += fleetMovement.description
-                counter++
+                counter += 1
                 if counter < fleetMovementsCount {
                     desc += " "
                 }
@@ -118,7 +118,7 @@ class Planet: Comparable, Equatable, Hashable {
         fleets = Array()
     }
     
-    func addHitAmbushFleets(aFleet: Fleet) {
+    func addHitAmbushFleets(_ aFleet: Fleet) {
         if hitAmbuschFleets.contains(aFleet) != true {
             let fleetClone = Fleet();
             fleetClone.player = aFleet.player
@@ -128,7 +128,7 @@ class Planet: Comparable, Equatable, Hashable {
         }
     }
     
-    func hasConnectionToPlanet(aPlant : Planet) -> Bool {
+    func hasConnectionToPlanet(_ aPlant : Planet) -> Bool {
         var result = false
         if port != nil {
             result = port!.hasConnectionToPlanet(aPlant)
@@ -175,7 +175,7 @@ class Planet: Comparable, Equatable, Hashable {
                     
                     for fleet in hitAmbuschFleets {
                         desc += fleet.name
-                        counter++
+                        counter += 1
                         if counter < hitAmbuschFleets.count {
                             desc += ", "
                         }
@@ -200,45 +200,45 @@ class Planet: Comparable, Equatable, Hashable {
         return result
     }
     
-    func getXMLElementForPlayer(aPlayer: Player) -> NSXMLElement {
-        let childElementPlanet = NSXMLElement(name: "world")
-        if let attribute = NSXMLNode.attributeWithName("completeInfo", stringValue: "True") as? NSXMLNode {
+    func getXMLElementForPlayer(_ aPlayer: Player) -> XMLElement {
+        let childElementPlanet = XMLElement(name: "world")
+        if let attribute = XMLNode.attribute(withName: "completeInfo", stringValue: "True") as? XMLNode {
             childElementPlanet.addAttribute(attribute)
         }
         
-        if let attribute = NSXMLNode.attributeWithName("hasSeen", stringValue: "\(aPlayer.name):0") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "hasSeen", stringValue: "\(aPlayer.name):0") as? XMLNode {
             childElementPlanet.addAttribute(attribute)
         }
         
         if let aLetPlayer = player {
-            if let attribute = NSXMLNode.attributeWithName("owner", stringValue: "\(aLetPlayer.name)") as? NSXMLNode {
+            if let attribute = XMLNode.attribute(withName: "owner", stringValue: "\(aLetPlayer.name)") as? XMLNode {
                 childElementPlanet.addAttribute(attribute)
             }
         }
-        if let attribute = NSXMLNode.attributeWithName("index", stringValue: "\(self.number)") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "index", stringValue: "\(self.number)") as? XMLNode {
             childElementPlanet.addAttribute(attribute)
         }
         
-        if let attribute = NSXMLNode.attributeWithName("unloadCounter", stringValue: "") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "unloadCounter", stringValue: "") as? XMLNode {
             childElementPlanet.addAttribute(attribute)
         }
         self.addXMLConnectOnParent(childElementPlanet)
         self.addXMLPassingOnParent(childElementPlanet)
         self.addXMLFleetOnParent(childElementPlanet)
-        let childElementHomeFleet = NSXMLElement(name: "homeFleet")
-        if let attribute = NSXMLNode.attributeWithName("key", stringValue: "D") as? NSXMLNode {
+        let childElementHomeFleet = XMLElement(name: "homeFleet")
+        if let attribute = XMLNode.attribute(withName: "key", stringValue: "D") as? XMLNode {
             childElementHomeFleet.addAttribute(attribute)
         }
-        if let attribute = NSXMLNode.attributeWithName("ships", stringValue: "\(dShips)") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "ships", stringValue: "\(dShips)") as? XMLNode {
             childElementHomeFleet.addAttribute(attribute)
         }
         if dShipsAmbush {
-            if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "\(fireAmbuschFleets)") as? NSXMLNode {
+            if let attribute = XMLNode.attribute(withName: "fired", stringValue: "\(fireAmbuschFleets)") as? XMLNode {
                 childElementHomeFleet.addAttribute(attribute)
             }
         } else if dShipsFired {
             if let fleet = dShipsFiredFleet {
-                if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "AF\(fleet.number)") as? NSXMLNode {
+                if let attribute = XMLNode.attribute(withName: "fired", stringValue: "AF\(fleet.number)") as? XMLNode {
                     childElementHomeFleet.addAttribute(attribute)
                 }
             }
@@ -248,13 +248,13 @@ class Planet: Comparable, Equatable, Hashable {
         return childElementPlanet
     }
     
-    func addXMLConnectOnParent(parent : NSXMLElement) {
+    func addXMLConnectOnParent(_ parent : XMLElement) {
         if let aPort = port {
             aPort.addXMLConnectOnParent(parent)
         }
     }
     
-    func addXMLPassingOnParent(parent: NSXMLElement) {
+    func addXMLPassingOnParent(_ parent: XMLElement) {
         if fleetMovements.count > 0 {
             for fleetMovement in fleetMovements {
                 fleetMovement.addXMLPassingOnParent(parent)
@@ -262,7 +262,7 @@ class Planet: Comparable, Equatable, Hashable {
         }
     }
     
-    func addXMLFleetOnParent(parent : NSXMLElement) {
+    func addXMLFleetOnParent(_ parent : XMLElement) {
         for fleet in fleets {
             fleet.addXMLFleetOnParent(parent)
         }

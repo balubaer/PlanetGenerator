@@ -28,7 +28,7 @@ class PortFactory {
         abort = false
     }
     
-    func hasPlanetMaxConnetion(aPlanet: Planet) -> Bool {
+    func hasPlanetMaxConnetion(_ aPlanet: Planet) -> Bool {
         var result = false
         if (aPlanet.port != nil) {
             let connectionCount = Int(aPlanet.port!.planets.count)
@@ -39,7 +39,7 @@ class PortFactory {
         return result
     }
     
-    func hasPlanetEnoughConnection(aPlanet: Planet) -> Bool {
+    func hasPlanetEnoughConnection(_ aPlanet: Planet) -> Bool {
         var result = false
         if (aPlanet.port != nil) {
             let connectionCount = Int(aPlanet.port!.planets.count)
@@ -50,7 +50,7 @@ class PortFactory {
         return result
     }
     
-    func addPlanetWithEnoughConnectionTest(aPlanet: Planet) {
+    func addPlanetWithEnoughConnectionTest(_ aPlanet: Planet) {
         if self.hasPlanetEnoughConnection(aPlanet) {
             if planetsWithEnoughConnections.contains(aPlanet) == false {
                 planetsWithEnoughConnections.append(aPlanet)
@@ -58,7 +58,7 @@ class PortFactory {
         }
     }
     
-    func removePlanetFromWorkArrayWithMaxConnectionTest(aPlanet: Planet) {
+    func removePlanetFromWorkArrayWithMaxConnectionTest(_ aPlanet: Planet) {
         if self.hasPlanetMaxConnetion(aPlanet) {
             workingPlanets = workingPlanets.filter( {$0 != aPlanet})
             
@@ -80,7 +80,7 @@ class PortFactory {
         return result
     }
     
-    func isPlanetForNewConnectionOK(aPlanet: Planet) -> Bool {
+    func isPlanetForNewConnectionOK(_ aPlanet: Planet) -> Bool {
         var result = false
         
         if (self.hasPlanetMaxConnetion(aPlanet) == false) {
@@ -114,7 +114,7 @@ class PortFactory {
         
     }
     
-    func isEndPlanetForNewConnectionOK(aEndPlanet: Planet, aStartPlanet: Planet) -> Bool {
+    func isEndPlanetForNewConnectionOK(_ aEndPlanet: Planet, aStartPlanet: Planet) -> Bool {
         var result = false
         
         if (aEndPlanet.number != aStartPlanet.number) {
@@ -127,7 +127,7 @@ class PortFactory {
         return result
     }
     
-    func getEndPlanetWithDiceAndStartPlanet(aStartPlanet: Planet) -> Planet {
+    func getEndPlanetWithDiceAndStartPlanet(_ aStartPlanet: Planet) -> Planet {
         var result:Planet? = nil
         
         dice.setSites(workingPlanets.count)
@@ -179,7 +179,7 @@ class PortFactory {
         }
     }
     
-    func isPlanetForClearConnectionOK(aPlanet: Planet) -> Bool {
+    func isPlanetForClearConnectionOK(_ aPlanet: Planet) -> Bool {
         var result = false
         if let port = aPlanet.port {
             if port.planets.count > 2 {
@@ -232,7 +232,7 @@ class PortFactory {
 
             let realIndex = indexNumber - 1
             let planetFromPort = port.planets[realIndex]
-            port.planets.removeAtIndex(realIndex)
+            port.planets.remove(at: realIndex)
             
             if let portFPFP = planetFromPort.port {
                 portFPFP.planets.removeObject(planet)
@@ -240,7 +240,7 @@ class PortFactory {
         }
     }
     
-    func createWithPlanetArray(planetArray:Array <Planet>) {
+    func createWithPlanetArray(_ planetArray:Array <Planet>) {
         
         planetsCount = planetArray.count
         

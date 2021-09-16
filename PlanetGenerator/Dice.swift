@@ -19,7 +19,7 @@ class Dice {
         self.sides = sides
     }
     
-    func setSites(aSides: Int) {
+    func setSites(_ aSides: Int) {
         self.sides = aSides
     }
     

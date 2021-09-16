@@ -42,14 +42,14 @@ class OutputPlyerStatisticCoreGame {
         
         desc += "("
         var teammateNames = player.teanmatesNames
-        teammateNames.sortInPlace { $0 < $1 }
+        teammateNames.sort { $0 < $1 }
         let namesCount = teammateNames.count
         for name in teammateNames {
             desc += "\(name)"
             if counter < (namesCount - 1) {
                 desc += ","
             }
-            counter++;
+            counter += 1;
         }
         desc += ")\n"
         return desc
@@ -59,14 +59,14 @@ class OutputPlyerStatisticCoreGame {
         for planet in planets {
             //Test Planet
             if Player.isPlanetOwnedByPlayer(player, planet: planet) {
-                planetsCount++
+                planetsCount += 1
                 dShipCount = dShipCount + planet.dShips
             }
             
             for fleet in planet.fleets {
                 //Test Fleets
                 if Player.isFleetOwnedByPlayer(player, fleet: fleet) {
-                    fleetCount++
+                    fleetCount += 1
                     shipsOnFleetsCount = shipsOnFleetsCount + fleet.ships
                 }
             }

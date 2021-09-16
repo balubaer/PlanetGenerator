@@ -78,7 +78,7 @@ class FinalPhaseCoreGame {
     func isAmbushPlanet(planet: Planet?, passingFleet: Fleet, movementCount: Int) -> Bool {
         var result = false
         if planet!.ambushOff == false {
-            if isAmbushFromMovementCount(movementCount, movementHoleCount: passingFleet.fleetMovements.count) {
+            if isAmbushFromMovementCount(movementCount: movementCount, movementHoleCount: passingFleet.fleetMovements.count) {
                 if planet != nil {
                     let planetPlayer = planet!.player
                     let fleetPlayer = passingFleet.player
@@ -91,7 +91,7 @@ class FinalPhaseCoreGame {
                                 }
                             }
                         }
-                    }
+                   }
                 }
             }
         }
@@ -101,7 +101,7 @@ class FinalPhaseCoreGame {
     
     func isAmbushFleet(ambushFleet: Fleet, passingFleet: Fleet, movementCount: Int) -> Bool {
         var result = false
-        if isAmbushFromMovementCount(movementCount, movementHoleCount: passingFleet.fleetMovements.count) {
+        if isAmbushFromMovementCount(movementCount: movementCount, movementHoleCount: passingFleet.fleetMovements.count) {
             if (ambushFleet == passingFleet) == false {
                 if ambushFleet.fired == false {
                     if ambushFleet.moved == false {
@@ -150,8 +150,8 @@ class FinalPhaseCoreGame {
                                     toPlanet.fleets.append(fleet)
                                     fleetMovement.isMovementDone = true
                                     
-                                    if isAmbushPlanet(toPlanet, passingFleet: fleet, movementCount: movementCount) {
-                                        let firePower = self.getFirePowerForAmbushPlanet(toPlanet)
+                                    if isAmbushPlanet(planet: toPlanet, passingFleet: fleet, movementCount: movementCount) {
+                                        let firePower = getFirePowerForAmbushPlanet(planet: toPlanet)
                                         fleet.ships -= firePower
                                         if fleet.ships < 0 {
                                             fleet.ships = 0
@@ -159,7 +159,7 @@ class FinalPhaseCoreGame {
                                         toPlanet.addHitAmbushFleets(fleet)
                                     }
                                     for fleetFromPlanet in toPlanet.fleets {
-                                        if isAmbushFleet(fleetFromPlanet, passingFleet: fleet, movementCount: movementCount) {
+                                        if isAmbushFleet(ambushFleet: fleetFromPlanet, passingFleet: fleet, movementCount: movementCount) {
                                             fleet.ships -= fleetFromPlanet.ships;
                                             if fleet.ships < 0 {
                                                 fleet.ships = 0
@@ -174,7 +174,7 @@ class FinalPhaseCoreGame {
                                     }
                                 }
                             }
-                            movementCount++
+                            movementCount += 1
                         }
                     }
                 }
@@ -200,7 +200,7 @@ class FinalPhaseCoreGame {
     }
     
     func checkOwnership(planet: Planet) {
-        var players = self.getPlayersFromFleets(planet.fleets)
+        var players = getPlayersFromFleets(fleets: planet.fleets)
 
         //planet
         if planet.player == nil {
@@ -241,15 +241,15 @@ class FinalPhaseCoreGame {
     
     func doFinal() {
         for planet in planets {
-            if self.isSomeBodyOnPlanet(planet) {
-                self.checkFireResults(planet)
-                self.checkFleetMovement(planet)
+            if self.isSomeBodyOnPlanet(planet: planet) {
+                self.checkFireResults(planet: planet)
+                checkFleetMovement(planet: planet)
             }
         }
         for planet in planets {
-            if self.isSomeBodyOnPlanet(planet) {
-                self.checkOwnership(planet)
-                self.calculatePoints(planet)
+            if self.isSomeBodyOnPlanet(planet: planet) {
+                checkOwnership(planet: planet)
+                calculatePoints(planet: planet)
             }
         }
     }

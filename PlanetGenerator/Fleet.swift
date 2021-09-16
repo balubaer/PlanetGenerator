@@ -8,7 +8,7 @@
 
 import Foundation
 
-func fleetAndHomePlanetWithNumber(planets:Array<Planet>, number:Int) -> (fleet:Fleet?, homePlanet:Planet?) {
+func fleetAndHomePlanetWithNumber(_ planets:Array<Planet>, number:Int) -> (fleet:Fleet?, homePlanet:Planet?) {
     var fleet:Fleet? = nil
     var homePlanet:Planet? = nil
     for planet in planets {
@@ -92,7 +92,7 @@ class Fleet: Comparable, Equatable {
                 
                 for fleet in hitAmbuschFleets {
                     desc += fleet.name
-                    counter++
+                    counter += 1
                     if counter < hitAmbuschFleets.count {
                         desc += ", "
                     }
@@ -116,7 +116,7 @@ class Fleet: Comparable, Equatable {
         return result
     }
     
-    func addHitAmbushFleets(aFleet: Fleet) {
+    func addHitAmbushFleets(_ aFleet: Fleet) {
         if hitAmbuschFleets.contains(aFleet) != true {
             let fleetClone = Fleet();
             fleetClone.player = aFleet.player
@@ -126,41 +126,41 @@ class Fleet: Comparable, Equatable {
         }
     }
 
-    func addXMLFleetOnParent(parent : NSXMLElement) {
-        let childElementFleet = NSXMLElement(name: "fleet")
-        if let attribute = NSXMLNode.attributeWithName("completeInfo", stringValue: "True") as? NSXMLNode {
+    func addXMLFleetOnParent(_ parent : XMLElement) {
+        let childElementFleet = XMLElement(name: "fleet")
+        if let attribute = XMLNode.attribute(withName: "completeInfo", stringValue: "True") as? XMLNode {
             childElementFleet.addAttribute(attribute)
         }
         
         if firesToCommand != "" {
-            if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "\(firesToCommand)") as? NSXMLNode {
+            if let attribute = XMLNode.attribute(withName: "fired", stringValue: "\(firesToCommand)") as? XMLNode {
                 childElementFleet.addAttribute(attribute)
             }
         }
         if ambush {
-            if let attribute = NSXMLNode.attributeWithName("fired", stringValue: "\(fireAmbuschFleets)") as? NSXMLNode {
+            if let attribute = XMLNode.attribute(withName: "fired", stringValue: "\(fireAmbuschFleets)") as? XMLNode {
                 childElementFleet.addAttribute(attribute)
             }
         }
-        if let attribute = NSXMLNode.attributeWithName("index", stringValue: "\(number)") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "index", stringValue: "\(number)") as? XMLNode {
             childElementFleet.addAttribute(attribute)
         }
         var movedString = "False"
         if moved {
             movedString = "True"
         }
-        if let attribute = NSXMLNode.attributeWithName("moved", stringValue: movedString) as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "moved", stringValue: movedString) as? XMLNode {
             childElementFleet.addAttribute(attribute)
         }
         if let aPlayer = player {
-            if let attribute = NSXMLNode.attributeWithName("owner", stringValue: aPlayer.name) as? NSXMLNode {
+            if let attribute = XMLNode.attribute(withName: "owner", stringValue: aPlayer.name) as? XMLNode {
                 childElementFleet.addAttribute(attribute)
             }
-            if let attribute = NSXMLNode.attributeWithName("prevOwner", stringValue: aPlayer.name) as? NSXMLNode {
+            if let attribute = XMLNode.attribute(withName: "prevOwner", stringValue: aPlayer.name) as? XMLNode {
                 childElementFleet.addAttribute(attribute)
             }
         }
-        if let attribute = NSXMLNode.attributeWithName("ships", stringValue: "\(ships)") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "ships", stringValue: "\(ships)") as? XMLNode {
             childElementFleet.addAttribute(attribute)
         }
         parent.addChild(childElementFleet)

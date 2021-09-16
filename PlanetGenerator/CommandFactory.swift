@@ -26,12 +26,12 @@ class CommandFactory {
     }
     
     func setCommandStringsWithLongString(playerName:String, commandString: String) {
-        let aSet = NSSet(array: commandString.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: " \n\r")))
+      /*  let aSet = NSSet(array: commandString.componentsSeparatedByCharactersIn(NSCharacterSet (charactersInString: " \n\r")))
         let array = aSet.allObjects as? Array<String>
         
         if array != nil {
             commandStringsDict[playerName] = array
-        }
+        }*/
     }
 
     //WnnnBqqqFmmm
@@ -45,26 +45,26 @@ class CommandFactory {
 
         for commantElement in commandElements {
             if counter == 0 {
-                var aPlanetNumber = Int(extractNumberString(commantElement))
+                let aPlanetNumber = Int(extractNumberString(commantElement))
                 if aPlanetNumber != nil {
                     planetNumber = aPlanetNumber!
                 }
             } else if counter == 1 {
-                var aShipsToBuild = Int(extractNumberString(commantElement))
+                let aShipsToBuild = Int(extractNumberString(commantElement))
                 if aShipsToBuild != nil {
                     shipsToBuild = aShipsToBuild!
                 }
             } else {
-                var fleetNumber: Int? = Int(extractNumberString(commantElement))
+                let fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fleet = aFleetAndHomePlanet.fleet!
                         homePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             }
-            counter++
+            counter += 1
         }
         return (fleet, homePlanet, planetNumber, shipsToBuild)
     }
@@ -83,21 +83,21 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber: Int? = Int(extractNumberString(commantElement))
+                let fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fleet = aFleetAndHomePlanet.fleet!
                         homePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             } else if counter == 1 {
-                var aMetalToUnload = Int(extractNumberString(commantElement))
+                let aMetalToUnload = Int(extractNumberString(commantElement))
                 if aMetalToUnload != nil {
                     metalToUnload = aMetalToUnload!
                 }
             }
-            counter++
+            counter += 1
         }
         return (fleet, homePlanet, metalToUnload)
     }
@@ -117,25 +117,25 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber: Int? = Int(extractNumberString(commantElement))
+                let fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fleet = aFleetAndHomePlanet.fleet!
                         homePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             } else {
-                var planetNumber: Int? = Int(extractNumberString(commantElement))
+                let planetNumber: Int? = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
-                    var planet = planetWithNumber(planets, number: planetNumber!)
+                    let planet = planetWithNumber(planets, number: planetNumber!)
                     
                     if planet != nil {
                         planetArray.append(planet!)
                     }
                 }
             }
-            counter++
+            counter += 1
         }
         return (fleet, homePlanet, planetArray)
     }
@@ -155,30 +155,30 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber = Int(extractNumberString(commantElement))
+                let fleetNumber = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fromFleet = aFleetAndHomePlanet.fleet!
                         fromHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             } else if counter == 1 {
-                var aShipsToTransfer = Int(extractNumberString(commantElement))
+                let aShipsToTransfer = Int(extractNumberString(commantElement))
                 if aShipsToTransfer != nil {
                     shipsToTransfer = aShipsToTransfer!
                 }
             } else {
-                var fleetNumber: Int? = Int(extractNumberString(commantElement))
+                let fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         toFleet = aFleetAndHomePlanet.fleet!
                         toHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             }
-            counter++
+            counter += 1
         }
         return (fromFleet, toFleet, fromHomePlanet, toHomePlanet, shipsToTransfer)
     }
@@ -195,22 +195,22 @@ class CommandFactory {
 
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber = Int(extractNumberString(commantElement))
+                let fleetNumber = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fromFleet = aFleetAndHomePlanet.fleet!
                         fromHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             } else if counter == 1 {
-                var aShipsToTransfer = Int(extractNumberString(commantElement))
+                let aShipsToTransfer = Int(extractNumberString(commantElement))
                 if aShipsToTransfer != nil {
                     shipsToTransfer = aShipsToTransfer!
                 }
             }
             
-            counter++
+            counter += 1
         }
         return (fromFleet, fromHomePlanet, shipsToTransfer)
     }
@@ -229,26 +229,26 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var planetNumber = Int(extractNumberString(commantElement))
+                let planetNumber = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
                     fromHomePlanet = planetWithNumber(planets, number: planetNumber!) as Planet!
                 }
             } else if counter == 1 {
-                var aShipsToTransfer = Int(extractNumberString(commantElement))
+                let aShipsToTransfer = Int(extractNumberString(commantElement))
                 if aShipsToTransfer != nil {
                     shipsToTransfer = aShipsToTransfer!
                 }
             } else {
-                var fleetNumber: Int? = Int(extractNumberString(commantElement))
+                let fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         toFleet = aFleetAndHomePlanet.fleet!
                         toHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             }
-            counter++
+            counter += 1
         }
         return (toFleet, fromHomePlanet, toHomePlanet, shipsToTransfer)
     }
@@ -267,9 +267,9 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber = Int(extractNumberString(commantElement))
+                let fleetNumber = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fromFleet = aFleetAndHomePlanet.fleet!
                         fromHomePlanet = aFleetAndHomePlanet.homePlanet!
@@ -278,16 +278,16 @@ class CommandFactory {
             } else if counter == 1 {
                 //Nichts zu tun
             } else {
-                var fleetNumber: Int? = Int(extractNumberString(commantElement))
+                let fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         toFleet = aFleetAndHomePlanet.fleet!
                         toHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             }
-            counter++
+            counter += 1
         }
         return (fromFleet, toFleet, fromHomePlanet, toHomePlanet)
     }
@@ -304,16 +304,16 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var fleetNumber = Int(extractNumberString(commantElement))
+                let fleetNumber = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         fromFleet = aFleetAndHomePlanet.fleet!
                         fromHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             }
-            counter++
+            counter += 1
         }
         return (fromFleet, fromHomePlanet)
     }
@@ -331,23 +331,23 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var planetNumber = Int(extractNumberString(commantElement))
+                let planetNumber = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
                     fromHomePlanet = planetWithNumber(planets, number: planetNumber!) as Planet!
                 }
             } else if counter == 1 {
                 //Nichts zu tun
             } else {
-                var fleetNumber: Int? = Int(extractNumberString(commantElement))
+                let fleetNumber: Int? = Int(extractNumberString(commantElement))
                 if fleetNumber != nil {
-                    var aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
+                    let aFleetAndHomePlanet = fleetAndHomePlanetWithNumber(planets, number: fleetNumber!)
                     if aFleetAndHomePlanet.fleet != nil && aFleetAndHomePlanet.homePlanet != nil {
                         toFleet = aFleetAndHomePlanet.fleet!
                         toHomePlanet = aFleetAndHomePlanet.homePlanet!
                     }
                 }
             }
-            counter++
+            counter += 1
         }
         return (toFleet, fromHomePlanet, toHomePlanet)
     }
@@ -364,15 +364,15 @@ class CommandFactory {
         
         for commantElement in commandElements {
             if counter == 0 {
-                var planetNumber: Int? = Int(extractNumberString(commantElement))
+                let planetNumber: Int? = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
-                    var planetFromNumber = planetWithNumber(planets, number: planetNumber!)
+                    let planetFromNumber = planetWithNumber(planets, number: planetNumber!)
                     if planetFromNumber != nil {
                         planet = planetFromNumber!
                     }
                 }
             }
-            counter++
+            counter += 1
         }
         return planet
     }
@@ -516,7 +516,7 @@ class CommandFactory {
                     } else {
                         commandElement.append(character)
                     }
-                    counter++
+                    counter += 1
                     if counter == charCount {
                         commandElements.append(commandElement)
                     }
@@ -538,7 +538,7 @@ class CommandFactory {
             }
         }
         
-        commandArray.sortInPlace { $0 < $1 }
+        commandArray.sort { $0 < $1 }
         
         for command in commandArray {
             (command as! ExecuteCommand).executeCommand()

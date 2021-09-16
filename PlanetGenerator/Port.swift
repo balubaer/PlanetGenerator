@@ -27,28 +27,28 @@ class Port {
         if (connectionCount > 0) {
             var counter = 0
             desc += "("
-            planets.sortInPlace { $0 < $1 }
+            planets.sort { $0 < $1 }
             for item in planets {
                 let number = item.number
                 desc += "\(number)"
                 if counter < (connectionCount - 1) {
                     desc += ","
                 }
-                counter++;
+                counter += 1;
             }
             desc += ")"
         }
         return desc
     }
     
-    func hasConnectionToPlanet(aPlant : Planet) -> Bool {
+    func hasConnectionToPlanet(_ aPlant : Planet) -> Bool {
         return planets.contains(aPlant)
     }
     
-    func addXMLConnectOnParent(parent : NSXMLElement) {
+    func addXMLConnectOnParent(_ parent : XMLElement) {
         for planet in planets {
-            let childElementConnect = NSXMLElement(name: "connect")
-            if let attribute = NSXMLNode.attributeWithName("index", stringValue: "\(planet.number)") as? NSXMLNode {
+            let childElementConnect = XMLElement(name: "connect")
+            if let attribute = XMLNode.attribute(withName: "index", stringValue: "\(planet.number)") as? XMLNode {
                 childElementConnect.addAttribute(attribute)
                 parent.addChild(childElementConnect)
             }

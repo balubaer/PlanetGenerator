@@ -13,9 +13,9 @@ class TestDistanceLevel: XCTestCase {
     var planetArray: Array<Planet>?
     var allPlayerDict: [String: Player]?
     
-    func getBundle() -> NSBundle? {
-        var result: NSBundle? = nil
-        let array: Array = NSBundle.allBundles()
+    func getBundle() -> Bundle? {
+        var result: Bundle? = nil
+        let array: Array = Bundle.allBundles
         
         for aBundle in array {
             if aBundle.bundleIdentifier == "de.berndniklas.Tests" {
@@ -32,10 +32,10 @@ class TestDistanceLevel: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let aBundle: NSBundle? = self.getBundle()
+        let aBundle: Bundle? = self.getBundle()
         if aBundle != nil {
-            var path: NSString? = aBundle!.resourcePath
-            path = path?.stringByAppendingPathComponent("planets.plist")
+            var path: NSString? = aBundle!.resourcePath as! NSString
+            path = path?.appendingPathComponent("planets.plist") as! NSString
             if path != nil {
                 let persManager = PersistenceManager()
                 
@@ -54,10 +54,10 @@ class TestDistanceLevel: XCTestCase {
     func testDistanceLevel() {
         if planetArray != nil && allPlayerDict != nil {
             
-            var planet1 = planetWithNumber(planetArray!, number: 1)
+            let planet1 = planetWithNumber(planetArray!, number: 1)
             
             if planet1 != nil {
-                var disLevel = DistanceLevel(aStartPlanet: planet1!, aDistanceLevel: 1)
+                let disLevel = DistanceLevel(aStartPlanet: planet1!, aDistanceLevel: 1)
                 
                 XCTAssertTrue(disLevel.nextLevelPlanets.count == 1, "### nextLevelPlanets Anzahl falsch ###")
                 if (disLevel.nextLevelPlanets.count == 1) {

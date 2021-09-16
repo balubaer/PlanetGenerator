@@ -12,10 +12,10 @@ import XCTest
 class TestFleets: XCTestCase {
     
     func testName() {
-        var fleet = Fleet()
+        let fleet = Fleet()
         XCTAssertEqual("F0[---]", fleet.name, "### fleet.name Fehler ###")
         
-        var player = Player()
+        let player = Player()
         player.name = "ZAPHOD"
         fleet.player = player
         fleet.number = 25
@@ -26,10 +26,10 @@ class TestFleets: XCTestCase {
     }
     
     func testdescription() {
-        var fleet = Fleet()
+        let fleet = Fleet()
         XCTAssertEqual("F0[---] = 0", fleet.description, "### fleet.description Fehler ###")
         
-        var player = Player()
+        let player = Player()
         player.name = "ZAPHOD"
         fleet.player = player
         fleet.ships = 99
@@ -37,7 +37,7 @@ class TestFleets: XCTestCase {
         
         XCTAssertEqual("F25[ZAPHOD] = 99", fleet.description, "### fleet.description Fehler ###")
         
-        var fleetMovement = FleetMovement()
+        let fleetMovement = FleetMovement()
         fleet.fleetMovements.append(fleetMovement)
         fleet.cargo = 7
         XCTAssertEqual("F25[ZAPHOD] = 99 (bewegt,Fracht=7)", fleet.description, "### fleet.description Fehler ###")

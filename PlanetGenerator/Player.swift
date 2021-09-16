@@ -39,7 +39,7 @@ class Player: Equatable, Hashable {
         name = "NO Name"
     }
     
-    class func isPlayerInFleetsWithPlayer(player: Player, fleets: Array <Fleet>) -> Bool {
+    class func isPlayerInFleetsWithPlayer(_ player: Player, fleets: Array <Fleet>) -> Bool {
         var result = false
         for fleet in fleets {
             result = self.isFleetOwnedByPlayer(player, fleet: fleet)
@@ -50,7 +50,7 @@ class Player: Equatable, Hashable {
         return result
     }
     
-    class func isFleetOwnedByPlayer(player: Player, fleet: Fleet) -> Bool {
+    class func isFleetOwnedByPlayer(_ player: Player, fleet: Fleet) -> Bool {
         var result = false
         if fleet.player != nil {
             if fleet.player! == player {
@@ -60,7 +60,7 @@ class Player: Equatable, Hashable {
         return result
     }
 
-    class func isPlayerInFleetMovementWithPlayer(player: Player, fleetMovements: Array <FleetMovement>) -> Bool {
+    class func isPlayerInFleetMovementWithPlayer(_ player: Player, fleetMovements: Array <FleetMovement>) -> Bool {
         var result = false
         for fleetMovement in fleetMovements {
             if fleetMovement.fleet != nil {
@@ -76,7 +76,7 @@ class Player: Equatable, Hashable {
         return result
     }
     
-    class func isPlanetOwnedByPlayer(player: Player, planet: Planet) -> Bool {
+    class func isPlanetOwnedByPlayer(_ player: Player, planet: Planet) -> Bool {
         var result = false
 
         if planet.player != nil {
@@ -87,7 +87,7 @@ class Player: Equatable, Hashable {
         return result
     }
     
-    class func isPlayOnPlanetWithPlayer(player: Player, planet: Planet) -> Bool {
+    class func isPlayOnPlanetWithPlayer(_ player: Player, planet: Planet) -> Bool {
         //Test Planet
         var result = self.isPlanetOwnedByPlayer(player, planet: planet)
         
@@ -99,7 +99,7 @@ class Player: Equatable, Hashable {
         return result
     }
     
-    class func isPlayerInPlanetHitAmbushFleetWithPlayer(aPlayer: Player, hitAmbuschFleets: Array <Fleet>) -> Bool {
+    class func isPlayerInPlanetHitAmbushFleetWithPlayer(_ aPlayer: Player, hitAmbuschFleets: Array <Fleet>) -> Bool {
         var result = false
         
         for fleet in hitAmbuschFleets {
@@ -113,7 +113,7 @@ class Player: Equatable, Hashable {
         return result;
     }
     
-    class func isPlanetOutPutForPlayer(player: Player, planet: Planet) -> Bool {
+    class func isPlanetOutPutForPlayer(_ player: Player, planet: Planet) -> Bool {
         //Test Planet
         var result = self.isPlanetOwnedByPlayer(player, planet: planet)
         
@@ -134,26 +134,26 @@ class Player: Equatable, Hashable {
         return result
     }
     
-    func getXMLElement() -> NSXMLElement {
-        let childElementPlayer = NSXMLElement(name: "player")
+    func getXMLElement() -> XMLElement {
+        let childElementPlayer = XMLElement(name: "player")
         //TODO: niklas woher kommt diese?
-        if let attribute = NSXMLNode.attributeWithName("accountId", stringValue: "01601386") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "accountId", stringValue: "01601386") as? XMLNode {
             childElementPlayer.addAttribute(attribute)
         }
-        if let attribute = NSXMLNode.attributeWithName("handle", stringValue: name) as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "handle", stringValue: name) as? XMLNode {
             childElementPlayer.addAttribute(attribute)
         }
-        if let attribute = NSXMLNode.attributeWithName("fullName", stringValue: name) as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "fullName", stringValue: name) as? XMLNode {
             childElementPlayer.addAttribute(attribute)
         }
-        if let attribute = NSXMLNode.attributeWithName("stillInGame", stringValue: "True") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "stillInGame", stringValue: "True") as? XMLNode {
             childElementPlayer.addAttribute(attribute)
         }
-        if let attribute = NSXMLNode.attributeWithName("prevScore", stringValue: "\(points)") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "prevScore", stringValue: "\(points)") as? XMLNode {
             childElementPlayer.addAttribute(attribute)
         }
         //TODO niklas das ist so noch nicht richtig
-        if let attribute = NSXMLNode.attributeWithName("score", stringValue: "\(points)") as? NSXMLNode {
+        if let attribute = XMLNode.attribute(withName: "score", stringValue: "\(points)") as? XMLNode {
             childElementPlayer.addAttribute(attribute)
         }
         return childElementPlayer;

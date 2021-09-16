@@ -12,8 +12,8 @@ import XCTest
 class TestPlanetPort: XCTestCase {
     
     func testDescription() {
-        var planet = Planet()
-        var port = Port()
+        let planet = Planet()
+        let port = Port()
         
         XCTAssertEqual("W0", planet.description, "### planet.description Fehler ###")
 
@@ -27,19 +27,19 @@ class TestPlanetPort: XCTestCase {
         XCTAssertEqual("W123", planet.description, "### planet.description Fehler ###")
         XCTAssertEqual("W123", port.description, "### port.description Fehler ###")
         
-        var planet1 = Planet()
+        let planet1 = Planet()
         planet1.number = 1
         
         port.planets.append(planet1)
         XCTAssertEqual("W123(1)", port.description, "### port.description Fehler ###")
 
-        var planet2 = Planet()
+        let planet2 = Planet()
         planet2.number = 2
 
         port.planets.append(planet2)
         XCTAssertEqual("W123(1,2)", port.description, "### port.description Fehler ###")
 
-        var planet3 = Planet()
+        let planet3 = Planet()
         planet3.number = 3
 
         port.planets.append(planet3)
@@ -55,13 +55,13 @@ class TestPlanetPort: XCTestCase {
         planet.limit = 3
         XCTAssertEqual("W123(1,2,3) (Industrie=1,Bevoelkerung=2,Limit=3)", planet.description, "### planet.description Fehler ###")
         
-        var player = Player()
+        let player = Player()
         player.name = "ZAPHOD"
         planet.player = player
         
         XCTAssertEqual("W123(1,2,3) [ZAPHOD] (Industrie=1,Bevoelkerung=2,Limit=3)", planet.description, "### planet.description Fehler ###")
 
-        var port1 = Port()
+        let port1 = Port()
         port1.planet = planet1
         port1.planets.append(planet)
         planet1.port = port1

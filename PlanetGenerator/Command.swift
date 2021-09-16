@@ -400,7 +400,7 @@ class BuildDShips: Command, ExecuteCommand {
         let disLevel = DistanceLevel(aStartPlanet: planet, aDistanceLevel: 1)
         
         while foundDistanceLevel != true {
-            if self.testPlayerInNextLevelPlanets(disLevel.nextLevelPlanets) == false {
+            if self.testPlayerInNextLevelPlanets(nextLevelPlanets: disLevel.nextLevelPlanets) == false {
                 foundDistanceLevel = true
             } else {
                 if maxBuild <= disLevel.distanceLevel {
@@ -443,8 +443,8 @@ class BuildDShips: Command, ExecuteCommand {
     @objc func executeCommand() {
         for planet in planets {
             if planet.player == self.player {
-                if noEnemyFleetOnPlanet(planet) {
-                    let shipsToBuild = calculateNumberOfShipsToBuild(planet)
+                if noEnemyFleetOnPlanet(planet: planet) {
+                    let shipsToBuild = calculateNumberOfShipsToBuild(planet: planet)
                     planet.dShips += shipsToBuild
                 }
             }
@@ -622,8 +622,8 @@ class AddTeammate: Command, ExecuteCommand {
     }
     
     @objc func executeCommand() {
-        let range = string.startIndex...string.startIndex.successor()
-        string.removeRange(range)
+      //  let range = string.startIndex...string.startIndex.successor()
+       // string.removeRange(range)
         if let aPlayer = allPlayerDict[string] {
              player.teammates.insert(aPlayer);
         }
@@ -640,8 +640,8 @@ class RemoveTeammate: Command, ExecuteCommand {
     }
     
     @objc func executeCommand() {
-        let range = string.startIndex...string.startIndex.successor()
-        string.removeRange(range)
+       // let range = string.startIndex...string.startIndex.successor()
+       // string.removeRange(range)
         if let aPlayer = allPlayerDict[string] {
             player.teammates.remove(aPlayer);
         }

@@ -19,12 +19,12 @@ class TestPersistenceManager: XCTestCase {
        // NSString *applicationSupportDirectory = [paths firstObject];
        // NSLog(@"applicationSupportDirectory: '%@'", applicationSupportDirectory);
         
-        var player = Player()
+        let player = Player()
         player.name = "ZAPHOD"
 
-        var planet1 = Planet()
-        var port1 = Port()
-        var fleet1 = Fleet()
+        let planet1 = Planet()
+        let port1 = Port()
+        let fleet1 = Fleet()
         
         fleet1.number = 1
         fleet1.player = player
@@ -39,15 +39,15 @@ class TestPersistenceManager: XCTestCase {
         planet1.population = 12
         planet1.limit = 13
 
-        var planet2 = Planet()
+        let planet2 = Planet()
         port1.planets.append(planet2)
         
-        var port2 = Port()
+        let port2 = Port()
         port2.planet = planet2
         port2.planets.append(planet1)
         planet2.port = port2
         
-        var fleet2 = Fleet()
+        let fleet2 = Fleet()
         
         fleet2.number = 2
         fleet2.player = player
@@ -60,14 +60,14 @@ class TestPersistenceManager: XCTestCase {
         planet2.population = 22
         planet2.limit = 23
 
-        var planet3 = Planet()
+        let planet3 = Planet()
         port2.planets.append(planet3)
-        var port3 = Port()
+        let port3 = Port()
         port3.planet = planet3
         planet3.port = port3
         port3.planets.append(planet2)
         
-        var fleet3 = Fleet()
+        let fleet3 = Fleet()
         
         fleet3.number = 3
         fleet3.player = player
@@ -85,7 +85,7 @@ class TestPersistenceManager: XCTestCase {
         planetArray.append(planet2)
         planetArray.append(planet3)
         
-        var persManager = PersistenceManager(aPlanetArray:planetArray)
+        let persManager = PersistenceManager(aPlanetArray:planetArray)
         persManager.writePlanetPListWithPlanetArray("/tmp/planets.plist")
         
         var newPlanetArray = persManager.readPlanetPListWithPath("/tmp/planets.plist")

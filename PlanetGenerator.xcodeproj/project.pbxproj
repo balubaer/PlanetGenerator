@@ -44,35 +44,35 @@
 		85DE741D19E8CF3100952C10 /* Fleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741C19E8CF3100952C10 /* Fleet.swift */; };
 		85DE741F19E8D04400952C10 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741E19E8D04400952C10 /* Player.swift */; };
 		85DE742119E8D15200952C10 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
-		85EC18041BCEF78F00E5BAF7 /* Port.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C819E4B2E00045A39D /* Port.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18051BCEF78F00E5BAF7 /* PortFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C719E4B2E00045A39D /* PortFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18061BCEF78F00E5BAF7 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117CA19E4B2E00045A39D /* Planet.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18071BCEF78F00E5BAF7 /* Fleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741C19E8CF3100952C10 /* Fleet.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18081BCEF78F00E5BAF7 /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18091BCEF78F00E5BAF7 /* FleetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42B19EB10B300B10E56 /* FleetFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC180A1BCEF78F00E5BAF7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741E19E8D04400952C10 /* Player.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC180B1BCEF78F00E5BAF7 /* PlayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA590619F99E6F009FA889 /* PlayerFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC180C1BCEF78F00E5BAF7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC180D1BCEF78F00E5BAF7 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC180E1BCEF78F00E5BAF7 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC180F1BCEF78F00E5BAF7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18101BCEF78F00E5BAF7 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C90B9419F6CDB100800CE8 /* Error.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18111BCEF78F00E5BAF7 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C919E4B2E00045A39D /* Dice.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18121BCEF78F00E5BAF7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852B2CFF19EA4C8A005B9623 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18131BCEF79B00E5BAF7 /* FinalPhaseCoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AD60F41A05A4BF0058DC90 /* FinalPhaseCoreGame.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18141BCEF79B00E5BAF7 /* DistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDB1A0A1B8700600AC1 /* DistanceLevel.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18151BCEF79B00E5BAF7 /* OutputPlyerStatisticCoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C375471B135D98001F7635 /* OutputPlyerStatisticCoreGame.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18161BCEF7A700E5BAF7 /* TestFleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742919E8E25200952C10 /* TestFleet.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18171BCEF7A700E5BAF7 /* TestsComandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD0C9519ECD1A7009F8146 /* TestsComandFactory.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18181BCEF7A700E5BAF7 /* TestsFleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE743219E8E35700952C10 /* TestsFleetMovement.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18191BCEF7A700E5BAF7 /* TestPlanetPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB119EA015F00291C9C /* TestPlanetPort.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC181A1BCEF7A700E5BAF7 /* TestPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB319EA0B1000291C9C /* TestPlayer.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC181B1BCEF7A700E5BAF7 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F661919EA693D005B5E2D /* TestUtils.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC181C1BCEF7A700E5BAF7 /* TestPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83A19EDF83000ACA91B /* TestPersistenceManager.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC181D1BCEF7A700E5BAF7 /* TestDistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDE1A0AC86200600AC1 /* TestDistanceLevel.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC181E1BCEF7A700E5BAF7 /* TestOutputPlyerStatisticCoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F108F41B1378CF0035E3DC /* TestOutputPlyerStatisticCoreGame.swift */; settings = {ASSET_TAGS = (); }; };
-		85EC18201BCEF7B400E5BAF7 /* planets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 852EB71419EEF0AC000BE7DB /* planets.plist */; settings = {ASSET_TAGS = (); }; };
-		85EC18211BCEF7B900E5BAF7 /* commands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 85DD0C9219ECD054009F8146 /* commands.txt */; settings = {ASSET_TAGS = (); }; };
+		85EC18041BCEF78F00E5BAF7 /* Port.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C819E4B2E00045A39D /* Port.swift */; };
+		85EC18051BCEF78F00E5BAF7 /* PortFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C719E4B2E00045A39D /* PortFactory.swift */; };
+		85EC18061BCEF78F00E5BAF7 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117CA19E4B2E00045A39D /* Planet.swift */; };
+		85EC18071BCEF78F00E5BAF7 /* Fleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741C19E8CF3100952C10 /* Fleet.swift */; };
+		85EC18081BCEF78F00E5BAF7 /* FleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742419E8D81000952C10 /* FleetMovement.swift */; };
+		85EC18091BCEF78F00E5BAF7 /* FleetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42B19EB10B300B10E56 /* FleetFactory.swift */; };
+		85EC180A1BCEF78F00E5BAF7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE741E19E8D04400952C10 /* Player.swift */; };
+		85EC180B1BCEF78F00E5BAF7 /* PlayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA590619F99E6F009FA889 /* PlayerFactory.swift */; };
+		85EC180C1BCEF78F00E5BAF7 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742019E8D15200952C10 /* Role.swift */; };
+		85EC180D1BCEF78F00E5BAF7 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF07EC19EAEFBC00705298 /* Command.swift */; };
+		85EC180E1BCEF78F00E5BAF7 /* CommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859DB42919EB03AD00B10E56 /* CommandFactory.swift */; };
+		85EC180F1BCEF78F00E5BAF7 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83819EDF0E700ACA91B /* PersistenceManager.swift */; };
+		85EC18101BCEF78F00E5BAF7 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C90B9419F6CDB100800CE8 /* Error.swift */; };
+		85EC18111BCEF78F00E5BAF7 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A117C919E4B2E00045A39D /* Dice.swift */; };
+		85EC18121BCEF78F00E5BAF7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852B2CFF19EA4C8A005B9623 /* Utils.swift */; };
+		85EC18131BCEF79B00E5BAF7 /* FinalPhaseCoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AD60F41A05A4BF0058DC90 /* FinalPhaseCoreGame.swift */; };
+		85EC18141BCEF79B00E5BAF7 /* DistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDB1A0A1B8700600AC1 /* DistanceLevel.swift */; };
+		85EC18151BCEF79B00E5BAF7 /* OutputPlyerStatisticCoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C375471B135D98001F7635 /* OutputPlyerStatisticCoreGame.swift */; };
+		85EC18161BCEF7A700E5BAF7 /* TestFleet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE742919E8E25200952C10 /* TestFleet.swift */; };
+		85EC18171BCEF7A700E5BAF7 /* TestsComandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD0C9519ECD1A7009F8146 /* TestsComandFactory.swift */; };
+		85EC18181BCEF7A700E5BAF7 /* TestsFleetMovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE743219E8E35700952C10 /* TestsFleetMovement.swift */; };
+		85EC18191BCEF7A700E5BAF7 /* TestPlanetPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB119EA015F00291C9C /* TestPlanetPort.swift */; };
+		85EC181A1BCEF7A700E5BAF7 /* TestPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85844FB319EA0B1000291C9C /* TestPlayer.swift */; };
+		85EC181B1BCEF7A700E5BAF7 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859F661919EA693D005B5E2D /* TestUtils.swift */; };
+		85EC181C1BCEF7A700E5BAF7 /* TestPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDC83A19EDF83000ACA91B /* TestPersistenceManager.swift */; };
+		85EC181D1BCEF7A700E5BAF7 /* TestDistanceLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1DEDE1A0AC86200600AC1 /* TestDistanceLevel.swift */; };
+		85EC181E1BCEF7A700E5BAF7 /* TestOutputPlyerStatisticCoreGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F108F41B1378CF0035E3DC /* TestOutputPlyerStatisticCoreGame.swift */; };
+		85EC18201BCEF7B400E5BAF7 /* planets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 852EB71419EEF0AC000BE7DB /* planets.plist */; };
+		85EC18211BCEF7B900E5BAF7 /* commands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 85DD0C9219ECD054009F8146 /* commands.txt */; };
 		85F2621019FAC78200BF51A4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2620F19FAC78200BF51A4 /* main.swift */; };
 		85FA590519F99909009FA889 /* PlanetGenerator.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85FA590419F992FE009FA889 /* PlanetGenerator.plist */; };
 		85FA590719F99E6F009FA889 /* PlayerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FA590619F99E6F009FA889 /* PlayerFactory.swift */; };
@@ -409,15 +409,19 @@
 				TargetAttributes = {
 					85A117BC19E4B27E0045A39D = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0830;
 					};
 					85D18EC719FE79EB002E7EE2 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0830;
 					};
 					85EC17FB1BCEF74E00E5BAF7 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0830;
 					};
 					85F2620C19FAC78200BF51A4 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -630,6 +634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -637,6 +642,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -649,6 +655,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -657,6 +664,7 @@
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -671,6 +679,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = de.berndniklas.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -685,6 +694,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = de.berndniklas.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -697,6 +707,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -705,6 +716,7 @@
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -745,6 +757,7 @@
 				85EC18031BCEF74E00E5BAF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		85F2621319FAC78200BF51A4 /* Build configuration list for PBXNativeTarget "OutPutLists" */ = {
 			isa = XCConfigurationList;

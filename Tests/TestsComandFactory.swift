@@ -14,9 +14,9 @@ class TestsCommandFactory: XCTestCase {
     var planetArray: Array<Planet>?
     var allPlayerDict: [String: Player]?
     
-    func getBundle() -> NSBundle? {
-        var result: NSBundle? = nil
-        let array: Array = NSBundle.allBundles()
+    func getBundle() -> Bundle? {
+        var result: Bundle? = nil
+        let array: Array = Bundle.allBundles
         
         for aBundle in array {
             if aBundle.bundleIdentifier == "de.berndniklas.Tests" {
@@ -33,20 +33,20 @@ class TestsCommandFactory: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let aBundle: NSBundle? = self.getBundle()
+        let aBundle: Bundle? = self.getBundle()
         if aBundle != nil {
             if let path = aBundle!.resourcePath {
                 var urlPath = NSURL(fileURLWithPath: path)
-                urlPath = urlPath.URLByAppendingPathComponent("commands.txt")
+                urlPath = urlPath.appendingPathComponent("commands.txt") as! NSURL
                 
                 if let txtPath = urlPath.path {
-                    commandsString = try? NSString(contentsOfFile: txtPath , encoding: NSUTF8StringEncoding) as String
+                    commandsString = try? NSString(contentsOfFile: txtPath , encoding: String.Encoding.utf8.rawValue) as String
                 }
             }
             
             if let path = aBundle!.resourcePath {
                 var urlPath = NSURL(fileURLWithPath: path)
-                urlPath = urlPath.URLByAppendingPathComponent("planets.plist")
+                urlPath = urlPath.appendingPathComponent("planets.plist") as! NSURL
                 let persManager = PersistenceManager()
                 
                 if let plistPath = urlPath.path {
@@ -112,7 +112,7 @@ class TestsCommandFactory: XCTestCase {
                     XCTFail("### Flotte 5 nicht gefunden  ###")
                 }
 
-                commandFactory.setCommandStringsWithLongString("ZAPHOD", commandString:commandsString!)
+                commandFactory.setCommandStringsWithLongString(playerName: "ZAPHOD", commandString:commandsString!)
                 commandFactory.coreGame = true
 
                 commandFactory.executeCommands()
@@ -204,7 +204,7 @@ class TestsCommandFactory: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }

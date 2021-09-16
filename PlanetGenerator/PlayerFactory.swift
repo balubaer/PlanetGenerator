@@ -26,7 +26,7 @@ class PlayerFactory {
         distanceLevelHomes = 0
     }
     
-    func findPlanetWithDice(dice:Dice, planetArray:Array <Planet>) -> Planet {
+    func findPlanetWithDice(_ dice:Dice, planetArray:Array <Planet>) -> Planet {
         var result:Planet? = nil
         var found = false
         
@@ -41,7 +41,7 @@ class PlayerFactory {
         return result!
     }
     
-    func findPlanetWithMinPlanetArea(planetArray: Array <Planet>) -> Planet {
+    func findPlanetWithMinPlanetArea(_ planetArray: Array <Planet>) -> Planet {
         var result:Planet? = nil
         var planetAndAreaCount: [Int: Int] = Dictionary()
         var foundPlanetNumber = 1
@@ -72,7 +72,7 @@ class PlayerFactory {
         return result!
     }
     
-    func findFleetAndPlanetWithDice(dice:Dice, planetArray:Array <Planet>) -> (fleet:Fleet, planet:Planet) {
+    func findFleetAndPlanetWithDice(_ dice:Dice, planetArray:Array <Planet>) -> (fleet:Fleet, planet:Planet) {
         var fleet:Fleet? = nil
         var planet:Planet? = nil
         var found = false
@@ -94,13 +94,13 @@ class PlayerFactory {
         let result = Player()
         playerDice.setSites(playerNameArray.count)
         let index = playerDice.roll() - 1
-        let playerName =  playerNameArray.removeAtIndex(index)
+        let playerName =  playerNameArray.remove(at: index)
         result.name = playerName
         return result
     }
 
     
-    func createWithPlanetArray(planetArray:Array <Planet>, fleetCount: Int, aFleetsOnHomePlanet: Int, startShipsCount: Int, distanceLevelHomes: Int) {
+    func createWithPlanetArray(_ planetArray:Array <Planet>, fleetCount: Int, aFleetsOnHomePlanet: Int, startShipsCount: Int, distanceLevelHomes: Int) {
         planetDice.setSites(planetArray.count)
         fleetDice.setSites(fleetCount)
         let playerNameCount: Int = playerNameArray.count;
@@ -170,7 +170,7 @@ class PlayerFactory {
             if result.count > 0 {
                 finishCreate = true
             } else {
-                startDistanceLevelHomes--;
+                startDistanceLevelHomes -= 1;
                 allPassedPlanets.removeAll()
                 allNextLevelPlanets.removeAll()
             }

@@ -21,25 +21,25 @@ class PersistenceManager {
         
     }
     
-    func writePlanetPListWithPlanetArray(aPath: String) {
+    func writePlanetPListWithPlanetArray(_ aPath: String) {
         var dictForPList = [String:AnyObject]()
         var planetArrayForPList = [[String:AnyObject]]()
         var portDictForPList = [String:AnyObject]()
         var fleetDictForPList = [String:AnyObject]()
-        var playerDictForPList = [String:AnyObject]()
+        let playerDictForPList = [String:AnyObject]()
 
         if planetArray != nil {
             for planet in planetArray! {
                 var planetDict = [String: AnyObject]()
                 
-                planetDict["number"] = planet.number
-                planetDict["name"] = planet.name
+                planetDict["number"] = planet.number as AnyObject
+                planetDict["name"] = planet.name as AnyObject
                 if planet.player != nil {
-                    planetDict["player"] = planet.player!.name
+                    planetDict["player"] = planet.player!.name as AnyObject
                     if planet.player!.role == nil {
                         planet.player!.role = Role()
                     }
-                    playerDictForPList[planet.player!.name] = ["points":planet.player!.points, "role": planet.player!.role!.name, "teammates": planet.player!.teanmatesNames]
+                   // playerDictForPList[planet.player!.name] = ["points":planet.player!.points, "role": planet.player!.role!.name, "teammates": planet.player!.teanmatesNames]
                 }
                 
                 var fleetArray: Array <Int> = Array()
@@ -47,16 +47,16 @@ class PersistenceManager {
                     var fleetDict = [String: AnyObject]()
                     fleetArray.append(fleet.number)
                     
-                    fleetDict["number"] = fleet.number
-                    fleetDict["ships"] = fleet.ships
+                    fleetDict["number"] = fleet.number as AnyObject
+                    fleetDict["ships"] = fleet.ships as AnyObject
                     if fleet.player != nil {
-                        fleetDict["player"] = fleet.player!.name
+                        fleetDict["player"] = fleet.player!.name as AnyObject
                     }
-                    fleetDict["cargo"] = fleet.cargo
-                    fleetDict["moved"] = fleet.moved
-                    fleetDictForPList[String(fleet.number)] = fleetDict
+                    fleetDict["cargo"] = fleet.cargo as AnyObject
+                    fleetDict["moved"] = fleet.moved as AnyObject
+                    fleetDictForPList[String(fleet.number)] = fleetDict as AnyObject
                 }
-                planetDict["fleets"] = fleetArray
+                planetDict["fleets"] = fleetArray as AnyObject
                 
                 if planet.port != nil && planet.port!.planet != nil {
                     var aPlanetsArray: Array <Int> = Array()
@@ -64,30 +64,30 @@ class PersistenceManager {
                     for planet in planet.port!.planets {
                         aPlanetsArray.append(planet.number)
                     }
-                    portDictForPList[String(planet.port!.planet!.number)] = aPlanetsArray
+                    portDictForPList[String(planet.port!.planet!.number)] = aPlanetsArray as AnyObject
                     //  portDictForPList[String(planet.port!.planet!.number)] = "Hallo"
                 }
-                planetDict["industry"] = planet.industry
-                planetDict["metal"] = planet.metal
-                planetDict["mines"] = planet.mines
-                planetDict["population"] = planet.population
-                planetDict["limit"] = planet.limit
-                planetDict["round"] = planet.round
-                planetDict["iShips"] = planet.iShips
-                planetDict["pShips"] = planet.pShips
-                planetDict["dShips"] = planet.dShips
+                planetDict["industry"] = planet.industry as AnyObject
+                planetDict["metal"] = planet.metal as AnyObject
+                planetDict["mines"] = planet.mines as AnyObject
+                planetDict["population"] = planet.population as AnyObject
+                planetDict["limit"] = planet.limit as AnyObject
+                planetDict["round"] = planet.round as AnyObject
+                planetDict["iShips"] = planet.iShips as AnyObject
+                planetDict["pShips"] = planet.pShips as AnyObject
+                planetDict["dShips"] = planet.dShips as AnyObject
                 planetArrayForPList.append(planetDict)
             }
         }
-        dictForPList["planets"] = planetArrayForPList
-        dictForPList["player"] = playerDictForPList
-        dictForPList["ports"] = portDictForPList
-        dictForPList["fleets"] = fleetDictForPList
+        dictForPList["planets"] = planetArrayForPList as AnyObject
+        dictForPList["player"] = playerDictForPList as AnyObject
+        dictForPList["ports"] = portDictForPList as AnyObject
+        dictForPList["fleets"] = fleetDictForPList as AnyObject
         
-        (dictForPList as  NSDictionary).writeToFile(aPath, atomically: true)
+        (dictForPList as  NSDictionary).write(toFile: aPath, atomically: true)
     }
     
-    func readPlanetPListWithPath(aPath: String) -> Array <Planet> {
+    func readPlanetPListWithPath(_ aPath: String) -> Array <Planet> {
         var planetArray: Array <Planet> = Array()
         if let dictFormPList = NSDictionary(contentsOfFile: aPath) {
             

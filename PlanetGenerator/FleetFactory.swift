@@ -17,7 +17,7 @@ class FleetFactory {
         fleetCount = aFleetCount
     }
     
-    func createWithPlanetArray(planetArray:Array <Planet>) {
+    func createWithPlanetArray(_ planetArray:Array <Planet>) {
         dice.setSites(planetArray.count)
 
         //Create Fleets

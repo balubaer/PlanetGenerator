@@ -76,7 +76,7 @@ class DistanceLevel {
     }
 
     func goNextLevel() {
-        distanceLevel++
+        distanceLevel += 1
         self.createNewNextLevelPlanets()
     }
 }

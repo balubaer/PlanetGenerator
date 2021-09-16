@@ -8,10 +8,10 @@
 
 import Foundation
 
-var processInfo = NSProcessInfo.processInfo()
+var processInfo = ProcessInfo.processInfo
 var arguments = processInfo.arguments as NSArray
 var programmFilePath = arguments[0] as! NSString
-var plistFilePath = programmFilePath.stringByAppendingPathExtension("plist")
+var plistFilePath = programmFilePath.appendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
 var planetCount = Int(dictFormPList!["planetCount"] as! NSNumber)
@@ -61,15 +61,15 @@ var playerFactory = PlayerFactory(aPlayerNameArray: playerNames)
 
 playerFactory.createWithPlanetArray(planets, fleetCount: fleetCount, aFleetsOnHomePlanet: fleetsOnHomePlanet, startShipsCount: startShipsCount, distanceLevelHomes: distanceLevelHomes)
 
-var planetPlistFilePath = playPath.stringByAppendingPathComponent(playName)
+var planetPlistFilePath = playPath.appendingPathComponent(playName)
 
-var fileManager = NSFileManager.defaultManager()
+var fileManager = FileManager.default
 
 var isDir : ObjCBool = false
 
-if fileManager.fileExistsAtPath(planetPlistFilePath, isDirectory: &isDir) == false {
+if fileManager.fileExists(atPath: planetPlistFilePath, isDirectory: &isDir) == false {
     do {
-        try fileManager.createDirectoryAtPath(planetPlistFilePath, withIntermediateDirectories: true, attributes: nil)
+        try fileManager.createDirectory(atPath: planetPlistFilePath, withIntermediateDirectories: true, attributes: nil)
     } catch {
         NSLog("Fehler createDirectoryAtPath")
     }
@@ -77,15 +77,15 @@ if fileManager.fileExistsAtPath(planetPlistFilePath, isDirectory: &isDir) == fal
 
 var planetPlistFilePathTurn = planetPlistFilePath as NSString
 
-planetPlistFilePath = planetPlistFilePathTurn.stringByAppendingPathComponent("Turn0")
+planetPlistFilePath = planetPlistFilePathTurn.appendingPathComponent("Turn0")
 
-if fileManager.fileExistsAtPath(planetPlistFilePath, isDirectory: &isDir) == false {
-    try fileManager.createDirectoryAtPath(planetPlistFilePath, withIntermediateDirectories: true, attributes: nil)
+if fileManager.fileExists(atPath: planetPlistFilePath, isDirectory: &isDir) == false {
+    try fileManager.createDirectory(atPath: planetPlistFilePath, withIntermediateDirectories: true, attributes: nil)
 }
 
 planetPlistFilePathTurn = planetPlistFilePath as NSString
 
-planetPlistFilePath = planetPlistFilePathTurn.stringByAppendingPathComponent("Turn0.plist")
+planetPlistFilePath = planetPlistFilePathTurn.appendingPathComponent("Turn0.plist")
 
 var persManager = PersistenceManager(aPlanetArray:planets)
 persManager.writePlanetPListWithPlanetArray(planetPlistFilePath)

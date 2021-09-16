@@ -14,9 +14,9 @@ class TestOutputPlyerStatisticCoreGame: XCTestCase {
     var planetArray: Array<Planet>?
     var allPlayerDict: [String: Player]?
     
-    func getBundle() -> NSBundle? {
-        var result: NSBundle? = nil
-        let array: Array = NSBundle.allBundles()
+    func getBundle() -> Bundle? {
+        var result: Bundle? = nil
+        let array: Array = Bundle.allBundles
         
         for aBundle in array {
             if aBundle.bundleIdentifier == "de.berndniklas.Tests" {
@@ -32,11 +32,11 @@ class TestOutputPlyerStatisticCoreGame: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let aBundle: NSBundle? = self.getBundle()
+        let aBundle: Bundle? = self.getBundle()
         if aBundle != nil {
             if let path = aBundle!.resourcePath as String? {
                 var urlPath = NSURL(fileURLWithPath: path)
-                urlPath = urlPath.URLByAppendingPathComponent("planets.plist")
+                urlPath = urlPath.appendingPathComponent("planets.plist") as! NSURL
                 let persManager = PersistenceManager()
                 
                 if let plistPath = urlPath.path {
@@ -70,7 +70,7 @@ class TestOutputPlyerStatisticCoreGame: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }

@@ -8,10 +8,10 @@
 
 import Foundation
 
-var processInfo = NSProcessInfo.processInfo()
+var processInfo = ProcessInfo.processInfo
 var arguments = processInfo.arguments
 var programmFilePath = arguments[0] as NSString
-var plistFilePath = programmFilePath.stringByAppendingPathExtension("plist")
+var plistFilePath = programmFilePath.appendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
 
@@ -23,22 +23,22 @@ var coreGame = dictFormPList!["coreGame"] as! Bool
 var turnNumber = Int(dictFormPList!["turn"] as! NSNumber)
 var turnNumberBefore = turnNumber - 1
 
-var turnPath = playPath.stringByAppendingPathComponent(playName) as NSString
+var turnPath = playPath.appendingPathComponent(playName) as NSString
 
-var turnBeforePath = turnPath.stringByAppendingPathComponent("Turn\(turnNumberBefore)") as NSString
-turnPath = turnPath.stringByAppendingPathComponent("Turn\(turnNumber)")
+var turnBeforePath = turnPath.appendingPathComponent("Turn\(turnNumberBefore)") as NSString
+turnPath = turnPath.appendingPathComponent("Turn\(turnNumber)") as NSString
 
-var planetPlistFileBeforePath = turnBeforePath.stringByAppendingPathComponent("Turn\(turnNumberBefore).plist") as NSString
-var planetPlistFilePath = turnPath.stringByAppendingPathComponent("Turn\(turnNumber).plist")
+var planetPlistFileBeforePath = turnBeforePath.appendingPathComponent("Turn\(turnNumberBefore).plist") as NSString
+var planetPlistFilePath = turnPath.appendingPathComponent("Turn\(turnNumber).plist")
 
 
-var fileManager = NSFileManager.defaultManager()
+var fileManager = FileManager.default
 
 var isDir : ObjCBool = false
 
-if fileManager.fileExistsAtPath(turnPath as String, isDirectory: &isDir) == false {
+if fileManager.fileExists(atPath: turnPath as String, isDirectory: &isDir) == false {
     do {
-        try fileManager.createDirectoryAtPath(turnPath as String, withIntermediateDirectories: true, attributes: nil)
+        try fileManager.createDirectory(atPath: turnPath as String, withIntermediateDirectories: true, attributes: nil)
     } catch _ {
     }
 }
@@ -56,11 +56,11 @@ commandFactory.coreGame = coreGame
 
 //Execute Commands Result
 for (playerName, player) in allPlayerDict {
-    var commandFilePath = turnPath.stringByAppendingPathComponent("\(playerName).txt")
+    var commandFilePath = turnPath.appendingPathComponent("\(playerName).txt")
     
-    var commandsString = try? NSString(contentsOfFile:commandFilePath, encoding: NSUTF8StringEncoding)
+    var commandsString = try? NSString(contentsOfFile:commandFilePath, encoding: String.Encoding.utf8.rawValue)
     if commandsString != nil {
-        commandFactory.setCommandStringsWithLongString(playerName, commandString: commandsString! as String)
+        commandFactory.setCommandStringsWithLongString(playerName: playerName, commandString: commandsString! as String)
     } else {
         NSLog("Fehler: CommandsString konnte nicht erzeugt werden für Spieler [\(playerName)]!!!")
     }
@@ -74,46 +74,46 @@ var finalPhase = FinalPhaseCoreGame(aPlanetArray: planets, aAllPlayerDict: allPl
 finalPhase.doFinal()
 
 for (playerName, player) in allPlayerDict {
-    var xmlRoot = NSXMLElement(name: "report");
+    var xmlRoot = XMLElement(name: "report");
 
-    if let attribute = NSXMLNode.attributeWithName("changeSeq", stringValue: "1") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "changeSeq", stringValue: "1") as? XMLNode {
         xmlRoot.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("endCondition", stringValue: "score:None") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "endCondition", stringValue: "score:None") as? XMLNode {
         xmlRoot.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("gameId", stringValue: playName) as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "gameId", stringValue: playName) as? XMLNode {
         xmlRoot.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("parametersName", stringValue: "Core") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "parametersName", stringValue: "Core") as? XMLNode {
         xmlRoot.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("parametersToken", stringValue: "core") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "parametersToken", stringValue: "core") as? XMLNode {
         xmlRoot.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("rsw", stringValue: "False") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "rsw", stringValue: "False") as? XMLNode {
         xmlRoot.addAttribute(attribute)
     }
     
-    if let attribute = NSXMLNode.attributeWithName("turnNumber", stringValue: "\(turnNumber + 1)") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "turnNumber", stringValue: "\(turnNumber + 1)") as? XMLNode {
         xmlRoot.addAttribute(attribute)
     }
     
     var childElementPlayer = player.getXMLElement()
 
-    if let attribute = NSXMLNode.attributeWithName("lastInvolvedTurn", stringValue: "\(turnNumber + 1)") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "lastInvolvedTurn", stringValue: "\(turnNumber + 1)") as? XMLNode {
         childElementPlayer.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("lastPlayedTurn", stringValue: "\(turnNumber)") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "lastPlayedTurn", stringValue: "\(turnNumber)") as? XMLNode {
         childElementPlayer.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("type", stringValue: "Core") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "type", stringValue: "Core") as? XMLNode {
         childElementPlayer.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("typeKey", stringValue: "core") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "typeKey", stringValue: "core") as? XMLNode {
         childElementPlayer.addAttribute(attribute)
     }
-    if let attribute = NSXMLNode.attributeWithName("score", stringValue: "\(player.points)") as? NSXMLNode {
+    if let attribute = XMLNode.attribute(withName: "score", stringValue: "\(player.points)") as? XMLNode {
         childElementPlayer.addAttribute(attribute)
     }
     xmlRoot.addChild(childElementPlayer)
@@ -130,19 +130,19 @@ for (playerName, player) in allPlayerDict {
             outPutString += "\(planet.description)\n\n"
         }
     }
-    var outPutFilePath = turnPath.stringByAppendingPathComponent("\(playerName).out") as NSString
+    var outPutFilePath = turnPath.appendingPathComponent("\(playerName).out") as NSString
     do {
-        try outPutString.writeToFile(outPutFilePath as String, atomically: true, encoding: NSUTF8StringEncoding)
+        try outPutString.write(toFile: outPutFilePath as String, atomically: true, encoding: String.Encoding.utf8)
     } catch _ {
     }
-    if let xmlReport = NSXMLDocument.documentWithRootElement(xmlRoot) as? NSXMLDocument{
+    if let xmlReport = XMLDocument.document(withRootElement: xmlRoot) as? XMLDocument{
         xmlReport.version = "1.0"
         xmlReport.characterEncoding = "UTF-8"
-        var xmlData = xmlReport.XMLDataWithOptions(Int(NSXMLNodePrettyPrint))
+        //var xmlData = xmlReport.XMLDataWithOptions(Int(NSXMLNodePrettyPrint))
         //var xmlData = xmlReport.XMLData
-        outPutFilePath = outPutFilePath.stringByDeletingPathExtension
-        if let outPutXMLFilePath = outPutFilePath.stringByAppendingPathExtension("xml") {
-            xmlData.writeToFile(outPutXMLFilePath, atomically: true)
+        outPutFilePath = outPutFilePath.deletingPathExtension as NSString
+        if let outPutXMLFilePath = outPutFilePath.appendingPathExtension("xml") {
+          //  xmlData.writeToFile(outPutXMLFilePath, atomically: true)
         }
     }
 }

@@ -7,8 +7,43 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
-func createBracketAndCommarStringWithStringArray(aStringArray:Array <String>) -> String {
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
+
+func createBracketAndCommarStringWithStringArray(_ aStringArray:Array <String>) -> String {
     var result = "("
     var counter = 0
     let maxCounter = aStringArray.count - 1
@@ -18,14 +53,14 @@ func createBracketAndCommarStringWithStringArray(aStringArray:Array <String>) ->
         if counter < maxCounter {
             result += ","
         }
-        counter++
+        counter += 1
     }
     result += ")"
 
     return result
 }
 
-func isCharacterANumber(aCharacter: Character) -> Bool {
+func isCharacterANumber(_ aCharacter: Character) -> Bool {
     let tempString = "\(aCharacter)"
     let value : Int? = Int(tempString)
     var result: Bool = false
@@ -36,7 +71,7 @@ func isCharacterANumber(aCharacter: Character) -> Bool {
     return result
 }
 
-func extractNumberString(aString: String) ->String {
+func extractNumberString(_ aString: String) ->String {
     var result = String()
     for aCharacter in aString.characters {
         if isCharacterANumber(aCharacter) {
@@ -47,9 +82,9 @@ func extractNumberString(aString: String) ->String {
 }
 
 extension Array {
-    mutating func removeObject<U: Equatable>(object: U) {
+    mutating func removeObject<U: Equatable>(_ object: U) {
         var index: Int?
-        for (idx, objectToCompare) in self.enumerate() {
+        for (idx, objectToCompare) in self.enumerated() {
             if let to = objectToCompare as? U {
                 if object == to {
                     index = idx
@@ -58,7 +93,7 @@ extension Array {
         }
         
         if(index != nil) {
-            self.removeAtIndex(index!)
+            self.remove(at: index!)
         }
     }
 }
