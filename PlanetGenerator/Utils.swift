@@ -73,7 +73,7 @@ func isCharacterANumber(_ aCharacter: Character) -> Bool {
 
 func extractNumberString(_ aString: String) ->String {
     var result = String()
-    for aCharacter in aString.characters {
+    for aCharacter in aString {
         if isCharacterANumber(aCharacter) {
             result.append(aCharacter)
         }

@@ -231,7 +231,7 @@ class CommandFactory {
             if counter == 0 {
                 let planetNumber = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
-                    fromHomePlanet = planetWithNumber(planets, number: planetNumber!) as Planet!
+                    fromHomePlanet = (planetWithNumber(planets, number: planetNumber!) as Planet? ?? nil)!
                 }
             } else if counter == 1 {
                 let aShipsToTransfer = Int(extractNumberString(commantElement))
@@ -333,7 +333,7 @@ class CommandFactory {
             if counter == 0 {
                 let planetNumber = Int(extractNumberString(commantElement))
                 if planetNumber != nil {
-                    fromHomePlanet = planetWithNumber(planets, number: planetNumber!) as Planet!
+                    fromHomePlanet = (planetWithNumber(planets, number: planetNumber!) as Planet?)!
                 }
             } else if counter == 1 {
                 //Nichts zu tun
@@ -398,7 +398,7 @@ class CommandFactory {
     func getCommandInstance() -> AnyObject? {
         var result: AnyObject? = nil
         if commandChars != nil {
-            var characterArray: Array <Character> = Array((commandChars!).characters)
+            let characterArray: Array <Character> = Array((commandChars!))
             
             if characterArray.count >= 2 {
                 switch characterArray[0] {
@@ -496,11 +496,11 @@ class CommandFactory {
                 processCommand = command
                 commandElements = Array()
                 var counter = 0
-                let charCount = command.characters.count
+                let charCount = command.count
                 var foundCommandElementEnd = false
                 var commandElement = String()
                 
-                for character in (command as String).characters {
+                for character in (command as String) {
                     
                     if isCharacterANumber(character) == false {
                         commandChars?.append(character)

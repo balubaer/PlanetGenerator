@@ -56,7 +56,7 @@ class Fleet: Comparable, Equatable {
         for hitAmbushfleet in hitAmbuschFleets {
             desc += "F\(hitAmbushfleet.number),"
         }
-        return String(desc.characters.dropLast())
+        return String(desc.dropLast())
     }
 
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
@@ -67,7 +67,7 @@ class Fleet: Comparable, Equatable {
         
         let infoString = createInfoString()
         
-        if infoString.characters.count != 0 {
+        if infoString.count != 0 {
             desc += " "
             desc += infoString
         }

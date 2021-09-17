@@ -65,7 +65,7 @@ class Planet: Comparable, Equatable, Hashable {
         for hitAmbushfleet in hitAmbuschFleets {
             desc += "F\(hitAmbushfleet.number),"
         }
-        return String(desc.characters.dropLast())
+        return String(desc.dropLast())
     }
 
     var hitedShotsDShips: Int = 0
@@ -83,7 +83,7 @@ class Planet: Comparable, Equatable, Hashable {
         
         let resouceString = createResourceString()
         
-        if resouceString.characters.count != 0 {
+        if resouceString.count != 0 {
             desc += " "
             desc += resouceString
         }
