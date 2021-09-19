@@ -18,7 +18,7 @@ var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<
 var playPath = dictFormPList!["playPath"] as! NSString
 var playName = dictFormPList!["playName"] as! String
 
-var turnNumber = Int(dictFormPList!["turn"] as! NSNumber)
+var turnNumber = Int(truncating: dictFormPList!["turn"] as! NSNumber)
 
 var turnPath = playPath.appendingPathComponent(playName) as NSString
 
@@ -43,7 +43,7 @@ var allPlayerDict = persManager.allPlayerDict
 
 //output Result
 for (playerName, player) in allPlayerDict {
-    var xmlRoot = XMLElement(name: "report");
+    let xmlRoot = XMLElement(name: "report");
     if let attribute = XMLNode.attribute(withName: "changeSeq", stringValue: "1") as? XMLNode {
         xmlRoot.addAttribute(attribute)
     }
@@ -67,7 +67,7 @@ for (playerName, player) in allPlayerDict {
         xmlRoot.addAttribute(attribute)
     }
     
-    var childElementPlayer = player.getXMLElement()
+    let childElementPlayer = player.getXMLElement()
     if let attribute = XMLNode.attribute(withName: "lastInvolvedTurn", stringValue: "1") as? XMLNode {
         childElementPlayer.addAttribute(attribute)
     }
@@ -81,29 +81,32 @@ for (playerName, player) in allPlayerDict {
         childElementPlayer.addAttribute(attribute)
     }
     xmlRoot.addChild(childElementPlayer)
-
+    
     var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber + 1)\n\n"
     for planet in planets {
         if Player.isPlanetOutPutForPlayer(player, planet: planet) {
-            var childElementPlanet = planet.getXMLElementForPlayer(player)
+            let childElementPlanet = planet.getXMLElementForPlayer(player)
             xmlRoot.addChild(childElementPlanet)
-
+            
             outPutString += "\(planet.description)\n\n"
         }
     }
-    var outPutFilePath = turnPath.appendingPathComponent("\(playerName).out")
-    try outPutString.write(toFile: outPutFilePath, atomically: true, encoding: String.Encoding.utf8)
+    let outPutFilePath  = turnPath.appendingPathComponent("\(playerName).out") as NSString
+    try outPutString.write(toFile: String(outPutFilePath), atomically: true, encoding: String.Encoding.utf8)
     
     if let xmlReport = XMLDocument.document(withRootElement: xmlRoot) as? XMLDocument{
         var outPutFilePathXML = outPutFilePath as NSString
         xmlReport.version = "1.0"
         xmlReport.characterEncoding = "UTF-8"
-       // var xmlData = xmlReport.XMLDataWithOptions(Int(NSXMLNodePrettyPrint))
-        //var xmlData = xmlReport.XMLData
+        let xmlData = xmlReport.xmlData(options: .nodePrettyPrint)
         outPutFilePathXML = outPutFilePathXML.deletingPathExtension as NSString
-        if let outPutXMLFilePath = outPutFilePathXML.appendingPathExtension("xml") {
-          //  xmlData.writeToFile(outPutXMLFilePath, atomically: true)
-        }
+        
+        
+        outPutFilePathXML = outPutFilePathXML.appendingPathExtension("xml")! as NSString
+        let xmlFileString = String(outPutFilePathXML)
+        
+        let xmlUrl = URL(fileURLWithPath: xmlFileString)
+        try xmlData.write(to: xmlUrl)
     }
     
 }

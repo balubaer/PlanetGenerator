@@ -88,7 +88,7 @@ class TestPersistenceManager: XCTestCase {
         let persManager = PersistenceManager(aPlanetArray:planetArray)
         persManager.writePlanetPListWithPlanetArray("/tmp/planets.plist")
         
-        var newPlanetArray = persManager.readPlanetPListWithPath("/tmp/planets.plist")
+        _ = persManager.readPlanetPListWithPath("/tmp/planets.plist")
 
         XCTAssertTrue(true, "### factory Fehler ###")
         

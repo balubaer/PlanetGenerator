@@ -23,9 +23,6 @@ func planetWithNumber(_ planets:Array<Planet>, number:Int) -> Planet? {
 
 class Planet: Comparable, Equatable, Hashable {
     
-    var hashValue: Int {
-        return number
-    }
     var number: Int = 0
     var name: String {
         let aName = "W\(number)"
@@ -72,6 +69,9 @@ class Planet: Comparable, Equatable, Hashable {
     
     //TODO: niklas Kunstwerke ... V70:Plastik Mondstein
     
+    func hash(into hasher: inout Hasher) {
+           hasher.combine(number)
+     }
     var description: String {
         var desc = self.name
         if port != nil {

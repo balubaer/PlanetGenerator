@@ -26,12 +26,12 @@ class CommandFactory {
     }
     
     func setCommandStringsWithLongString(playerName:String, commandString: String) {
-      /*  let aSet = NSSet(array: commandString.componentsSeparatedByCharactersIn(NSCharacterSet (charactersInString: " \n\r")))
+        let aSet = NSSet(array: commandString.components(separatedBy: [" ", "\n", "\r"]))
         let array = aSet.allObjects as? Array<String>
         
         if array != nil {
             commandStringsDict[playerName] = array
-        }*/
+        }
     }
 
     //WnnnBqqqFmmm
@@ -532,7 +532,7 @@ class CommandFactory {
         }
         
         if coreGame {
-            for (playerName, player) in allPlayerDict {
+            for (_, player) in allPlayerDict {
                 let buildDShips = BuildDShips(aPlanetArray: planets, aPlayer: player)
                 commandArray.append(buildDShips as Command)
             }

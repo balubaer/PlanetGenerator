@@ -26,7 +26,7 @@ class PersistenceManager {
         var planetArrayForPList = [[String:AnyObject]]()
         var portDictForPList = [String:AnyObject]()
         var fleetDictForPList = [String:AnyObject]()
-        let playerDictForPList = [String:AnyObject]()
+        var playerDictForPList = [String:AnyObject]()
 
         if planetArray != nil {
             for planet in planetArray! {
@@ -39,7 +39,7 @@ class PersistenceManager {
                     if planet.player!.role == nil {
                         planet.player!.role = Role()
                     }
-                   // playerDictForPList[planet.player!.name] = ["points":planet.player!.points, "role": planet.player!.role!.name, "teammates": planet.player!.teanmatesNames]
+                    playerDictForPList[planet.player!.name] = ["points":planet.player!.points, "role": planet.player!.role!.name, "teammates": planet.player!.teanmatesNames] as AnyObject
                 }
                 
                 var fleetArray: Array <Int> = Array()
@@ -206,7 +206,7 @@ class PersistenceManager {
                     if let portDictFormPList = (dictFormPList["ports"] as? Dictionary<String, AnyObject>) {
                         if let intArrayWithPlanetNumbers = portDictFormPList[String(planet.number)] as? Array <NSNumber> {
                             for planetNumber in intArrayWithPlanetNumbers {
-                                let aPlanet: Planet? = planetWithNumber(planetArray, number: Int(planetNumber))
+                                let aPlanet: Planet? = planetWithNumber(planetArray, number: Int(truncating: planetNumber))
                                 
                                 if aPlanet != nil {
                                     port.planets.append(aPlanet!)

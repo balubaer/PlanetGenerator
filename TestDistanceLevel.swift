@@ -34,8 +34,8 @@ class TestDistanceLevel: XCTestCase {
         
         let aBundle: Bundle? = self.getBundle()
         if aBundle != nil {
-            var path: NSString? = aBundle!.resourcePath as! NSString
-            path = path?.appendingPathComponent("planets.plist") as! NSString
+            var path: NSString? = aBundle!.resourcePath! as NSString
+            path = (path?.appendingPathComponent("planets.plist") as! NSString)
             if path != nil {
                 let persManager = PersistenceManager()
                 

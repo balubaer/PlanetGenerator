@@ -45,7 +45,8 @@ class TestFleets: XCTestCase {
         fleet.fleetMovements.removeAll()
         fleet.ambush = true
         fleet.cargo = 0
-        XCTAssertEqual("F25[ZAPHOD] = 99 (Ambush)", fleet.description, "### fleet.description Fehler ###")
+        fleet.hitAmbuschFleets.append(fleet)
+        XCTAssertEqual("F25[ZAPHOD] = 99 (Ambush: {F25[ZAPHOD]})", fleet.description, "### fleet.description Fehler ###")
         
     }
 

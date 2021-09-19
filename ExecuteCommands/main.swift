@@ -20,7 +20,7 @@ var playName = dictFormPList!["playName"] as! String
 var coreGame = dictFormPList!["coreGame"] as! Bool
 
 
-var turnNumber = Int(dictFormPList!["turn"] as! NSNumber)
+var turnNumber = Int(truncating: dictFormPList!["turn"] as! NSNumber)
 var turnNumberBefore = turnNumber - 1
 
 var turnPath = playPath.appendingPathComponent(playName) as NSString
@@ -55,10 +55,10 @@ var commandFactory = CommandFactory(aPlanetArray: planets, aAllPlayerDict: allPl
 commandFactory.coreGame = coreGame
 
 //Execute Commands Result
-for (playerName, player) in allPlayerDict {
-    var commandFilePath = turnPath.appendingPathComponent("\(playerName).txt")
+for (playerName, _) in allPlayerDict {
+    let commandFilePath = turnPath.appendingPathComponent("\(playerName).txt")
     
-    var commandsString = try? NSString(contentsOfFile:commandFilePath, encoding: String.Encoding.utf8.rawValue)
+    let commandsString = try? NSString(contentsOfFile:commandFilePath, encoding: String.Encoding.utf8.rawValue)
     if commandsString != nil {
         commandFactory.setCommandStringsWithLongString(playerName: playerName, commandString: commandsString! as String)
     } else {
@@ -74,7 +74,7 @@ var finalPhase = FinalPhaseCoreGame(aPlanetArray: planets, aAllPlayerDict: allPl
 finalPhase.doFinal()
 
 for (playerName, player) in allPlayerDict {
-    var xmlRoot = XMLElement(name: "report");
+    let xmlRoot = XMLElement(name: "report");
 
     if let attribute = XMLNode.attribute(withName: "changeSeq", stringValue: "1") as? XMLNode {
         xmlRoot.addAttribute(attribute)
@@ -99,7 +99,7 @@ for (playerName, player) in allPlayerDict {
         xmlRoot.addAttribute(attribute)
     }
     
-    var childElementPlayer = player.getXMLElement()
+    let childElementPlayer = player.getXMLElement()
 
     if let attribute = XMLNode.attribute(withName: "lastInvolvedTurn", stringValue: "\(turnNumber + 1)") as? XMLNode {
         childElementPlayer.addAttribute(attribute)
@@ -119,31 +119,33 @@ for (playerName, player) in allPlayerDict {
     xmlRoot.addChild(childElementPlayer)
 
     var outPutString = "Infos zu Spieler: \(playerName) Runde: \(turnNumber + 1) \n"
-    var outPutStatistic = OutputPlyerStatisticCoreGame(aPlanets: planets, aPlayer: player)
+    let outPutStatistic = OutputPlyerStatisticCoreGame(aPlanets: planets, aPlayer: player)
     outPutStatistic.calculateStatistic()
     outPutString += "\(outPutStatistic.description)\n"
     for planet in planets {
         if Player.isPlanetOutPutForPlayer(player, planet: planet) {
-            var childElementPlanet = planet.getXMLElementForPlayer(player)
+            let childElementPlanet = planet.getXMLElementForPlayer(player)
             xmlRoot.addChild(childElementPlanet)
 
             outPutString += "\(planet.description)\n\n"
         }
     }
-    var outPutFilePath = turnPath.appendingPathComponent("\(playerName).out") as NSString
+    let outPutFilePath = turnPath.appendingPathComponent("\(playerName).out") as NSString
     do {
         try outPutString.write(toFile: outPutFilePath as String, atomically: true, encoding: String.Encoding.utf8)
     } catch _ {
     }
     if let xmlReport = XMLDocument.document(withRootElement: xmlRoot) as? XMLDocument{
+        var outPutFilePathXML = outPutFilePath as NSString
+
         xmlReport.version = "1.0"
         xmlReport.characterEncoding = "UTF-8"
-        //var xmlData = xmlReport.XMLDataWithOptions(Int(NSXMLNodePrettyPrint))
-        //var xmlData = xmlReport.XMLData
-        outPutFilePath = outPutFilePath.deletingPathExtension as NSString
-        if let outPutXMLFilePath = outPutFilePath.appendingPathExtension("xml") {
-          //  xmlData.writeToFile(outPutXMLFilePath, atomically: true)
-        }
+        let xmlData = xmlReport.xmlData(options: .nodePrettyPrint)
+        outPutFilePathXML = outPutFilePathXML.deletingPathExtension as NSString
+        outPutFilePathXML = outPutFilePathXML.appendingPathExtension("xml")! as NSString
+        let xmlFileString = String(outPutFilePathXML)
+        let xmlUrl = URL(fileURLWithPath: xmlFileString)
+        try xmlData.write(to: xmlUrl)
     }
 }
 

@@ -37,7 +37,7 @@ class TestsCommandFactory: XCTestCase {
         if aBundle != nil {
             if let path = aBundle!.resourcePath {
                 var urlPath = NSURL(fileURLWithPath: path)
-                urlPath = urlPath.appendingPathComponent("commands.txt") as! NSURL
+                urlPath = urlPath.appendingPathComponent("commands.txt")! as NSURL
                 
                 if let txtPath = urlPath.path {
                     commandsString = try? NSString(contentsOfFile: txtPath , encoding: String.Encoding.utf8.rawValue) as String
@@ -46,7 +46,7 @@ class TestsCommandFactory: XCTestCase {
             
             if let path = aBundle!.resourcePath {
                 var urlPath = NSURL(fileURLWithPath: path)
-                urlPath = urlPath.appendingPathComponent("planets.plist") as! NSURL
+                urlPath = urlPath.appendingPathComponent("planets.plist")! as NSURL
                 let persManager = PersistenceManager()
                 
                 if let plistPath = urlPath.path {

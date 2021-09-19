@@ -119,7 +119,7 @@ class PlayerFactory {
                 planet = findPlanetWithMinPlanetArea(nextLevelPlanets);
             }
             
-            logString = "#### \(counter) vor setPlayer Planet: \(planet.number)] Player: \(planet.player)"
+            logString = "#### \(counter) vor setPlayer Planet: \(planet.number)] Player: \(String(describing: planet.player))"
             NSLog("%@", logString)
 
             planet.player = player;

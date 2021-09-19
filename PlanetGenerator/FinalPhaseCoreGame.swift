@@ -200,7 +200,7 @@ class FinalPhaseCoreGame {
     }
     
     func checkOwnership(planet: Planet) {
-        var players = getPlayersFromFleets(fleets: planet.fleets)
+        let players = getPlayersFromFleets(fleets: planet.fleets)
 
         //planet
         if planet.player == nil {

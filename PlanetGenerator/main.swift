@@ -14,7 +14,7 @@ var programmFilePath = arguments[0] as! NSString
 var plistFilePath = programmFilePath.appendingPathExtension("plist")
 
 var dictFormPList = NSDictionary(contentsOfFile: plistFilePath!) as? Dictionary<String, AnyObject>
-var planetCount = Int(dictFormPList!["planetCount"] as! NSNumber)
+var planetCount = Int(truncating: dictFormPList!["planetCount"] as! NSNumber)
 
 var playerNamesFromPlist = Array(dictFormPList!["player"] as! NSArray)
 var playerNames: Array <String> = Array()
@@ -23,11 +23,11 @@ for playerName in playerNamesFromPlist {
     playerNames.append(String(playerName as! String))
 }
 
-var fleetCount = Int(dictFormPList!["fleetCount"] as! NSNumber)
+var fleetCount = Int(truncating: dictFormPList!["fleetCount"] as! NSNumber)
 
-var fleetsOnHomePlanet = Int(dictFormPList!["fleetsOnHomePlanet"] as! NSNumber)
-var startShipsCount = Int(dictFormPList!["startShipsCount"] as! NSNumber)
-var distanceLevelHomes = Int(dictFormPList!["distanceLevelHomes"] as! NSNumber)
+var fleetsOnHomePlanet = Int(truncating: dictFormPList!["fleetsOnHomePlanet"] as! NSNumber)
+var startShipsCount = Int(truncating: dictFormPList!["startShipsCount"] as! NSNumber)
+var distanceLevelHomes = Int(truncating: dictFormPList!["distanceLevelHomes"] as! NSNumber)
 
 var playPath = dictFormPList!["playPath"] as! NSString
 var playName = dictFormPList!["playName"] as! String
@@ -37,7 +37,7 @@ var planets:Array <Planet> = Array()
 
 //Create Planets
 for index in 1...planetCount {
-    var planet: Planet = Planet()
+    let planet: Planet = Planet()
     
     planet.number = index
     

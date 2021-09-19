@@ -36,7 +36,7 @@ class TestOutputPlyerStatisticCoreGame: XCTestCase {
         if aBundle != nil {
             if let path = aBundle!.resourcePath as String? {
                 var urlPath = NSURL(fileURLWithPath: path)
-                urlPath = urlPath.appendingPathComponent("planets.plist") as! NSURL
+                urlPath = urlPath.appendingPathComponent("planets.plist")! as NSURL
                 let persManager = PersistenceManager()
                 
                 if let plistPath = urlPath.path {

@@ -30,11 +30,11 @@ class Player: Equatable, Hashable {
         }
         return desc
     }
-    
-    internal var hashValue: Int {
-        return name.hashValue
-    }
 
+    func hash(into hasher: inout Hasher) {
+          hasher.combine(name.hashValue)
+    }
+    
     init() {
         name = "NO Name"
     }

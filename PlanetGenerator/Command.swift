@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc protocol ExecuteCommand {
+protocol ExecuteCommand {
     func executeCommand()
 }
 
@@ -85,7 +85,7 @@ class MoveCommand: Command, ExecuteCommand{
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Movement)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         if player.name == fleet.player?.name {
             var fromPlanet: Planet = homePlanet
             var toPlanet: Planet
@@ -151,7 +151,7 @@ class BuildFleetShip: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Building)
     }
 
-    @objc func executeCommand() {
+    func executeCommand() {
         if homePlanet.player?.name == player.name {
             var isError = false
             
@@ -199,7 +199,7 @@ class UnloadingMetal: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Unloading)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         if player.name == fleet.player?.name {
             var isError = false
             
@@ -247,7 +247,7 @@ class TransferShipsFleetToFleet: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         if player.name == fromFleet.player?.name {
             var isError = false
             
@@ -292,7 +292,7 @@ class TransferShipsFleetToDShips: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         if player.name == fromFleet.player?.name {
             var isError = false
             
@@ -333,7 +333,7 @@ class TransferDShipsToFleet: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Transfer)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         if fromHomePlanet.player?.name == player.name {
             var isError = false
             
@@ -440,7 +440,7 @@ class BuildDShips: Command, ExecuteCommand {
         return result
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         for planet in planets {
             if planet.player == self.player {
                 if noEnemyFleetOnPlanet(planet: planet) {
@@ -468,7 +468,7 @@ class FireFleetToFleet: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Combat)
     }
 
-    @objc func executeCommand() {
+    func executeCommand() {
         if player.name == fromFleet.player?.name {
             var isError = false
             
@@ -507,7 +507,7 @@ class FireDShipsToFleet: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Combat)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         if fromHomePlanet.player?.name == player.name {
             var isError = false
             
@@ -543,7 +543,7 @@ class FireFleetToDShips: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Combat)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         if player.name == fromFleet.player?.name {
             let isError = false
             
@@ -574,7 +574,7 @@ class AmbushOffForPlanet: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Initial)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         if planet.player?.name == player.name {
             let planetPlayer = planet.player
             
@@ -600,7 +600,7 @@ class AmbushOffForPlayer: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Initial)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
         for planet in planets {
             let planetPlayer = planet.player
             if planetPlayer != nil {
@@ -621,7 +621,7 @@ class AddTeammate: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Initial)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
       //  let range = string.startIndex...string.startIndex.successor()
        // string.removeRange(range)
         if let aPlayer = allPlayerDict[string] {
@@ -639,7 +639,7 @@ class RemoveTeammate: Command, ExecuteCommand {
         super.init(aString: aString, aPlayer: aPlayer, aTurnPhase: TurnPhase.Initial)
     }
     
-    @objc func executeCommand() {
+    func executeCommand() {
        // let range = string.startIndex...string.startIndex.successor()
        // string.removeRange(range)
         if let aPlayer = allPlayerDict[string] {
